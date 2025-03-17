@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "prestart": "node scripts/env.js",
     "start": "ng serve",
-    "build": "ng build",
+    "prebuild": "node scripts/env.js",
+    "build": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:Trackllo": "node dist/trackllo/server/server.mjs"
@@ -21,8 +23,13 @@
     "@angular/platform-server": "^19.1.0",
     "@angular/router": "^19.1.0",
     "@angular/ssr": "^19.1.5",
+    "@tailwindcss/postcss": "^4.0.14",
+    "appwrite": "^17.0.1",
+    "dotenv": "^16.4.7",
     "express": "^4.18.2",
+    "postcss": "^8.5.3",
     "rxjs": "~7.8.0",
+    "tailwindcss": "^4.0.14",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
