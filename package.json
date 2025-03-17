@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "prestart": "node scripts/env.js",
     "start": "ng serve",
-    "build": "ng build",
+    "prebuild": "node scripts/env.js",
+    "build": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:Trackllo": "node dist/trackllo/server/server.mjs"
