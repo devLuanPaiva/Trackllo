@@ -15,6 +15,8 @@ export const environment = {
   production: ${isProd},
   API_WRITE: '${process.env.API_WRITE || ""}',
   PROJECT_ID: '${process.env.PROJECT_ID || ""}',
+  BOARD_COLLECTION_ID: '${process.env.BOARD_COLLECTION_ID || ""}',
+  DATABASE_ID: '${process.env.DATABASE_ID || ""}'
 };
 `;
 
