@@ -14,12 +14,12 @@
         <label class="block text-gray-700" for="password">Password</label>
         <input type="password" formControlName="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
       </div>
-      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">{{ isRegister ? 'Register' : 'Login' }}</button>
+      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition cursor-pointer ">{{ isRegister ? 'Register' : 'Login' }}</button>
     </form>
     <p class="text-center mt-4">
-      <a href="#" class="text-blue-500 hover:underline" (click)="toggleMode()">
+      <button class="text-blue-500 hover:underline" (click)="toggleMode()">
         {{ isRegister ? 'Already have an account? Login' : "Don't have an account? Register" }}
-      </a>
+      </button>
     </p>
   </div>
 </div>
