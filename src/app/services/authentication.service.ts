@@ -9,23 +9,28 @@ import { IUser } from '../models';
 })
 export class AuthenticationService {
   loggedInUser!: IUser | null;
+
   constructor() { }
 
   login(email: string, password: string): Observable<IUser> {
-    return from(account.createEmailPasswordSession(email, password)).pipe(
+    return from(account.createSession(email, password)).pipe(
       switchMap(() => from(account.get())),
       map(user => ({
         id: user.$id,
         name: user.name,
         email: user.email
       }) as IUser),
-      tap(user => this.loggedInUser = user),
+      tap(user => {
+        this.loggedInUser = user;
+        sessionStorage.setItem('user', JSON.stringify(user));
+      }),
       catchError(error => {
         console.error('Erro ao fazer login:', error);
         throw error;
       })
     );
   }
+
 
   register(email: string, password: string, name: string): Observable<IUser> {
     return from(account.create(ID.unique(), email, password, name)).pipe(
@@ -35,12 +40,20 @@ export class AuthenticationService {
 
   logout(): Observable<void> {
     return from(account.deleteSession('current')).pipe(
-      tap(() => this.loggedInUser = null),
+      tap(() => {
+        this.loggedInUser = null;
+        sessionStorage.removeItem('user');
+      }),
       catchError(error => {
         console.error('Erro ao fazer logout:', error);
         throw error;
       }),
       map(() => undefined)
     );
+  }
+
+  getLoggedUser(): IUser | null {
+    const user = sessionStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
   }
 }
