@@ -1,1 +1,21 @@
-<p>home works!</p>
+<div class="container mx-auto p-4">
+  <h1 class="text-3xl font-bold text-center mb-4">Meus Quadros</h1>
+
+  <button (click)="createBoard()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+    Criar Novo Quadro
+  </button>
+
+  <div *ngIf="boards$ | async as boards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+    <div *ngFor="let board of boards" class="bg-gray-100 p-4 rounded shadow-md">
+      <h2 class="text-xl font-semibold">{{ board.userId }}</h2>
+      <ul>
+        <li *ngFor="let column of board.columns" class="mt-2">
+          <strong>{{ column.title }}</strong>
+          <ul class="ml-4">
+            <li *ngFor="let task of column.tasks" class="text-gray-700">{{ task.title }}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
