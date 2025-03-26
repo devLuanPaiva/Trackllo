@@ -15,18 +15,21 @@ import { Router } from '@angular/router';
   templateUrl: './authentication.component.html',
 })
 export class AuthenticationComponent {
-  authForm!: FormGroup
-  isRegister = true
+  authForm!: FormGroup;
+  isRegister = true;
+
   constructor(
     private readonly auth: AuthenticationService,
     private readonly formBuilder: FormBuilder,
-    private readonly router: Router) {
+    private readonly router: Router
+  ) {
     this.authForm = this.formBuilder.group({
       name: [''],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
+
   toggleMode() {
     this.isRegister = !this.isRegister;
     if (!this.isRegister) {
@@ -41,13 +44,19 @@ export class AuthenticationComponent {
 
     if (this.isRegister) {
       this.auth.register(email, password, name).subscribe({
-        next: () => this.router.navigate(['/dashboard']),
-        error: (err) => console.error('Registration error:', err)
+        next: (user) => {
+          sessionStorage.setItem('user', JSON.stringify(user));
+          this.router.navigate(['/home']);
+        },
+        error: (err) => console.error('Registration error:', err),
       });
     } else {
       this.auth.login(email, password).subscribe({
-        next: () => this.router.navigate(['/dashboard']),
-        error: (err) => console.error('Login error:', err)
+        next: (user) => {
+          sessionStorage.setItem('user', JSON.stringify(user));
+          this.router.navigate(['/home']);
+        },
+        error: (err) => console.error('Login error:', err),
       });
     }
   }
