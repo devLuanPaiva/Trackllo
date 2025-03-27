@@ -1,7 +1,7 @@
 <div class="container mx-auto p-4">
   <h1 class="text-3xl font-bold text-center mb-4">Meus Quadros</h1>
 
-  <button (click)="createBoard()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+  <button (click)="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
     Criar Novo Quadro
   </button>
 
@@ -16,6 +16,19 @@
           </ul>
         </li>
       </ul>
+    </div>
+  </div>
+
+
+  <div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-xl font-bold mb-2">Criar Novo Quadro</h2>
+      <input [(ngModel)]="newBoardTitle" type="text" placeholder="Nome do Quadro"
+        class="border p-2 w-full rounded mb-4" />
+      <div class="flex justify-end">
+        <button (click)="closeModal()" class="mr-2 px-4 py-2 bg-gray-500 text-white rounded">Cancelar</button>
+        <button (click)="createBoard()" class="px-4 py-2 bg-blue-500 text-white rounded">Criar</button>
+      </div>
     </div>
   </div>
 </div>
