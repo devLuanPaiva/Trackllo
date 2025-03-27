@@ -4,17 +4,20 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { IBoard } from '../../models';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   boards$: Observable<IBoard[]> | null = null;
   userId: string | null = null;
+  newBoardTitle: string = '';
+  showModal: boolean = false;
 
   constructor(
     private readonly boardService: BoardService,
@@ -35,10 +38,20 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  openModal(): void {
+    this.showModal = true;
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+    this.newBoardTitle = '';
+  }
+
   createBoard(): void {
-    if (this.userId) {
-      this.boardService.createBoard(this.userId).subscribe(() => {
+    if (this.userId && this.newBoardTitle.trim()) {
+      this.boardService.createBoard(this.userId, this.newBoardTitle).subscribe(() => {
         this.loadBoards();
+        this.closeModal();
       });
     }
   }
