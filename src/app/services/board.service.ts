@@ -12,16 +12,30 @@ export class BoardService {
   private readonly collectionId = environment.BOARD_COLLECTION_ID;
 
   constructor() { }
-  createBoard(userId: string): Observable<IBoard> {
+  createBoard(userId: string, title: string): Observable<IBoard> {
     const board = {
       userId,
+      title,
       columns: [
         { id: ID.unique(), title: 'Todo', tasks: [] },
         { id: ID.unique(), title: 'In Progress', tasks: [] },
         { id: ID.unique(), title: 'Done', tasks: [] },
       ]
     };
-    return from(database.createDocument(this.databaseId, this.collectionId, ID.unique(), board)).pipe(
+    const permissions = [
+      `read("user:${userId}")`,
+      `write("user:${userId}")`,
+      `update("user:${userId}")`,
+      `delete("user:${userId}")`
+    ];
+
+    return from(database.createDocument(
+      this.databaseId,
+      this.collectionId,
+      ID.unique(),
+      board,
+      permissions
+    )).pipe(
       map(doc => doc as unknown as IBoard),
       catchError(error => {
         console.error('Erro ao criar board:', error);
@@ -29,6 +43,7 @@ export class BoardService {
       })
     );
   }
+
   getBoards(userId: string): Observable<IBoard[]> {
     return from(database.listDocuments(this.databaseId, this.collectionId, [
       `equal("userId", "${userId}")`
