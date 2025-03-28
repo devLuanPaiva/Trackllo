@@ -1,0 +1,35 @@
+<section class="w-full flex justify-around gap-5 flex-wrap items-start ">
+  <article class="flex flex-col items-center">
+    <h2>To do</h2>
+    <ul cdkDropList #todoList="cdkDropList" [cdkDropListData]="columnTodo"
+      (cdkDropListDropped)="onMoveColumnTask($event)">
+      @for (item of columnTodo; track $index) {
+      <li cdkDrag class="p-2 rounded-lg shadow-md" [cdkDragData]="item">
+        {{ item.title }}
+      </li>
+      }
+    </ul>
+  </article>
+  <article class="flex flex-col items-center">
+    <h2>In Progress</h2>
+    <ul cdkDropList #inProgressList="cdkDropList" [cdkDropListData]="columnInProgress"
+      (cdkDropListDropped)="onMoveColumnTask($event)">
+      @for (item of columnInProgress; track $index) {
+      <li cdkDrag class="p-2 rounded-lg shadow-md" [cdkDragData]="item">
+        {{ item.title }}
+      </li>
+      }
+    </ul>
+  </article>
+  <article class="flex flex-col items-center">
+    <h2>Done</h2>
+    <ul cdkDropList #doneList="cdkDropList" [cdkDropListData]="columnDone"
+      (cdkDropListDropped)="onMoveColumnTask($event)">
+      @for (item of columnDone; track $index) {
+      <li cdkDrag class="p-2 rounded-lg shadow-md" [cdkDragData]="item">
+        {{ item.title }}
+      </li>
+      }
+    </ul>
+  </article>
+</section>
