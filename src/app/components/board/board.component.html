@@ -5,8 +5,14 @@
       [cdkDropListConnectedTo]="[inProgressList, doneList]" (cdkDropListDropped)="onMoveColumnTask($event)"
       class="w-full space-y-2">
       @for (item of columnTodo; track $index) {
-      <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md bg-blue-200 cursor-grab list-none">
-        {{ item.title }}
+      <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md bg-blue-200 cursor-move list-none">
+        <div class="flex flex-col items-start space-y-2">
+          <h3 class="font-medium text-lg">{{ item.title }}</h3>
+          <p class="text-sm text-gray-600">{{ item.description }}</p>
+          @if(item.image){
+          <img [src]="item.image" alt="Task" class="w-full h-32 object-cover rounded-lg" />
+          }
+        </div>
       </li>
       }
     </ul>
@@ -24,8 +30,14 @@
       [cdkDropListConnectedTo]="[todoList, doneList]" (cdkDropListDropped)="onMoveColumnTask($event)"
       class="w-full space-y-2">
       @for (item of columnInProgress; track $index) {
-      <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md bg-yellow-200 cursor-grab list-none">
-        {{ item.title }}
+      <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md bg-yellow-200 cursor-move list-none">
+        <div class="flex flex-col items-start space-y-2">
+          <h3 class="font-medium text-lg">{{ item.title }}</h3>
+          <p class="text-sm text-gray-600">{{ item.description }}</p>
+          @if(item.image){
+          <img [src]="item.image" alt="Task" class="w-full h-32 object-cover rounded-lg" />
+          }
+        </div>
       </li>
       }
     </ul>
@@ -43,8 +55,14 @@
       [cdkDropListConnectedTo]="[todoList, inProgressList]" (cdkDropListDropped)="onMoveColumnTask($event)"
       class="w-full space-y-2">
       @for (item of columnDone; track $index) {
-      <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md bg-green-200 cursor-grab list-none">
-        {{ item.title }}
+      <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md bg-green-200 cursor-move list-none">
+        <div class="flex flex-col items-start space-y-2">
+          <h3 class="font-medium text-lg">{{ item.title }}</h3>
+          <p class="text-sm text-gray-600">{{ item.description }}</p>
+          @if(item.image){
+          <img [src]="item.image" alt="Task" class="w-full h-32 object-cover rounded-lg" />
+          }
+        </div>
       </li>
       }
     </ul>
