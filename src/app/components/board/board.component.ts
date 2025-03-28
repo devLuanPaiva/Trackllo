@@ -9,12 +9,14 @@ import {
   CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome"
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, CdkDropList, CdkDrag,],
+  imports: [CommonModule, CdkDropList, CdkDrag, FontAwesomeModule],
   templateUrl: './board.component.html',
   animations: [
     trigger('fadeInOut', [
@@ -29,7 +31,9 @@ export class BoardComponent implements OnInit {
   columnTodo: ITask[] = [];
   columnInProgress: ITask[] = [];
   columnDone: ITask[] = [];
-
+  icons = {
+    plus: faPlus,
+  }
   constructor() { }
 
   ngOnInit(): void {

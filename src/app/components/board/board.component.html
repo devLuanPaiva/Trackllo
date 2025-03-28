@@ -5,11 +5,17 @@
       [cdkDropListConnectedTo]="[inProgressList, doneList]" (cdkDropListDropped)="onMoveColumnTask($event)"
       class="w-full space-y-2">
       @for (item of columnTodo; track $index) {
-      <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md bg-blue-200 cursor-grab">
+      <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md bg-blue-200 cursor-grab list-none">
         {{ item.title }}
       </li>
       }
     </ul>
+    <button
+      class="group mt-5 bg-blue-500 hover:bg-blue-600 transition-colors duration-300 ease-out w-full py-3 flex items-center justify-center rounded-lg shadow-md gap-3 text-white font-medium hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300">
+      <fa-icon [icon]="icons.plus"
+        class="bg-white w-6 h-6 rounded-full group-hover:bg-blue-100 transition-colors duration-300 ease-in-out text-blue-500" />
+      <span>Create Task</span>
+    </button>
   </article>
 
   <article class="flex flex-col items-center bg-gray-100 p-4 rounded-lg shadow-lg w-80">
@@ -18,11 +24,17 @@
       [cdkDropListConnectedTo]="[todoList, doneList]" (cdkDropListDropped)="onMoveColumnTask($event)"
       class="w-full space-y-2">
       @for (item of columnInProgress; track $index) {
-      <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md bg-yellow-200 cursor-grab">
+      <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md bg-yellow-200 cursor-grab list-none">
         {{ item.title }}
       </li>
       }
     </ul>
+    <button
+      class="group mt-5 bg-yellow-500 hover:bg-yellow-600 transition-colors duration-300 ease-out w-full py-3 flex items-center justify-center rounded-lg shadow-md gap-3 text-white font-medium hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-300">
+      <fa-icon [icon]="icons.plus"
+        class="bg-white w-6 h-6 rounded-full group-hover:bg-yellow-100 transition-colors duration-300 ease-in-out text-yellow-500" />
+      <span>Create Task</span>
+    </button>
   </article>
 
   <article class="flex flex-col items-center bg-gray-100 p-4 rounded-lg shadow-lg w-80">
@@ -31,10 +43,16 @@
       [cdkDropListConnectedTo]="[todoList, inProgressList]" (cdkDropListDropped)="onMoveColumnTask($event)"
       class="w-full space-y-2">
       @for (item of columnDone; track $index) {
-      <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md bg-green-200 cursor-grab">
+      <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md bg-green-200 cursor-grab list-none">
         {{ item.title }}
       </li>
       }
     </ul>
+    <button
+      class="group mt-5 bg-green-500 hover:bg-green-600 transition-colors duration-300 ease-out w-full py-3 flex items-center justify-center rounded-lg shadow-md gap-3 text-white font-medium hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-300">
+      <fa-icon [icon]="icons.plus"
+        class="bg-white w-6 h-6 rounded-full group-hover:bg-green-100 transition-colors duration-300 ease-in-out text-green-500" />
+      <span>Create Task</span>
+    </button>
   </article>
 </section>
