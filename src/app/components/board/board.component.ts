@@ -5,18 +5,17 @@ import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
-  CdkDrag,
-  CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ColumnsComponent } from './columns/columns.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, CdkDropList, CdkDrag, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule, ColumnsComponent],
   templateUrl: './board.component.html',
   animations: [
     trigger('fadeInOut', [
@@ -58,4 +57,14 @@ export class BoardComponent implements OnInit {
       );
     }
   }
+  getConnectedColumns(column: string): string[] {
+    if (column === 'Todo') {
+      return ['In Progress', 'Done'];
+    } else if (column === 'In Progress') {
+      return ['Todo', 'Done'];
+    } else {
+      return ['Todo', 'In Progress'];
+    }
+  }
+
 }
