@@ -9,12 +9,20 @@ import {
   CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, CdkDropList, CdkDrag],
-  templateUrl: './board.component.html'
+  imports: [CommonModule, CdkDropList, CdkDrag,],
+  templateUrl: './board.component.html',
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0, transform: 'scale(0.95)' })),
+      transition('void => *', [animate('300ms ease-in')]),
+      transition('* => void', [animate('200ms ease-out', style({ opacity: 0, transform: 'scale(0.95)' }))])
+    ])
+  ]
 })
 export class BoardComponent implements OnInit {
   boards: IBoard = BOARD_DATA;
@@ -42,7 +50,7 @@ export class BoardComponent implements OnInit {
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex
+        event.currentIndex,
       );
     }
   }
