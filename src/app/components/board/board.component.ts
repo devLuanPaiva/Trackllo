@@ -59,12 +59,11 @@ export class BoardComponent implements OnInit {
   }
   getConnectedColumns(column: string): string[] {
     if (column === 'Todo') {
-      return ['In Progress', 'Done'];
+      return ['InProgress', 'Done'];
     } else if (column === 'In Progress') {
       return ['Todo', 'Done'];
     } else {
-      return ['Todo', 'In Progress'];
+      return ['Todo', 'InProgress'];
     }
   }
-
 }
