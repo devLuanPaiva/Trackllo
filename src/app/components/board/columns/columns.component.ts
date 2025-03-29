@@ -21,7 +21,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class ColumnsComponent {
   @Input() columnTitle: string = '';
   @Input() columnTasks: ITask[] = [];
-  @Input() columnId: string = '';
+  @Input() id: string = ''; 
   @Input() connectedTo: string[] = [];
   @Input() colorTask: string = 'blue';
   @Output() taskDropped = new EventEmitter<CdkDragDrop<ITask[]>>();
