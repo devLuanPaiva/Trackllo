@@ -1,7 +1,7 @@
 <article class="flex flex-col items-center bg-gray-100 p-4 rounded-lg shadow-lg w-80">
   <h2 class="text-lg font-bold mb-3">{{ columnTitle }}</h2>
-  <ul cdkDropList [cdkDropListData]="columnTasks" [cdkDropListConnectedTo]="connectedTo "
-    (cdkDropListDropped)="onMoveColumnTask($event)" class="w-full space-y-2">
+  <ul cdkDropList [id]="id" [cdkDropListData]="columnTasks" [cdkDropListConnectedTo]="connectedTo"
+  (cdkDropListDropped)="onMoveColumnTask($event)" class="w-full space-y-2">
     @for (item of columnTasks; track $index) {
     <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md cursor-move list-none" [ngClass]="{
         'bg-blue-200': colorTask === 'blue',
