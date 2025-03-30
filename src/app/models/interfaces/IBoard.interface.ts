@@ -8,7 +8,7 @@ export interface ITask {
 
 export interface IColumn {
   id: string;
-  title: 'Todo' | 'In Progress' | 'Done';
+  title: 'To do' | 'In Progress' | 'Done';
   tasks: ITask[];
 }
 

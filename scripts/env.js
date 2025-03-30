@@ -15,8 +15,10 @@ export const environment = {
   production: ${isProd},
   API_WRITE: '${process.env.API_WRITE || ""}',
   PROJECT_ID: '${process.env.PROJECT_ID || ""}',
+  DATABASE_ID: '${process.env.DATABASE_ID || ""}',
   BOARD_COLLECTION_ID: '${process.env.BOARD_COLLECTION_ID || ""}',
-  DATABASE_ID: '${process.env.DATABASE_ID || ""}'
+  COLUMNS_COLLECTION_ID: '${process.env.COLUMNS_COLLECTION_ID || ""}',
+  TASKS_COLLECTION_ID: '${process.env.TASKS_COLLECTION_ID || ""}'
 };
 `;
 
