@@ -18,6 +18,8 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
+import { BoardService } from '../../../services/board.service';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-columns',
@@ -58,7 +60,11 @@ export class ColumnsComponent {
   showForm: boolean = false;
   taskForm: FormGroup;
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly authService: AuthenticationService,
+    private readonly boardService: BoardService
+  ) {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -72,17 +78,24 @@ export class ColumnsComponent {
 
   addTask() {
     if (this.taskForm.valid) {
+      const userId = this.authService.getLoggedUser()?.id;
       const newTask: ITask = {
         id: crypto.randomUUID(),
         title: this.taskForm.value.title,
         description: this.taskForm.value.description,
         image: this.taskForm.value.image || undefined,
-        userId: 'default-user',
+        userId: userId!,
       };
 
       this.columnTasks.push(newTask);
       this.taskForm.reset();
       this.showForm = false;
+      this.boardService
+        .createTask(userId!, newTask.title, newTask.description, newTask.image)
+        .subscribe({
+          next: (task) => console.log('Task created:', task),
+          error: (error) => console.error('Error creating task:', error),
+        });
     }
   }
 
