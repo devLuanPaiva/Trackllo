@@ -52,15 +52,24 @@ export class BoardComponent implements OnInit {
   constructor(
     private readonly authService: AuthenticationService,
     private readonly boardService: BoardService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-   this.loadUserBoard()
+    this.loadUserBoard()
   }
-  loadUserBoard(): void{
-    const userId = this.authService.getLoggedUser()?.id
-    this.boardService.getUserBoards(userId!).subscribe({
+  loadUserBoard(): void {
+    const userId = this.authService.getLoggedUser()?.id;
+    if (!userId) {
+      console.error('Erro: userId está indefinido');
+      return;
+    }
+    this.boardService.getUserBoards(userId).subscribe({
       next: (board) => {
+        if (board.length === 0) {
+          console.warn('Nenhum board encontrado para o usuário.');
+          return;
+        }
+
         this.boards = board[0];
         const todoColumn = board[0]?.columns.find((column) => column.title === 'To do');
         const inProgressColumn = board[0]?.columns.find((column) => column.title === 'In Progress');
@@ -68,9 +77,11 @@ export class BoardComponent implements OnInit {
         this.columnTodo = todoColumn ? todoColumn.tasks : [];
         this.columnInProgress = inProgressColumn ? inProgressColumn.tasks : [];
         this.columnDone = doneColumn ? doneColumn.tasks : [];
-      }
-    })
+      },
+      error: (err) => console.error('Erro ao buscar boards:', err)
+    });
   }
+
 
   onMoveColumnTask(event: CdkDragDrop<ITask[]>) {
     if (event.previousContainer === event.container) {
