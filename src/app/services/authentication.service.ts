@@ -13,7 +13,13 @@ export class AuthenticationService {
   constructor() { }
 
   login(email: string, password: string): Observable<IUser> {
-    return from(account.createEmailPasswordSession(email, password)).pipe(
+    return from(account.get()).pipe(
+      switchMap(user => {
+        if (user) {
+          return from(Promise.resolve(user));
+        }
+        return from(account.createEmailPasswordSession(email, password));
+      }),
       switchMap(() => from(account.get())),
       map(user => ({
         id: user.$id,
@@ -30,6 +36,7 @@ export class AuthenticationService {
       })
     );
   }
+
 
 
   register(email: string, password: string, name: string): Observable<IUser> {
