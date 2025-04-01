@@ -6,4 +6,6 @@ export type Task = Prisma.TaskGetPayload<{
         column: true
     }
 }>;
-export type CreateTaskInput = Prisma.TaskCreateInput
+
+export type CreateTaskInput = Prisma.TaskCreateInput;
+export type UpdateTaskInput = Prisma.TaskUpdateInput;
