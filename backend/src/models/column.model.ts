@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client'
 
-export type User = Prisma.ColumnGetPayload<{
+export type Column = Prisma.ColumnGetPayload<{
     include: {
         board: true,
         tasks: true
