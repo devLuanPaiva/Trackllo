@@ -5,7 +5,7 @@ import { successResponse, errorResponse } from "../utils/apiResponse.js";
 
 const userRoutes = new Hono();
 
-userRoutes.get("/users/", async (c) => {
+userRoutes.get("/", async (c) => {
   try {
     const users = await UserService.getAllUsers();
     return successResponse(c, users);
@@ -15,7 +15,7 @@ userRoutes.get("/users/", async (c) => {
   }
 });
 
-userRoutes.get("/users/:id", validator.userId, async (c) => {
+userRoutes.get("/:id", validator.userId, async (c) => {
   const { id } = c.req.valid("param");
 
   try {
@@ -28,7 +28,7 @@ userRoutes.get("/users/:id", validator.userId, async (c) => {
     return errorResponse(c, error.message, 500);
   }
 });
-userRoutes.post("/user/", validator.createUser, async (c) => {
+userRoutes.post("/", validator.createUser, async (c) => {
   const data = c.req.valid("json");
 
   try {
@@ -43,7 +43,7 @@ userRoutes.post("/user/", validator.createUser, async (c) => {
 });
 
 userRoutes.put(
-  "/user/:id",
+  "/:id",
   validator.userId,
   validator.updateUser,
   async (c) => {
@@ -59,7 +59,7 @@ userRoutes.put(
   }
 );
 
-userRoutes.delete("/user/:id", validator.userId, async (c) => {
+userRoutes.delete("/:id", validator.userId, async (c) => {
   const { id } = c.req.valid("param");
 
   try {
