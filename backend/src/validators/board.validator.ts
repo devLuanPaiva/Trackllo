@@ -12,5 +12,18 @@ export default {
             return c.json({ error: 'Invalid board ID' }, 400)
         }
         return result.data
-    })
+    }),
+    createBoard: validator('json', (value, c) => {
+        const schema = z.object({
+            userId: z.string()
+
+        })
+
+        const result = schema.safeParse(value)
+        if (!result.success) {
+            return c.json({ error: result.error.errors }, 400)
+        }
+        return result.data
+    }),
+
 }
