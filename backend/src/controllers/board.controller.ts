@@ -40,11 +40,11 @@ boardRoutes.get('/:id', validator.boardId, async (c) => {
 })
 
 
-boardRoutes.post('/', async (c) => {
-    const userId = c.get('userId')
+boardRoutes.post('/', validator.createBoard, async (c) => {
+    const data = c.req.valid("json");
 
     try {
-        const newBoard = await BoardService.createBoard(userId)
+        const newBoard = await BoardService.createBoard(data.userId)
         return successResponse(c, newBoard, 201)
     } catch (error: any) {
         if (error.message === 'User not found') {
