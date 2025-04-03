@@ -14,12 +14,13 @@ datasource db {
 }
 
 model User {
-  id    String @id @default(uuid())
-  name  String
-  email String @unique
-
-  boards Board[]
-  tasks  Task[]
+  id       String  @id @default(uuid())
+  name     String
+  email    String  @unique
+  password String
+  token    String?
+  boards   Board[]
+  tasks    Task[]
 }
 
 model Task {
