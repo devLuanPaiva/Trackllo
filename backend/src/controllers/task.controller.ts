@@ -6,7 +6,8 @@ import validator from '../validators/task.validator.js'
 const taskRoutes = new Hono()
 
 taskRoutes.use('*', async (c, next) => {
-    c.set('userId' as never, 'some-user-id' as string);
+    const userId = c.req.header('X-User-Id') ?? 'default-user-id'
+    c.set('userId', userId)
     await next()
 })
 

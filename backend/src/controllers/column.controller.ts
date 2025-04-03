@@ -6,13 +6,15 @@ import validator from '../validators/column.validator.js'
 const columnRoutes = new Hono()
 
 columnRoutes.use('*', async (c, next) => {
-    c.set('userId', 'some-user-id')
+    const userId = c.req.header('X-User-Id') ?? 'default-user-id'
+    c.set('userId', userId)
     await next()
 })
 
 columnRoutes.get('/board/:boardId', validator.boardId, async (c) => {
     const { boardId } = c.req.valid('param')
     const userId = c.get('userId')
+    console.log(boardId, userId)
 
     try {
         const columns = await ColumnService.getBoardColumns(boardId, userId)

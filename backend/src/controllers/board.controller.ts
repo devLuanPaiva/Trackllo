@@ -7,9 +7,11 @@ const boardRoutes = new Hono()
 
 
 boardRoutes.use('*', async (c, next) => {
-    c.set('userId', 'some-user-id')
+    const userId = c.req.header('X-User-Id') ?? 'default-user-id'
+    c.set('userId', userId)
     await next()
 })
+
 
 
 boardRoutes.get('/', async (c) => {
