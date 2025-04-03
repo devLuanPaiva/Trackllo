@@ -13,6 +13,7 @@ if (!fs.existsSync(environmentsPath)) {
 const environmentFile = (isProd) => `
 export const environment = {
   production: ${isProd},
+  API_URL: '${process.env.API_URL ?? ''}'
 };
 `;
 
