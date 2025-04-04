@@ -8,17 +8,15 @@ const boardRoutes = new Hono()
 
 boardRoutes.use('*', async (c, next) => {
     const userId = c.req.header('X-User-Id') ?? 'default-user-id'
-    c.set('userId', userId)
+    c.set('userId' as never, userId)
     await next()
 })
 
-
-
 boardRoutes.get('/', async (c) => {
-    const userId = c.get('userId')
+    const userId = c.get('userId' as never)
 
     try {
-        const boards = await BoardService.getUserBoards(userId)
+        const boards = await BoardService.getUserBoards(userId as string);
         return successResponse(c, boards)
     } catch (error: any) {
         return errorResponse(c, error.message, 500)
@@ -28,10 +26,10 @@ boardRoutes.get('/', async (c) => {
 
 boardRoutes.get('/:id', validator.boardId, async (c) => {
     const { id } = c.req.valid('param')
-    const userId = c.get('userId')
+    const userId = c.get('userId' as never)
 
     try {
-        const board = await BoardService.getBoardById(id, userId)
+        const board = await BoardService.getBoardById(id, userId as string)
         if (!board) {
             return errorResponse(c, 'Board not found', 404)
         }
@@ -59,10 +57,10 @@ boardRoutes.post('/', validator.createBoard, async (c) => {
 
 boardRoutes.delete('/:id', validator.boardId, async (c) => {
     const { id } = c.req.valid('param')
-    const userId = c.get('userId')
+    const userId = c.get('userId' as never)
 
     try {
-        const deletedBoard = await BoardService.deleteBoard(id, userId)
+        const deletedBoard = await BoardService.deleteBoard(id, userId as string)
         return successResponse(c, deletedBoard)
     } catch (error: any) {
         if (error.message === 'Board not found or not owned by user') {

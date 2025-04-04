@@ -7,17 +7,17 @@ const columnRoutes = new Hono()
 
 columnRoutes.use('*', async (c, next) => {
     const userId = c.req.header('X-User-Id') ?? 'default-user-id'
-    c.set('userId', userId)
+    c.set('userId' as never, userId)
     await next()
 })
 
 columnRoutes.get('/board/:boardId', validator.boardId, async (c) => {
     const { boardId } = c.req.valid('param')
-    const userId = c.get('userId')
+    const userId = c.get('userId' as never)
     console.log(boardId, userId)
 
     try {
-        const columns = await ColumnService.getBoardColumns(boardId, userId)
+        const columns = await ColumnService.getBoardColumns(boardId, userId as string)
         return successResponse(c, columns)
     } catch (error: any) {
         if (error.message === 'Board not found or not owned by user') {
@@ -29,10 +29,10 @@ columnRoutes.get('/board/:boardId', validator.boardId, async (c) => {
 
 columnRoutes.get('/:id', validator.columnId, async (c) => {
     const { id } = c.req.valid('param')
-    const userId = c.get('userId')
+    const userId = c.get('userId' as never)
 
     try {
-        const column = await ColumnService.getColumnById(id, userId)
+        const column = await ColumnService.getColumnById(id, userId as string)
         if (!column) {
             return errorResponse(c, 'Column not found', 404)
         }
@@ -44,10 +44,10 @@ columnRoutes.get('/:id', validator.columnId, async (c) => {
 
 columnRoutes.post('/', validator.createColumn, async (c) => {
     const { boardId, title } = c.req.valid('json')
-    const userId = c.get('userId')
+    const userId = c.get('userId' as never)
 
     try {
-        const newColumn = await ColumnService.createColumn(boardId, userId, title)
+        const newColumn = await ColumnService.createColumn(boardId, userId as string, title)
         return successResponse(c, newColumn, 201)
     } catch (error: any) {
         if (error.message === 'Board not found or not owned by user') {
@@ -60,10 +60,10 @@ columnRoutes.post('/', validator.createColumn, async (c) => {
 columnRoutes.put('/:id', validator.columnId, validator.updateColumn, async (c) => {
     const { id } = c.req.valid('param')
     const { title } = c.req.valid('json')
-    const userId = c.get('userId')
+    const userId = c.get('userId' as never)
 
     try {
-        const updatedColumn = await ColumnService.updateColumn(id, userId, { title })
+        const updatedColumn = await ColumnService.updateColumn(id, userId as string, { title })
         return successResponse(c, updatedColumn)
     } catch (error: any) {
         if (error.message === 'Column not found or not owned by user') {
@@ -75,10 +75,10 @@ columnRoutes.put('/:id', validator.columnId, validator.updateColumn, async (c) =
 
 columnRoutes.delete('/:id', validator.columnId, async (c) => {
     const { id } = c.req.valid('param')
-    const userId = c.get('userId')
+    const userId = c.get('userId' as never)
 
     try {
-        const deletedColumn = await ColumnService.deleteColumn(id, userId)
+        const deletedColumn = await ColumnService.deleteColumn(id, userId as string)
         return successResponse(c, deletedColumn)
     } catch (error: any) {
         if (error.message === 'Column not found or not owned by user') {

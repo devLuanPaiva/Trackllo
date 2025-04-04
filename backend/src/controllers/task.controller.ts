@@ -7,7 +7,7 @@ const taskRoutes = new Hono()
 
 taskRoutes.use('*', async (c, next) => {
     const userId = c.req.header('X-User-Id') ?? 'default-user-id'
-    c.set('userId', userId)
+    c.set('userId' as never, userId)
     await next()
 })
 
@@ -42,7 +42,7 @@ taskRoutes.post('/', validator.createTask, async (c) => {
     const userId = c.get('userId' as never)
 
     try {
-        const newTask = await TaskService.createTask({ ...data, userId });
+        const newTask = await TaskService.createTask({ ...data, userId: userId as string });
 
         return successResponse(c, newTask, 201)
     } catch (error: any) {
