@@ -21,6 +21,8 @@ model User {
   token    String?
   boards   Board[]
   tasks    Task[]
+
+  @@map("user")
 }
 
 model Task {
@@ -33,6 +35,8 @@ model Task {
 
   user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   column Column? @relation(fields: [columnId], references: [id], onDelete: SetNull)
+
+  @@map("task")
 }
 
 model Column {
@@ -42,6 +46,8 @@ model Column {
 
   board Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
   tasks Task[]
+
+  @@map("column")
 }
 
 model Board {
@@ -50,4 +56,6 @@ model Board {
 
   user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   columns Column[]
+
+  @@map("boards")
 }
