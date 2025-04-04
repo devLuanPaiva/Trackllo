@@ -14,18 +14,20 @@ export default {
         return result.data
     }),
 
-    createUser: validator('json', (value, c) => {
+    createUser: validator("json", (value, c) => {
         const schema = z.object({
             name: z.string().min(3).max(50),
-            email: z.string().email()
-        })
+            email: z.string().email(),
+            password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+        });
 
-        const result = schema.safeParse(value)
+        const result = schema.safeParse(value);
         if (!result.success) {
-            return c.json({ error: result.error.errors }, 400)
+            return c.json({ error: result.error.errors }, 400);
         }
-        return result.data
+        return result.data;
     }),
+
 
     updateUser: validator('json', (value, c) => {
         const schema = z.object({

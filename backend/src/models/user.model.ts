@@ -7,5 +7,10 @@ export type User = Prisma.UserGetPayload<{
     }
 }>
 
-export type CreateUserInput = Prisma.UserCreateInput
-export type UpdateUserInput = Prisma.UserUpdateInput
+export type CreateUserInput = Prisma.UserCreateInput & {
+    password: string;
+}
+
+export type UpdateUserInput = Prisma.UserUpdateInput & {
+    password?: string;
+}
