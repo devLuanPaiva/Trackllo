@@ -13,7 +13,8 @@ export default class ColumnService {
         return prisma.column.findMany({
             where: { boardId },
             include: {
-                tasks: true
+                tasks: true,
+                board: true
             }
         })
     }
@@ -33,7 +34,8 @@ export default class ColumnService {
         return prisma.column.findUnique({
             where: { id },
             include: {
-                tasks: true
+                tasks: true,
+                board: true
             }
         })
     }
@@ -53,7 +55,8 @@ export default class ColumnService {
                 boardId
             },
             include: {
-                tasks: true
+                tasks: true,
+                board: true
             }
         })
     }
@@ -78,7 +81,8 @@ export default class ColumnService {
             where: { id },
             data,
             include: {
-                tasks: true
+                tasks: true,
+                board: true
             }
         })
     }
@@ -98,7 +102,8 @@ export default class ColumnService {
         return prisma.column.delete({
             where: { id },
             include: {
-                tasks: true
+                tasks: true,
+                board: true
             }
         })
     }
