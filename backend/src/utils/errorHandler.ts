@@ -37,5 +37,6 @@ export default function errorHandler(error: Error, c: Context) {
     const errorResponse: ErrorResponse = { status, message }
     if (errors) errorResponse.errors = errors
 
-    return c.json(errorResponse, status)
+    return c.json(errorResponse, { status: status as any })
+
 }
