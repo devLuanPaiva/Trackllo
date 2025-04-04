@@ -4,7 +4,7 @@ export function successResponse(c: Context, data: any, status = 200) {
     return c.json({
         success: true,
         data
-    }, status)
+    }, { status: status as any })
 
 }
 
@@ -15,5 +15,5 @@ export function errorResponse(c: Context, message: string, status = 400, errors?
             message,
             ...(errors && { errors })
         }
-    }, status)
+    }, { status: status as any })
 }
