@@ -6,6 +6,7 @@ export default class BoardService {
         return prisma.board.findMany({
             where: { userId },
             include: {
+                user: true,
                 columns: {
                     include: {
                         tasks: true
@@ -19,6 +20,7 @@ export default class BoardService {
         return prisma.board.findUnique({
             where: { id, userId },
             include: {
+                user: true,
                 columns: {
                     include: {
                         tasks: true
@@ -51,6 +53,7 @@ export default class BoardService {
                 }
             },
             include: {
+                user: true,
                 columns: {
                     include: {
                         tasks: true
@@ -72,6 +75,7 @@ export default class BoardService {
         return prisma.board.delete({
             where: { id },
             include: {
+                user: true,
                 columns: {
                     include: {
                         tasks: true
