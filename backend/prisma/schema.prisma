@@ -31,10 +31,10 @@ model Task {
   description String
   image       String?
   userId      String
-  columnId    String?
+  columnId    String
 
-  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  column Column? @relation(fields: [columnId], references: [id], onDelete: SetNull)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  column Column @relation(fields: [columnId], references: [id], onDelete: Cascade)
 
   @@map("task")
 }
