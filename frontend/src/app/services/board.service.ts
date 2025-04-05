@@ -1,27 +1,77 @@
+import { IBoard } from '../models';
 import { Injectable } from '@angular/core';
-import { catchError, from, map, Observable } from 'rxjs';
-import { IBoard, ITask, IColumn } from '../models';
+import { HttpClient } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoardService {
-  constructor() { }
+  private readonly api_url = environment.API_URL;
+  constructor(
+    private readonly http: HttpClient,
+    private readonly authService: AuthenticationService
+  ) {}
 
-  createBoard(userId: string, columnIds: string[]): Observable<IBoard> { }
-
-  createColumn(
-    title: 'Todo' | 'In Progress' | 'Done',
-    taskIds: string[]
-  ): Observable<IColumn> { }
-
-  createTask(
-    userId: string,
-    title: string,
-    description?: string,
-    imageUrl?: string
-  ): Observable<ITask> { }
-
-  getUserBoards(userId: string): Observable<IBoard[]> { }
+  
+  getUserBoards(): Observable<IBoard[]> {
+    return this.http
+      .get<IBoard[]>(`${this.api_url}/boards`, {
+        headers: this.authService.getAuthHeaders(),
+      })
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching boards:', error);
+          return throwError(
+            () => new Error(error.error?.message || 'Erro ao buscar boards')
+          );
+        })
+      );
+  }
+  getBoardById(id: string): Observable<IBoard> {
+    return this.http
+      .get<IBoard>(`${this.api_url}/boards/${id}`, {
+        headers: this.authService.getAuthHeaders(),
+      })
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching board:', error);
+          return throwError(
+            () => new Error(error.error?.message || 'Erro ao buscar board')
+          );
+        })
+      );
+  }
+  createBoard(title: string): Observable<IBoard> {
+    return this.http
+      .post<IBoard>(
+        `${this.api_url}/boards`,
+        { title },
+        { headers: this.authService.getAuthHeaders() }
+      )
+      .pipe(
+        catchError((error) => {
+          console.error('Error creating board:', error);
+          return throwError(
+            () => new Error(error.error?.message || 'Erro ao criar board')
+          );
+        })
+      );
+  }
+  deleteBoard(id: string): Observable<IBoard> {
+    return this.http
+      .delete<IBoard>(`${this.api_url}/boards/${id}`, {
+        headers: this.authService.getAuthHeaders(),
+      })
+      .pipe(
+        catchError((error) => {
+          console.error('Error deleting board:', error);
+          return throwError(
+            () => new Error(error.error?.message || 'Erro ao deletar board')
+          );
+        })
+      );
+  }
 }
