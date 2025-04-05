@@ -19,7 +19,7 @@ export default {
             title: z.string().min(3).max(100),
             description: z.string().min(10).max(500),
             image: z.string().url().optional(),
-            columnId: z.string().uuid().optional()
+            columnId: z.string().uuid()
         })
 
         const result = schema.safeParse(value)
@@ -31,10 +31,10 @@ export default {
 
     updateTask: validator('json', (value, c) => {
         const schema = z.object({
-            title: z.string().min(3).max(100).optional(),
+            title: z.string().min(3).max(100),
             description: z.string().min(10).max(500).optional(),
             image: z.string().url().optional().or(z.literal('').transform(() => null)),
-            columnId: z.string().uuid().optional().or(z.literal('').transform(() => null))
+            columnId: z.string().uuid()
         })
 
         const result = schema.safeParse(value)
@@ -46,7 +46,7 @@ export default {
 
     moveTask: validator('json', (value, c) => {
         const schema = z.object({
-            columnId: z.string().uuid().nullable()
+            columnId: z.string().uuid()
         })
 
         const result = schema.safeParse(value)

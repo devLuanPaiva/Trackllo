@@ -31,9 +31,12 @@ taskRoutes.use("*", async (c, next) => {
 
 taskRoutes.get("/", async (c) => {
   const userId = c.get("userId" as never);
-
+  const columnId = c.req.query("columnId" as never);
   try {
-    const tasks = await TaskService.getAllTasks(userId as string);
+    const tasks = await TaskService.getAllTasks(
+      userId as string,
+      columnId as string
+    );
     return successResponse(c, tasks);
   } catch (error: any) {
     return errorResponse(c, error.message, 500);
