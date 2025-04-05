@@ -30,7 +30,7 @@ export default class BoardService {
         })
     }
 
-    static async createBoard(userId: string): Promise<Board> {
+    static async createBoard(userId: string, title: string): Promise<Board> {
         const userExists = await prisma.user.findUnique({
             where: { id: userId }
         })
@@ -42,6 +42,7 @@ export default class BoardService {
         return prisma.board.create({
             data: {
                 userId,
+                title,
                 columns: {
                     createMany: {
                         data: [
