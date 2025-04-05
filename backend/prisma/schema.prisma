@@ -51,9 +51,9 @@ model Column {
 }
 
 model Board {
-  id     String @id @default(uuid())
-  userId String
-
+  id      String   @id @default(uuid())
+  userId  String
+  title   String
   user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   columns Column[]
 
