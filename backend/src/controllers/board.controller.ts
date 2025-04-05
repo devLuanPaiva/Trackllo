@@ -2,32 +2,12 @@ import { Hono } from "hono";
 import BoardService from "../services/board.service.js";
 import { successResponse, errorResponse } from "../utils/apiResponse.js";
 import validator from "../validators/board.validator.js";
-import jwt from "jsonwebtoken";
+import { authMiddleware } from "../middleware/auth.middleware.js";
 
-const JWT_SECRET = process.env.JWT_SECRET ?? "secrettoken";
 const boardRoutes = new Hono();
 
-boardRoutes.use("*", async (c, next) => {
-  const authHeader = c.req.header("Authorization");
+boardRoutes.use("*", authMiddleware)
 
-  if (!authHeader?.startsWith("Bearer ")) {
-    return errorResponse(c, "Missing or invalid Authorization header", 401);
-  }
-
-  const token = authHeader.split(" ")[1];
-
-  try {
-    const payload = jwt.verify(token, JWT_SECRET) as { userId: string };
-    if (!payload.userId) {
-      return errorResponse(c, "Invalid token payload", 401);
-    }
-
-    c.set("userId" as never, payload.userId);
-    await next();
-  } catch (err) {
-    return errorResponse(c, "Invalid or expired token", 401);
-  }
-});
 
 boardRoutes.get("/", async (c) => {
   const userId = c.get("userId" as never);
