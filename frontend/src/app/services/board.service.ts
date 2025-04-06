@@ -1,7 +1,7 @@
-import { IBoard } from '../models';
+import { ApiResponse, IBoard } from '../models';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthenticationService } from './authentication.service';
 
@@ -15,13 +15,13 @@ export class BoardService {
     private readonly authService: AuthenticationService
   ) {}
 
-  
   getUserBoards(): Observable<IBoard[]> {
     return this.http
-      .get<IBoard[]>(`${this.api_url}/boards`, {
+      .get<ApiResponse<IBoard[]>>(`${this.api_url}/boards`, {
         headers: this.authService.getAuthHeaders(),
       })
       .pipe(
+        map((response) => response.data),
         catchError((error) => {
           console.error('Error fetching boards:', error);
           return throwError(
@@ -32,10 +32,11 @@ export class BoardService {
   }
   getBoardById(id: string): Observable<IBoard> {
     return this.http
-      .get<IBoard>(`${this.api_url}/boards/${id}`, {
+      .get<ApiResponse<IBoard>>(`${this.api_url}/boards/${id}`, {
         headers: this.authService.getAuthHeaders(),
       })
       .pipe(
+        map((response) => response.data),
         catchError((error) => {
           console.error('Error fetching board:', error);
           return throwError(
@@ -46,12 +47,13 @@ export class BoardService {
   }
   createBoard(title: string): Observable<IBoard> {
     return this.http
-      .post<IBoard>(
+      .post<ApiResponse<IBoard>>(
         `${this.api_url}/boards`,
         { title },
         { headers: this.authService.getAuthHeaders() }
       )
       .pipe(
+        map((response) => response.data),
         catchError((error) => {
           console.error('Error creating board:', error);
           return throwError(
@@ -62,10 +64,11 @@ export class BoardService {
   }
   deleteBoard(id: string): Observable<IBoard> {
     return this.http
-      .delete<IBoard>(`${this.api_url}/boards/${id}`, {
+      .delete<ApiResponse<IBoard>>(`${this.api_url}/boards/${id}`, {
         headers: this.authService.getAuthHeaders(),
       })
       .pipe(
+        map((response) => response.data),
         catchError((error) => {
           console.error('Error deleting board:', error);
           return throwError(
