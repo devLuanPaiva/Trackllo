@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IUser } from '../../models';
 import { AuthenticationService } from '../../services/authentication.service';
-import { UserBoardsComponent } from "../../components/user-boards/user-boards.component";
+import { UserBoardsComponent } from '../../components/board/user-boards/user-boards.component';
 
 @Component({
   selector: 'app-home',
