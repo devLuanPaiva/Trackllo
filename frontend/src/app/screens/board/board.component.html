@@ -1,3 +1,8 @@
 <div>
+    @if (board$ | async; as board) {
     <app-columns [board]="board"></app-columns>
+    } @else {
+    <p>Carregando board...</p>
+    }
+
 </div>
