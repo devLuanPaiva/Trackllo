@@ -1,0 +1,4 @@
+<form [formGroup]="boardForm" (ngSubmit)="onSubmit()" class="bg-purple-400">
+    <input formControlName="title" placeholder="Board title" />
+    <button type="submit" [disabled]="boardForm.invalid">Criate Board</button>
+</form>
