@@ -73,8 +73,14 @@ export class AuthenticationService {
   }
   getAuthHeaders(): HttpHeaders {
     const token = this.getToken();
-    return new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
+    const headersConfig: any = {
+      'Content-Type': 'application/json',
+    };
+
+    if (token) {
+      headersConfig['Authorization'] = `Bearer ${token}`;
+    }
+
+    return new HttpHeaders(headersConfig);
   }
 }
