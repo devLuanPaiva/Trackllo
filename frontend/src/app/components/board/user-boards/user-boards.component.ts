@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IBoard, IUser } from '../../models';
-import { BoardService } from '../../services/board.service';
-import { BoardFormComponent } from "../board/board-form/board-form.component";
 import { RouterModule } from '@angular/router';
+import { BoardFormComponent } from '../board-form/board-form.component';
+import { IBoard, IUser } from '../../../models';
+import { BoardService } from '../../../services/board.service';
 
 @Component({
   selector: 'app-user-boards',
