@@ -43,9 +43,8 @@ export class AuthenticationComponent {
     const { name, email, password } = this.authForm.value;
 
     if (this.isRegister) {
-      this.auth.register(email, password, name).subscribe({
-        next: (user) => {
-          sessionStorage.setItem('user', JSON.stringify(user));
+      this.auth.register(name, email, password).subscribe({
+        next: () => {
           this.router.navigate(['/home']);
         },
         error: (err) => console.error('Registration error:', err),
@@ -53,7 +52,6 @@ export class AuthenticationComponent {
     } else {
       this.auth.login(email, password).subscribe({
         next: (user) => {
-          sessionStorage.setItem('user', JSON.stringify(user));
           this.router.navigate(['/home']);
         },
         error: (err) => console.error('Login error:', err),
