@@ -48,7 +48,9 @@ export class TasksService {
         })
       );
   }
-  createTask(data: Omit<ITask, 'id'>): Observable<ITask> {
+  createTask(
+    data: Pick<ITask, 'title' | 'columnId' | 'description' | 'image'>
+  ): Observable<ITask> {
     return this.http
       .post<ApiResponse<ITask>>(
         `${this.api_url}/tasks`,
