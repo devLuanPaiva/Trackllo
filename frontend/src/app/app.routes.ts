@@ -1,20 +1,30 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
     path: 'autenticacao',
-    loadChildren: () => import('./screens/authentication/authentication.module').then((m) => m.AuthenticationModule),
-    title: 'Autenticação'
+    loadChildren: () =>
+      import('./screens/authentication/authentication.module').then(
+        (m) => m.AuthenticationModule
+      ),
+    title: 'Autenticação',
   },
   {
     path: 'home',
-    loadChildren: () => import('./screens/home/home.module').then((m) => m.HomeModule),
-    title: 'Dashboard'
+    loadChildren: () =>
+      import('./screens/home/home.module').then((m) => m.HomeModule),
+    title: 'Dashboard',
   },
   {
-    path: 'board/:id',
-    loadChildren: () => import('./screens/board/board.module').then((m) => m.BoardModule),
-    title: 'Board Columns'
-  }
-
+    path: 'boardColumns/:id',
+    loadChildren: () =>
+      import('./screens/board/board.module').then((m) => m.BoardModule),
+    title: 'Board Columns',
+  },
 ];
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
