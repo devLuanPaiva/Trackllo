@@ -15,14 +15,14 @@ export class AuthenticationService {
 
   login(email: string, password: string): Observable<IUser> {
     return this.http
-      .post<{ user: IUser; token: string }>(`${this.api_url}/login`, {
+      .post<{ user: IUser; token: string }>(`${this.api_url}/users/login`, {
         email,
         password,
       })
       .pipe(
-        tap((response) => {
-          sessionStorage.setItem('token', response.token);
-          sessionStorage.setItem('user', JSON.stringify(response.user));
+        tap((response: any) => {
+          sessionStorage.setItem('token', response.data.token);
+          sessionStorage.setItem('user', JSON.stringify(response.data.user));
         }),
         map((response) => response.user),
         catchError((error) => {
