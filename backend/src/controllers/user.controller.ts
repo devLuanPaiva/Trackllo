@@ -42,22 +42,34 @@ userRoutes.post("/", validator.createUser, async (c) => {
   }
 });
 
-userRoutes.put(
-  "/:id",
-  validator.userId,
-  validator.updateUser,
-  async (c) => {
-    const { id } = c.req.valid("param");
-    const data = c.req.valid("json");
+userRoutes.post("/login", validator.loginUser, async (c) => {
+  const { email, password } = c.req.valid("json");
 
-    try {
-      const updatedUser = await UserService.updateUser(id, data);
-      return successResponse(c, updatedUser);
-    } catch (error: any) {
-      return errorResponse(c, error.message, 400);
+  try {
+    const { user, token } = await UserService.loginUser(email, password);
+    return successResponse(c, {
+      user: { id: user.id, name: user.name, email: user.email },
+      token,
+    });
+  } catch (error: any) {
+    if (error.message === "Invalid credentials") {
+      return errorResponse(c, "Email ou senha inválidos", 401);
     }
+    return errorResponse(c, error.message, 500);
   }
-);
+});
+
+userRoutes.put("/:id", validator.userId, validator.updateUser, async (c) => {
+  const { id } = c.req.valid("param");
+  const data = c.req.valid("json");
+
+  try {
+    const updatedUser = await UserService.updateUser(id, data);
+    return successResponse(c, updatedUser);
+  } catch (error: any) {
+    return errorResponse(c, error.message, 400);
+  }
+});
 
 userRoutes.delete("/:id", validator.userId, async (c) => {
   const { id } = c.req.valid("param");

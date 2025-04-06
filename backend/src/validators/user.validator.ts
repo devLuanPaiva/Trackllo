@@ -40,5 +40,18 @@ export default {
             return c.json({ error: result.error.errors }, 400)
         }
         return result.data
-    })
+    }),
+    loginUser: validator("json", (value, c) => {
+        const schema = z.object({
+          email: z.string().email(),
+          password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+        });
+      
+        const result = schema.safeParse(value);
+        if (!result.success) {
+          return c.json({ error: result.error.errors }, 400);
+        }
+        return result.data;
+      }),
+      
 }
