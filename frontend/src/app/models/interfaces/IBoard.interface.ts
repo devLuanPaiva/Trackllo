@@ -4,6 +4,7 @@ export interface ITask {
   description: string;
   image?: string;
   userId: string;
+  columnId: string
 }
 
 export interface IColumn {
