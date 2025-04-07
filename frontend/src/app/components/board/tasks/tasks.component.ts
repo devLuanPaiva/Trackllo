@@ -59,23 +59,39 @@ export class TasksComponent {
   ) {
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      description: ['',[Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
-      image: [''],
+      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
+      image: ['', [Validators.pattern(/https?:\/\/.+/)]]
     });
   }
   toggleForm() {
     this.showForm = !this.showForm;
   }
-  createTask(){
-    if(this.taskForm.valid){
-      this.taskService.createTask({
-        columnId: this.columnId, 
-        description: this.taskForm.value.description,
-        title: this.taskForm.value.title,
-        image: this.taskForm.value.image
-      })
+  createTask() {
+    if (this.taskForm.valid) {
+      const formValue = this.taskForm.value;
+      const payload: Pick<ITask, "title" | "description" | "image" | "columnId"> = {
+        columnId: this.columnId,
+        title: formValue.title,
+        description: formValue.description
+      };
+
+      if (formValue.image?.trim()) {
+        payload.image = formValue.image;
+      }
+
+      this.taskService.createTask(payload).subscribe({
+        next: (newTask) => {
+          this.columnTasks.push(newTask);
+          this.taskForm.reset();
+          this.showForm = false;
+        },
+        error: (err) => {
+          console.error('Erro ao criar task:', err);
+        }
+      });
     }
   }
+
   onMoveColumnTask(event: CdkDragDrop<ITask[]>) {
     this.taskDropped.emit(event);
   }
