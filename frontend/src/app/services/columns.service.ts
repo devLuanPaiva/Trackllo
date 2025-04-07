@@ -1,7 +1,7 @@
-import { IColumn } from '../models';
+import { ApiResponse, IColumn } from '../models';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthenticationService } from './authentication.service';
 
@@ -16,10 +16,11 @@ export class ColumnsService {
   ) {}
   getBoardColumns(boardId: string): Observable<IColumn[]> {
     return this.http
-      .get<IColumn[]>(`${this.api_url}/columns/board/${boardId}`, {
+      .get<ApiResponse<IColumn[]>>(`${this.api_url}/columns/board/${boardId}`, {
         headers: this.authService.getAuthHeaders(),
       })
       .pipe(
+        map((response) => response.data),
         catchError((error) => {
           console.error('Error fetching boards:', error);
           return throwError(
@@ -30,10 +31,11 @@ export class ColumnsService {
   }
   getColumnById(columnId: string): Observable<IColumn> {
     return this.http
-      .get<IColumn>(`${this.api_url}/columns/${columnId}`, {
+      .get<ApiResponse<IColumn>>(`${this.api_url}/columns/${columnId}`, {
         headers: this.authService.getAuthHeaders(),
       })
       .pipe(
+        map((response) => response.data),
         catchError((error) => {
           console.error('Error fetching boards:', error);
           return throwError(

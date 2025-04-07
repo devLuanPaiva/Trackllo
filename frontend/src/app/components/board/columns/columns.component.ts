@@ -1,7 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ITask } from '../../../models';
-import { CdkDrag, CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
-import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { Component, Input, OnInit } from '@angular/core';
+import { IBoard, ITask } from '../../../models';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -11,26 +15,15 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import {
-  ReactiveFormsModule,
-  FormsModule,
-  FormGroup,
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+
 import { BoardService } from '../../../services/board.service';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { TasksComponent } from '../tasks/tasks.component';
+import { ColumnsService } from '../../../services/columns.service';
 
 @Component({
   selector: 'app-columns',
-  imports: [
-    CommonModule,
-    CdkDropList,
-    CdkDrag,
-    FontAwesomeModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [CommonModule, FontAwesomeModule, TasksComponent],
   templateUrl: './columns.component.html',
   animations: [
     trigger('fadeInOut', [
@@ -45,61 +38,71 @@ import { AuthenticationService } from '../../../services/authentication.service'
     ]),
   ],
 })
-export class ColumnsComponent {
-  @Input() columnTitle: string = '';
-  @Input() columnTasks: ITask[] = [];
-  @Input() id: string = '';
-  @Input() connectedTo: string[] = [];
-  @Input() colorTask: string = 'blue';
-  @Output() taskDropped = new EventEmitter<CdkDragDrop<ITask[]>>();
-
+export class ColumnsComponent implements OnInit {
+  @Input() board: IBoard = {
+    id: '',
+    userId: '',
+    title: '',
+    columns: [],
+  };
+  columnTodo: ITask[] = [];
+  columnInProgress: ITask[] = [];
+  columnDone: ITask[] = [];
   icons = {
     plus: faPlus,
-    xmark: faXmark,
   };
-  showForm: boolean = false;
-  taskForm: FormGroup;
-
   constructor(
-    private readonly fb: FormBuilder,
     private readonly authService: AuthenticationService,
-    private readonly boardService: BoardService
-  ) {
-    this.taskForm = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      image: [''],
+    private readonly boardService: BoardService,
+    private readonly columnService: ColumnsService
+  ) {}
+  ngOnInit(): void {
+    this.loadBoardColumns();
+  }
+
+  loadBoardColumns(): void {
+    this.columnService.getBoardColumns(this.board.id).subscribe({
+      next: (column) => {
+        if (column.length === 0) {
+          console.error('Not found!');
+          return;
+        }
+        const todoColumn = column.find((column) => column.title === 'To do');
+        const inProgressColumn = column.find(
+          (column) => column.title === 'In Progress'
+        );
+        const doneColumn = column.find((column) => column.title === 'Done');
+
+        this.columnTodo = todoColumn ? todoColumn.tasks : [];
+        this.columnInProgress = inProgressColumn ? inProgressColumn.tasks : [];
+        this.columnDone = doneColumn ? doneColumn.tasks : [];
+      },
+      error: (err) => console.error('Erro ao buscar boards:', err),
     });
   }
-
-  toggleForm() {
-    this.showForm = !this.showForm;
-  }
-
-  addTask() {
-    if (this.taskForm.valid) {
-      const userId = this.authService.getLoggedUser()?.id;
-      const newTask: ITask = {
-        id: crypto.randomUUID(),
-        title: this.taskForm.value.title,
-        description: this.taskForm.value.description,
-        image: this.taskForm.value.image || undefined,
-        userId: userId!,
-      };
-
-      this.columnTasks.push(newTask);
-      this.taskForm.reset();
-      this.showForm = false;
-      this.boardService
-        .createTask(userId!, newTask.title, newTask.description, newTask.image)
-        .subscribe({
-          next: (task) => console.log('Task created:', task),
-          error: (error) => console.error('Error creating task:', error),
-        });
+  onMoveColumnTask(event: CdkDragDrop<ITask[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     }
   }
-
-  onMoveColumnTask(event: CdkDragDrop<ITask[]>) {
-    this.taskDropped.emit(event);
+  getConnectedColumns(column: string): string[] {
+    if (column === 'Todo') {
+      return ['InProgress', 'Done'];
+    } else if (column === 'In Progress') {
+      return ['Todo', 'Done'];
+    } else {
+      return ['Todo', 'InProgress'];
+    }
   }
 }

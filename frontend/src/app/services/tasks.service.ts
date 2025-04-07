@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
-import { catchError, Observable, throwError } from 'rxjs';
-import { ITask } from '../models';
+import { catchError, map, Observable, throwError } from 'rxjs';
+import { ApiResponse, ITask } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -19,11 +19,12 @@ export class TasksService {
     const params = new HttpParams().set('columnId', columnId);
 
     return this.http
-      .get<ITask[]>(`${this.api_url}/tasks`, {
+      .get<ApiResponse<ITask[]>>(`${this.api_url}/tasks`, {
         headers: this.authService.getAuthHeaders(),
         params,
       })
       .pipe(
+        map((response) => response.data),
         catchError((error) => {
           console.error('Error fetching tasks:', error);
           return throwError(
@@ -34,10 +35,11 @@ export class TasksService {
   }
   getTaskById(id: string): Observable<ITask> {
     return this.http
-      .get<ITask>(`${this.api_url}/tasks/${id}`, {
+      .get<ApiResponse<ITask>>(`${this.api_url}/tasks/${id}`, {
         headers: this.authService.getAuthHeaders(),
       })
       .pipe(
+        map((response) => response.data),
         catchError((error) => {
           console.error('Error fetching boards:', error);
           return throwError(
@@ -46,14 +48,17 @@ export class TasksService {
         })
       );
   }
-  createTask(data: Omit<ITask, 'id'>): Observable<ITask> {
+  createTask(
+    data: Pick<ITask, 'title' | 'columnId' | 'description' | 'image'>
+  ): Observable<ITask> {
     return this.http
-      .post<ITask>(
+      .post<ApiResponse<ITask>>(
         `${this.api_url}/tasks`,
         { data },
         { headers: this.authService.getAuthHeaders() }
       )
       .pipe(
+        map((response) => response.data),
         catchError((error) => {
           console.error('Error fetching boards:', error);
           return throwError(
@@ -64,12 +69,13 @@ export class TasksService {
   }
   updateTask(data: ITask): Observable<ITask> {
     return this.http
-      .put<ITask>(
+      .put<ApiResponse<ITask>>(
         `${this.api_url}/tasks/${data.id}`,
         { data },
         { headers: this.authService.getAuthHeaders() }
       )
       .pipe(
+        map((response) => response.data),
         catchError((error) => {
           console.error('Error fetching boards:', error);
           return throwError(
@@ -80,10 +86,11 @@ export class TasksService {
   }
   deleteTask(id: string): Observable<ITask> {
     return this.http
-      .delete<ITask>(`${this.api_url}/tasks/${id}`, {
+      .delete<ApiResponse<ITask>>(`${this.api_url}/tasks/${id}`, {
         headers: this.authService.getAuthHeaders(),
       })
       .pipe(
+        map((response) => response.data),
         catchError((error) => {
           console.error('Error fetching boards:', error);
           return throwError(
@@ -94,12 +101,13 @@ export class TasksService {
   }
   moveTask(id: string, newColumnId: string): Observable<ITask> {
     return this.http
-      .patch<ITask>(
+      .patch<ApiResponse<ITask>>(
         `${this.api_url}/tasks/${id}/move`,
         { newColumnId },
         { headers: this.authService.getAuthHeaders() }
       )
       .pipe(
+        map((response) => response.data),
         catchError((error) => {
           console.error('Error fetching boards:', error);
           return throwError(
