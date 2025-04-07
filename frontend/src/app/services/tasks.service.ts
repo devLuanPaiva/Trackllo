@@ -52,11 +52,9 @@ export class TasksService {
     data: Pick<ITask, 'title' | 'columnId' | 'description' | 'image'>
   ): Observable<ITask> {
     return this.http
-      .post<ApiResponse<ITask>>(
-        `${this.api_url}/tasks`,
-         data ,
-        { headers: this.authService.getAuthHeaders() }
-      )
+      .post<ApiResponse<ITask>>(`${this.api_url}/tasks`, data, {
+        headers: this.authService.getAuthHeaders(),
+      })
       .pipe(
         map((response) => response.data),
         catchError((error) => {
@@ -69,11 +67,9 @@ export class TasksService {
   }
   updateTask(data: ITask): Observable<ITask> {
     return this.http
-      .put<ApiResponse<ITask>>(
-        `${this.api_url}/tasks/${data.id}`,
-        { data },
-        { headers: this.authService.getAuthHeaders() }
-      )
+      .put<ApiResponse<ITask>>(`${this.api_url}/tasks/${data.id}`, data, {
+        headers: this.authService.getAuthHeaders(),
+      })
       .pipe(
         map((response) => response.data),
         catchError((error) => {
@@ -103,7 +99,7 @@ export class TasksService {
     return this.http
       .patch<ApiResponse<ITask>>(
         `${this.api_url}/tasks/${id}/move`,
-        { newColumnId },
+        { columnId: newColumnId },
         { headers: this.authService.getAuthHeaders() }
       )
       .pipe(

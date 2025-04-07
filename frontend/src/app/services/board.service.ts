@@ -49,7 +49,7 @@ export class BoardService {
     return this.http
       .post<ApiResponse<IBoard>>(
         `${this.api_url}/boards`,
-        { title },
+         {title: title},
         { headers: this.authService.getAuthHeaders() }
       )
       .pipe(
