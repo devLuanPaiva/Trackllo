@@ -18,6 +18,7 @@ import {
 
 import { TasksComponent } from '../tasks/tasks.component';
 import { ColumnsService } from '../../../services/columns.service';
+import { TasksService } from '../../../services/tasks.service';
 
 @Component({
   selector: 'app-columns',
@@ -46,15 +47,16 @@ export class ColumnsComponent implements OnInit {
   columnTodo: ITask[] = [];
   columnInProgress: ITask[] = [];
   columnDone: ITask[] = [];
-  idTodo: string = ''
-  idInProgress: string = ''
-  idDone: string = ''
+  idTodo: string = '';
+  idInProgress: string = '';
+  idDone: string = '';
   icons = {
     plus: faPlus,
   };
   constructor(
-    private readonly columnService: ColumnsService
-  ) { }
+    private readonly columnService: ColumnsService,
+    private readonly taskService: TasksService
+  ) {}
   ngOnInit(): void {
     this.loadBoardColumns();
   }
@@ -79,7 +81,11 @@ export class ColumnsComponent implements OnInit {
         this.idTodo = todoColumn?.id ?? '';
         this.idInProgress = inProgressColumn?.id ?? '';
         this.idDone = doneColumn?.id ?? '';
-        console.log('todo: ' + this.idTodo, 'in progress' + this.idInProgress, 'done: ' + this.idDone)
+        console.log(
+          'todo: ' + this.idTodo,
+          'in progress' + this.idInProgress,
+          'done: ' + this.idDone
+        );
       },
       error: (err) => console.error('Erro ao buscar boards:', err),
     });
@@ -92,6 +98,19 @@ export class ColumnsComponent implements OnInit {
         event.currentIndex
       );
     } else {
+      const task: ITask = event.previousContainer.data[event.previousIndex];
+      const newColumnID = this.getColumnIdByDropListId(event.container.id);
+
+      if (task && newColumnID && task.columnId !== newColumnID) {
+        this.taskService.moveTask(task.id, newColumnID).subscribe({
+          next: () => {
+            task.columnId = newColumnID;
+          },
+          error: (err) => {
+            console.error(err);
+          },
+        });
+      }
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -107,6 +126,18 @@ export class ColumnsComponent implements OnInit {
       return ['Todo', 'Done'];
     } else {
       return ['Todo', 'InProgress'];
+    }
+  }
+  private getColumnIdByDropListId(dropListId: string): string {
+    switch (dropListId) {
+      case 'Todo':
+        return this.idTodo;
+      case 'InProgress':
+        return this.idInProgress;
+      case 'Done':
+        return this.idDone;
+      default:
+        return '';
     }
   }
 }
