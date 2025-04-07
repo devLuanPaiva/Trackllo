@@ -46,7 +46,7 @@ export default class BoardService {
                 columns: {
                     createMany: {
                         data: [
-                            { title: 'To Do' },
+                            { title: 'To do' },
                             { title: 'In Progress' },
                             { title: 'Done' }
                         ]
