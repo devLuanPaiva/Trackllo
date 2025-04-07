@@ -18,7 +18,7 @@ export default {
         const schema = z.object({
             title: z.string().min(3).max(100),
             description: z.string().min(10).max(500),
-            image: z.string().url().optional(),
+            image: z.union([z.string().url(), z.literal('')]).optional(),
             columnId: z.string().uuid()
         })
 
