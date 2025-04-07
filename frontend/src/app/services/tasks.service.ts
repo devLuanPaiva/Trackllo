@@ -54,7 +54,7 @@ export class TasksService {
     return this.http
       .post<ApiResponse<ITask>>(
         `${this.api_url}/tasks`,
-        { data },
+         data ,
         { headers: this.authService.getAuthHeaders() }
       )
       .pipe(
