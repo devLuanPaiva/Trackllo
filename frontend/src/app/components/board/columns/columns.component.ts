@@ -16,8 +16,6 @@ import {
   animate,
 } from '@angular/animations';
 
-import { BoardService } from '../../../services/board.service';
-import { AuthenticationService } from '../../../services/authentication.service';
 import { TasksComponent } from '../tasks/tasks.component';
 import { ColumnsService } from '../../../services/columns.service';
 
@@ -48,14 +46,15 @@ export class ColumnsComponent implements OnInit {
   columnTodo: ITask[] = [];
   columnInProgress: ITask[] = [];
   columnDone: ITask[] = [];
+  idTodo: string = ''
+  idInProgress: string = ''
+  idDone: string = ''
   icons = {
     plus: faPlus,
   };
   constructor(
-    private readonly authService: AuthenticationService,
-    private readonly boardService: BoardService,
     private readonly columnService: ColumnsService
-  ) {}
+  ) { }
   ngOnInit(): void {
     this.loadBoardColumns();
   }
@@ -76,6 +75,11 @@ export class ColumnsComponent implements OnInit {
         this.columnTodo = todoColumn ? todoColumn.tasks : [];
         this.columnInProgress = inProgressColumn ? inProgressColumn.tasks : [];
         this.columnDone = doneColumn ? doneColumn.tasks : [];
+
+        this.idTodo = todoColumn?.id ?? '';
+        this.idInProgress = inProgressColumn?.id ?? '';
+        this.idDone = doneColumn?.id ?? '';
+        console.log('todo: ' + this.idTodo, 'in progress' + this.idInProgress, 'done: ' + this.idDone)
       },
       error: (err) => console.error('Erro ao buscar boards:', err),
     });
