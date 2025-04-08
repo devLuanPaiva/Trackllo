@@ -13,7 +13,7 @@ export class UserBoardsComponent implements OnInit {
   @Input() user!: IUser;
   boards: IBoard[] = [];
   showForm: boolean = false;
-  constructor(private readonly boardService: BoardService) {}
+  constructor(private readonly boardService: BoardService) { }
 
   ngOnInit(): void {
     this.loadBoards();
