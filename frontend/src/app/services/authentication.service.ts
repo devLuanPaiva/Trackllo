@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
 export class AuthenticationService {
   private readonly api_url = environment.API_URL;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) { }
 
   login(email: string, password: string): Observable<IUser> {
     return this.http
@@ -50,10 +50,11 @@ export class AuthenticationService {
       );
   }
 
-  logout(): Observable<void> {
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('user');
-    return of(undefined);
+  getToken(): string | null {
+    if (typeof window !== 'undefined' && sessionStorage) {
+      return sessionStorage.getItem('token');
+    }
+    return null;
   }
 
   getLoggedUser(): IUser | null {
@@ -64,9 +65,14 @@ export class AuthenticationService {
     return null;
   }
 
-  getToken(): string | null {
-    return sessionStorage.getItem('token');
+  logout(): Observable<void> {
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('user');
+    }
+    return of(undefined);
   }
+
 
   isAuthenticated(): boolean {
     return this.getToken() !== null;
