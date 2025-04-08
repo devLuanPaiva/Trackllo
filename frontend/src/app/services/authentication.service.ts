@@ -24,7 +24,7 @@ export class AuthenticationService {
           sessionStorage.setItem('token', response.data.token);
           sessionStorage.setItem('user', JSON.stringify(response.data.user));
         }),
-        map((response) => response.user),
+        map((response) => response.data.user),
         catchError((error) => {
           console.error('Login error:', error);
           return throwError(
