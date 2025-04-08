@@ -1,0 +1,9 @@
+<section class="w-full flex justify-around gap-5 flex-wrap items-start">
+  @for (column of ['Todo', 'In Progress', 'Done']; track $index) {
+  <app-tasks [columnTitle]="column"
+    [columnId]="column === 'Todo' ? idTodo : column === 'In Progress' ? idInProgress : idDone"
+    [columnTasks]=" column==='Todo' ? columnTodo : column==='In Progress' ? columnInProgress : columnDone"
+    [colorTask]="column === 'Todo' ? 'blue' : column ==='In Progress' ?'yellow': 'green'" [id]="column.replace(' ', '')"
+    [connectedTo]="getConnectedColumns(column)" (taskDropped)="onMoveColumnTask($event)" />
+  }
+</section>

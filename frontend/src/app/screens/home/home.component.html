@@ -1,0 +1,9 @@
+<app-header></app-header>
+<div class="flex flex-col my-6 py-4 container
+">
+  @defer () {
+  <app-user-boards [user]="user"></app-user-boards>
+  }@placeholder (minimum 3s) {
+  <app-loading></app-loading>
+  }
+</div>
