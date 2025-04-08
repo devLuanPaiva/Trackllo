@@ -5,7 +5,8 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "test": "vitest"
+    "test": "vitest",
+    "vercel-build": "npx prisma generate && npx prisma migrate deploy && npm prune --production"
   },
   "dependencies": {
     "@hono/node-server": "^1.14.0",
@@ -20,6 +21,7 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^20.11.17",
     "prisma": "^6.5.0",
-    "tsx": "^4.7.1"
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3"
   }
 }
