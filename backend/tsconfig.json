@@ -9,7 +9,11 @@
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "outDir": "dist",
-    "rootDir": "src"
+    "baseUrl": "./",
+    "rootDir": "src",
+    "paths": {
+      "@database": ["src/database/*"]
+    }
   },
   "include": ["src"]
 }
