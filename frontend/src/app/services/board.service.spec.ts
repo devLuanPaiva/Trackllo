@@ -49,4 +49,17 @@ describe('Board service', () => {
 
     req.flush({ data: board });
   })
+  it('should create a new board', () => {
+    const newBoardTitle = 'Novo Board';
+
+    service.createBoard(newBoardTitle).subscribe((result) => {
+      expect(result).toEqual(mockBoards[0]);
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL}/boards`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual({ title: newBoardTitle });
+
+    req.flush({ data: mockBoards[0] });
+  });
 })
