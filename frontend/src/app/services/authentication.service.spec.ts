@@ -19,7 +19,7 @@ describe('AuthenticationService', () => {
       providers: [
         AuthenticationService,
         provideHttpClient(),
-        provideHttpClientTesting(), 
+        provideHttpClientTesting(),
       ],
     });
 
@@ -38,7 +38,9 @@ describe('AuthenticationService', () => {
     service.login('alice@example.com', 'user-1').subscribe((user) => {
       expect(user).toEqual(mockUsers[0]);
       expect(sessionStorage.getItem('token')).toBe(token);
-      expect(JSON.parse(sessionStorage.getItem('user') ?? '')).toEqual(mockUsers[0]);
+      expect(JSON.parse(sessionStorage.getItem('user') ?? '')).toEqual(
+        mockUsers[0]
+      );
     });
 
     const req = httpMock.expectOne(`${apiURL}/users/login`);
@@ -49,5 +51,22 @@ describe('AuthenticationService', () => {
         token: token,
       },
     });
+  });
+  it('should throw error on login failure', () => {
+    const email = 'wrong@example.com';
+    const password = 'wrong';
+
+    service.login(email, password).subscribe({
+      next: () => fail('should have failed with an error'),
+      error: (error) => {
+        expect(error.message).toBe('Invalid credentials');
+      },
+    });
+
+    const req = httpMock.expectOne(`${apiURL}/users/login`);
+    req.flush(
+      { message: 'Invalid credentials' },
+      { status: 401, statusText: 'Unauthorized' }
+    );
   });
 });
