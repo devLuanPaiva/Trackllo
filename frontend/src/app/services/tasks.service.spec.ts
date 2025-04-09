@@ -42,4 +42,15 @@ describe('Task service', () => {
 
     req.flush({ data: expected });
   })
+  it('should fetch a task by ID', () => {
+    const task = mockTasks[0];
+
+    service.getTaskById(task.id).subscribe((result) => {
+      expect(result).toEqual(task);
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL}/tasks/${task.id}`);
+    expect(req.request.method).toBe('GET');
+    req.flush({ data: task });
+  });
 })
