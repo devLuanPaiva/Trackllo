@@ -5,6 +5,7 @@ import { AuthenticationService } from "./authentication.service";
 import { mockAuthService, mockTasks } from "../mocks";
 import { provideHttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
+import { ITask } from "../models";
 
 describe('Task service', () => {
   let service: TasksService;
@@ -52,5 +53,27 @@ describe('Task service', () => {
     const req = httpMock.expectOne(`${environment.API_URL}/tasks/${task.id}`);
     expect(req.request.method).toBe('GET');
     req.flush({ data: task });
+  });
+  it('should create a task', () => {
+    const newTask: Pick<ITask, 'title' | 'description' | 'columnId' | 'image'> = {
+      title: 'Nova tarefa',
+      description: 'Descrição nova',
+      columnId: 'column-todo',
+      image: 'https://via.placeholder.com/200',
+    };
+
+    const createdTask: ITask = {
+      ...newTask,
+      id: 'task-4',
+      userId: 'user-3',
+    };
+
+    service.createTask(newTask).subscribe((result) => {
+      expect(result).toEqual(createdTask);
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL}/tasks`);
+    expect(req.request.method).toBe('POST');
+    req.flush({ data: createdTask });
   });
 })
