@@ -40,4 +40,15 @@ describe('Column service', () => {
 
     req.flush({ data: mockColumns });
   })
+  it('should fetch a column by ID', () => {
+    const column = mockColumns[0]
+    service.getColumnById(column.id).subscribe((result) => {
+      expect(result).toEqual(column)
+    })
+    const req = httpMock.expectOne(`${environment.API_URL}/columns/${column.id}`);
+    expect(req.request.method).toBe('GET');
+    expect(req.request.headers.get('Authorization')).toBe('Bearer fake-token');
+
+    req.flush({ data: column });
+  })
 })
