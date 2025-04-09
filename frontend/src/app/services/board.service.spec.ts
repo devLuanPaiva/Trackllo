@@ -39,4 +39,14 @@ describe('Board service', () => {
 
     req.flush({ data: mockBoards });
   })
+  it('should fetch a board by ID', () => {
+    const board = mockBoards[0]
+    service.getBoardById(board.id).subscribe((result) => {
+      expect(result).toEqual(board)
+    })
+    const req = httpMock.expectOne(`${environment.API_URL}/boards/${board.id}`);
+    expect(req.request.method).toBe('GET');
+
+    req.flush({ data: board });
+  })
 })
