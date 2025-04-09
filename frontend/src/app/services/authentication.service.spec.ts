@@ -84,4 +84,15 @@ describe('AuthenticationService', () => {
     expect(req.request.method).toBe('POST');
     req.flush(mockUsers[0]);
   });
+  it('should throw error on register failure', () => {
+    service.register('John', 'email', 'pass').subscribe({
+      next: () => fail('Should have failed'),
+      error: (error) => {
+        expect(error.message).toBe('Email already in use');
+      },
+    });
+
+    const req = httpMock.expectOne(`${apiURL}/users`);
+    req.flush({ message: 'Email already in use' }, { status: 400, statusText: 'Bad Request' });
+  });
 });
