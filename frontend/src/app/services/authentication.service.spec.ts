@@ -104,4 +104,13 @@ describe('AuthenticationService', () => {
     expect(service.getLoggedUser()).toEqual(mockUsers[0]);
   });
 
+  it('should remove user and token from sessionStorage on logout', () => {
+    sessionStorage.setItem('token', 'token-alice-123');
+    sessionStorage.setItem('user', JSON.stringify(mockUsers[0]));
+
+    service.logout().subscribe(() => {
+      expect(sessionStorage.getItem('token')).toBeNull();
+      expect(sessionStorage.getItem('user')).toBeNull();
+    });
+  });
 });
