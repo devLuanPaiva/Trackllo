@@ -64,4 +64,17 @@ describe('Column service', () => {
       { status: 500, statusText: 'Internal Server Error' }
     );
   });
+  it('should handle error when fetching column by ID', () => {
+    service.getColumnById('column-todo').subscribe({
+      error: (err) => {
+        expect(err.message).toBe('Erro ao buscar coluna');
+      },
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL}/columns/column-todo`);
+    req.flush(
+      { message: 'Erro ao buscar coluna' },
+      { status: 404, statusText: 'Not Found' }
+    );
+  });
 })
