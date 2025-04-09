@@ -99,4 +99,9 @@ describe('AuthenticationService', () => {
     sessionStorage.setItem('token', 'token-alice-123');
     expect(service.getToken()).toBe('token-alice-123');
   });
+  it('should get logged user from sessionStorage', () => {
+    sessionStorage.setItem('user', JSON.stringify(mockUsers[0]));
+    expect(service.getLoggedUser()).toEqual(mockUsers[0]);
+  });
+
 });
