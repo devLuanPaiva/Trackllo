@@ -76,4 +76,19 @@ describe('Task service', () => {
     expect(req.request.method).toBe('POST');
     req.flush({ data: createdTask });
   });
+  it('should update a task', () => {
+    const updatedTask: ITask = {
+      ...mockTasks[1],
+      title: 'Revisar código atualizado',
+    };
+
+    service.updateTask(updatedTask).subscribe((result) => {
+      expect(result).toEqual(updatedTask);
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL}/tasks/${updatedTask.id}`);
+    expect(req.request.method).toBe('PUT');
+    req.flush({ data: updatedTask });
+  });
+
 })
