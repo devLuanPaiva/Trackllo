@@ -117,4 +117,10 @@ describe('AuthenticationService', () => {
     sessionStorage.setItem('token', 'token-alice-123');
     expect(service.isAuthenticated()).toBeTrue();
   });
+  it('should auth headers with token', () => {
+    sessionStorage.setItem('token', 'token-alice-123')
+    const headers = service.getAuthHeaders()
+    expect(headers.get('Authorization')).toBe('Bearer token-alice-123')
+    expect(headers.get('Content-Type')).toBe('application/json');
+  })
 });
