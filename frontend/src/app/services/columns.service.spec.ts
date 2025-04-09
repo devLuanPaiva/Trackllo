@@ -51,4 +51,17 @@ describe('Column service', () => {
 
     req.flush({ data: column });
   })
+  it('should handle error when fetching board columns', () => {
+    service.getBoardColumns('board-1').subscribe({
+      error: (err) => {
+        expect(err.message).toBe('Erro ao buscar colunas');
+      },
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL}/columns/board/board-1`);
+    req.flush(
+      { message: 'Erro ao buscar colunas' },
+      { status: 500, statusText: 'Internal Server Error' }
+    );
+  });
 })
