@@ -101,4 +101,22 @@ describe('Task service', () => {
     expect(req.request.method).toBe('DELETE');
     req.flush({ data: mockTasks[0] });
   });
+  it('should move a task to a new column', () => {
+    const taskId = mockTasks[1].id;
+    const newColumnId = 'column-done';
+
+    const movedTask: ITask = {
+      ...mockTasks[1],
+      columnId: newColumnId,
+    };
+
+    service.moveTask(taskId, newColumnId).subscribe((result) => {
+      expect(result).toEqual(movedTask);
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL}/tasks/${taskId}/move`);
+    expect(req.request.method).toBe('PATCH');
+    expect(req.request.body).toEqual({ columnId: newColumnId });
+    req.flush({ data: movedTask });
+  });
 })
