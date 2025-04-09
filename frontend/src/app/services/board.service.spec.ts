@@ -62,4 +62,13 @@ describe('Board service', () => {
 
     req.flush({ data: mockBoards[0] });
   });
+  it('should delete a board', () => {
+    const boardId = 'board-1'
+    service.deleteBoard(boardId).subscribe((result) => {
+      expect(result).toEqual(mockBoards[0])
+    })
+    const req = httpMock.expectOne(`${environment.API_URL}/boards/${boardId}`);
+    expect(req.request.method).toBe('DELETE');
+    req.flush({ data: mockBoards[0] })
+  })
 })
