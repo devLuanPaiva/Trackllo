@@ -113,4 +113,8 @@ describe('AuthenticationService', () => {
       expect(sessionStorage.getItem('user')).toBeNull();
     });
   });
+  it('should return true if authenticated', () => {
+    sessionStorage.setItem('token', 'token-alice-123');
+    expect(service.isAuthenticated()).toBeTrue();
+  });
 });
