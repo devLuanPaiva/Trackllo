@@ -7,6 +7,7 @@ import { AuthenticationService } from './authentication.service';
 import { mockUsers } from '../mocks';
 import { environment } from '../../environments/environment';
 import { provideHttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
 
 describe('AuthenticationService', () => {
   let service: AuthenticationService;
@@ -68,5 +69,19 @@ describe('AuthenticationService', () => {
       { message: 'Invalid credentials' },
       { status: 401, statusText: 'Unauthorized' }
     );
+  });
+  it('should register a user and call login internally', () => {
+    spyOn(service, 'login').and.returnValue(of(mockUsers[0]));
+    const name = 'John';
+    const email = 'john@example.com';
+    const password = '123456';
+
+    service.register(name, email, password).subscribe((user) => {
+      expect(service.login).toHaveBeenCalledWith(email, password);
+    });
+
+    const req = httpMock.expectOne(`${apiURL}/users`);
+    expect(req.request.method).toBe('POST');
+    req.flush(mockUsers[0]);
   });
 });
