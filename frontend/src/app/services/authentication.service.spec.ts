@@ -95,4 +95,8 @@ describe('AuthenticationService', () => {
     const req = httpMock.expectOne(`${apiURL}/users`);
     req.flush({ message: 'Email already in use' }, { status: 400, statusText: 'Bad Request' });
   });
+  it('should get token from sessionStorage', () => {
+    sessionStorage.setItem('token', 'token-alice-123');
+    expect(service.getToken()).toBe('token-alice-123');
+  });
 });
