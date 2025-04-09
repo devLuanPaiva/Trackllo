@@ -90,5 +90,15 @@ describe('Task service', () => {
     expect(req.request.method).toBe('PUT');
     req.flush({ data: updatedTask });
   });
+  it('should delete a task', () => {
+    const taskId = mockTasks[0].id;
 
+    service.deleteTask(taskId).subscribe((result) => {
+      expect(result).toEqual(mockTasks[0]);
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL}/tasks/${taskId}`);
+    expect(req.request.method).toBe('DELETE');
+    req.flush({ data: mockTasks[0] });
+  });
 })
