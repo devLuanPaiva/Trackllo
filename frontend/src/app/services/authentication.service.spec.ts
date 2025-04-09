@@ -123,4 +123,10 @@ describe('AuthenticationService', () => {
     expect(headers.get('Authorization')).toBe('Bearer token-alice-123')
     expect(headers.get('Content-Type')).toBe('application/json');
   })
+  it('should return headers without Authorization if no token', () => {
+    sessionStorage.removeItem('token');
+    const headers = service.getAuthHeaders();
+    expect(headers.get('Authorization')).toBeNull();
+    expect(headers.get('Content-Type')).toBe('application/json');
+  });
 });
