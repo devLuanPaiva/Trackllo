@@ -1,0 +1,42 @@
+import { TestBed } from '@angular/core/testing';
+import { BoardService } from './board.service';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { environment } from '../../environments/environment';
+import { AuthenticationService } from './authentication.service';
+import { mockAuthService, mockBoards } from '../mocks';
+
+describe('Board service', () => {
+  let service: BoardService;
+  let httpMock: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        BoardService,
+        { provide: AuthenticationService, useValue: mockAuthService },
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
+    });
+
+    service = TestBed.inject(BoardService);
+    httpMock = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  it('should fetch user boards', () => {
+    service.getUserBoards().subscribe((boards) => {
+      expect(boards).toEqual(mockBoards);
+    });
+
+    const req = httpMock.expectOne(`${environment.API_URL}/boards`);
+    expect(req.request.method).toBe('GET');
+    expect(req.request.headers.get('Authorization')).toBe('Bearer fake-token');
+
+    req.flush({ data: mockBoards });
+  })
+})
