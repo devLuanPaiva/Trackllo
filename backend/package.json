@@ -2,9 +2,9 @@
   "name": "backend",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/api/index.ts",
+    "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "start": "node dist/api/index.js",
+    "start": "node dist/index.js",
     "test": "vitest",
     "vercel-build": "npx prisma generate && npx prisma migrate deploy"
   },
