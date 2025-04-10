@@ -6,7 +6,7 @@
     "build": "tsc",
     "start": "node dist/api/index.js",
     "test": "vitest",
-    "vercel-build": "npx prisma generate && npx prisma migrate deploy && npm prune --production"
+    "vercel-build": "npx prisma generate && npx prisma migrate deploy"
   },
   "dependencies": {
     "@hono/node-server": "^1.14.0",
