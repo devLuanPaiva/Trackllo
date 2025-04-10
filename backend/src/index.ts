@@ -1,11 +1,11 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import userRoutes from '../controllers/user.controller.js'
-import taskRoutes from '../controllers/task.controller.js'
-import boardRoutes from '../controllers/board.controller.js'
-import errorHandler from '../utils/errorHandler.js'
-import columnRoutes from '../controllers/column.controller.js'
+import userRoutes from './controllers/user.controller.js'
+import taskRoutes from './controllers/task.controller.js'
+import boardRoutes from './controllers/board.controller.js'
+import errorHandler from './utils/errorHandler.js'
+import columnRoutes from './controllers/column.controller.js'
 
 const app = new Hono().basePath('/api')
 app.use('*', cors())
