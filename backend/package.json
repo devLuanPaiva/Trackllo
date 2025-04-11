@@ -4,8 +4,9 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "vercel dev",
     "test": "vitest",
+    "deploy": "vercel",
     "vercel-build": "npx prisma generate --no-engine && npx prisma migrate deploy"
   },
   "dependencies": {
@@ -14,6 +15,7 @@
     "bcrypt": "^5.1.1",
     "hono": "^4.7.5",
     "jsonwebtoken": "^9.0.2",
+    "vercel": "^41.6.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
