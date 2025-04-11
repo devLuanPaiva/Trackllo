@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "strict": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
@@ -10,10 +11,9 @@
     "jsxImportSource": "hono/jsx",
     "outDir": "dist",
     "baseUrl": "./",
-    "rootDir": "src",
     "paths": {
       "@database": ["src/database/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "api"]
 }
