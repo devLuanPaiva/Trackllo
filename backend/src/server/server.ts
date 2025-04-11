@@ -7,7 +7,7 @@ import errorHandler from '../utils/errorHandler.js'
 import columnRoutes from '../controllers/column.controller.js'
 
 const createApp = () => {
-    const app = new Hono().basePath('/api')
+    const app = new Hono()
 
     app.use('*', cors())
     app.use('*', async (c, next) => {
