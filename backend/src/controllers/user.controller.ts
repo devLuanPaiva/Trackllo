@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import UserService from "../services/user.service.js";
-import validator from "../validators/user.validator.js";
-import { successResponse, errorResponse } from "../utils/apiResponse.js";
+import UserService from "../services/user.service";
+import validator from "../validators/user.validator";
+import { successResponse, errorResponse } from "../utils/apiResponse";
 
 const userRoutes = new Hono();
 

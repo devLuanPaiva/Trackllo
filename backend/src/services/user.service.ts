@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
-import prisma from '../database/db.js'
-import type { UpdateUserInput, User } from '../models/user.model.js'
+import prisma from '../database/db'
+import type { UpdateUserInput, User } from '../models/user.model'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
