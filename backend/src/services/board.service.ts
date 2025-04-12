@@ -1,5 +1,5 @@
-import prisma from "../database/db.js";
-import type { Board } from "../models/board.model.js";
+import prisma from "../database/db";
+import type { Board } from "../models/board.model";
 
 export default class BoardService {
     static async getUserBoards(userId: string): Promise<Board[]> {

@@ -1,5 +1,5 @@
-import prisma from "../database/db.js";
-import type { Column } from '../models/column.model.js'
+import prisma from "../database/db";
+import type { Column } from '../models/column.model'
 export default class ColumnService {
     static async getBoardColumns(boardId: string, userId: string): Promise<Column[]> {
         const board = await prisma.board.findUnique({
