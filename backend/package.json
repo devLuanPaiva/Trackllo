@@ -1,11 +1,12 @@
 {
   "name": "backend",
-  "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
-    "test": "vitest"
+    "start": "vercel dev",
+    "test": "vitest",
+    "deploy": "vercel",
+    "vercel-build": "npx prisma generate --no-engine && npx prisma migrate deploy"
   },
   "dependencies": {
     "@hono/node-server": "^1.14.0",
@@ -13,13 +14,15 @@
     "bcrypt": "^5.1.1",
     "hono": "^4.7.5",
     "jsonwebtoken": "^9.0.2",
+    "vercel": "^41.6.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^20.11.17",
+    "@types/node": "^20.17.30",
     "prisma": "^6.5.0",
-    "tsx": "^4.7.1"
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3"
   }
 }

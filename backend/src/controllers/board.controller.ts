@@ -1,8 +1,8 @@
 import { Hono } from "hono";
-import BoardService from "../services/board.service.js";
-import { successResponse, errorResponse } from "../utils/apiResponse.js";
-import validator from "../validators/board.validator.js";
-import { authMiddleware } from "../middleware/auth.middleware.js";
+import BoardService from "../services/board.service";
+import { successResponse, errorResponse } from "../utils/apiResponse";
+import validator from "../validators/board.validator";
+import { authMiddleware } from "../middleware/auth.middleware";
 
 const boardRoutes = new Hono();
 

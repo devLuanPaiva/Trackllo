@@ -1,8 +1,8 @@
 import { Hono } from "hono";
-import ColumnService from "../services/column.service.js";
-import { successResponse, errorResponse } from "../utils/apiResponse.js";
-import validator from "../validators/column.validator.js";
-import { authMiddleware } from "../middleware/auth.middleware.js";
+import ColumnService from "../services/column.service";
+import { successResponse, errorResponse } from "../utils/apiResponse";
+import validator from "../validators/column.validator";
+import { authMiddleware } from "../middleware/auth.middleware";
 
 const columnRoutes = new Hono();
 

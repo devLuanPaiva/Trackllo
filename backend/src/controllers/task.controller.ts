@@ -1,8 +1,8 @@
 import { Hono } from "hono";
-import TaskService from "../services/task.service.js";
-import { successResponse, errorResponse } from "../utils/apiResponse.js";
-import validator from "../validators/task.validator.js";
-import { authMiddleware } from "../middleware/auth.middleware.js";
+import TaskService from "../services/task.service";
+import { successResponse, errorResponse } from "../utils/apiResponse";
+import validator from "../validators/task.validator";
+import { authMiddleware } from "../middleware/auth.middleware";
 
 const taskRoutes = new Hono();
 taskRoutes.use("*", authMiddleware)

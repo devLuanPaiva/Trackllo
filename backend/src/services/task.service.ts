@@ -1,5 +1,5 @@
-import prisma from "../database/db.js";
-import type { Task } from "../models/task.model.js";
+import prisma from "../database/db";
+import type { Task } from "../models/task.model";
 
 export default class TaskService {
   static async getAllTasks(userId: string, columnId: string): Promise<Task[]> {
