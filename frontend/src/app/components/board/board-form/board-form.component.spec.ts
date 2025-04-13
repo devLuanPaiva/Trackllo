@@ -27,4 +27,11 @@ describe('BoardForm component', () => {
     const button = fixture.debugElement.query(By.css('button')).nativeElement;
     expect(button.disabled).toBeTrue();
   });
+  it('should enable the submit button when the form is valid', () => {
+    component.boardForm.get('title')?.setValue('New board');
+    fixture.detectChanges();
+
+    const button = fixture.debugElement.query(By.css('button')).nativeElement;
+    expect(button.disabled).toBeFalse();
+  });
 });
