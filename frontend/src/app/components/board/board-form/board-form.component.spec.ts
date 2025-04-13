@@ -34,4 +34,16 @@ describe('BoardForm component', () => {
     const button = fixture.debugElement.query(By.css('button')).nativeElement;
     expect(button.disabled).toBeFalse();
   });
+  it('should emit the board title and reset the form on submit', () => {
+    spyOn(component.create, 'emit');
+    const testTitle = 'My new board';
+
+    component.boardForm.get('title')?.setValue(testTitle);
+    fixture.detectChanges();
+
+    component.onSubmit();
+
+    expect(component.create.emit).toHaveBeenCalledWith(testTitle);
+    expect(component.boardForm.get('title')?.value).toBeNull();
+  });
 });
