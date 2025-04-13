@@ -17,4 +17,9 @@ describe('BoardForm component', () => {
   it('should have a form with title control', () => {
     expect(component.boardForm.contains('title')).toBeTrue();
   });
+  it('should make the title control required', () => {
+    const control = component.boardForm.get('title');
+    control?.setValue('');
+    expect(control?.valid).toBeFalse();
+  });
 });
