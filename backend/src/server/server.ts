@@ -1,10 +1,11 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
+import boardRoutes from '../controllers/board.controller'
+import columnRoutes from '../controllers/column.controller'
+import taskRoutes from '../controllers/task.controller'
 import userRoutes from '../controllers/user.controller'
-import taskRoutes from 'src/controllers/task.controller'
-import boardRoutes from 'src/controllers/board.controller'
-import columnRoutes from 'src/controllers/column.controller'
-import errorHandler from 'src/utils/errorHandler'
+import errorHandler from '../utils/errorHandler'
+
 
 const createApp = () => {
     const app = new Hono()
