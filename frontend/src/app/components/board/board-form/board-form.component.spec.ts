@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BoardFormComponent } from './board-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 describe('BoardForm component', () => {
   let component: BoardFormComponent;
@@ -21,5 +22,9 @@ describe('BoardForm component', () => {
     const control = component.boardForm.get('title');
     control?.setValue('');
     expect(control?.valid).toBeFalse();
+  });
+  it('should disable the submit button if the form is invalid', () => {
+    const button = fixture.debugElement.query(By.css('button')).nativeElement;
+    expect(button.disabled).toBeTrue();
   });
 });
