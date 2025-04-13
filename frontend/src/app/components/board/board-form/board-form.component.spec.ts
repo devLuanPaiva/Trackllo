@@ -46,4 +46,14 @@ describe('BoardForm component', () => {
     expect(component.create.emit).toHaveBeenCalledWith(testTitle);
     expect(component.boardForm.get('title')?.value).toBeNull();
   });
+  it('should not emit if form is invalid', () => {
+    spyOn(component.create, 'emit');
+
+    component.boardForm.get('title')?.setValue('');
+    fixture.detectChanges();
+
+    component.onSubmit();
+
+    expect(component.create.emit).not.toHaveBeenCalled();
+  });
 });
