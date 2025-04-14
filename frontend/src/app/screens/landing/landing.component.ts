@@ -1,11 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-landing',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './landing.component.html',
-  styleUrl: './landing.component.scss'
+  animations: [
+    trigger('fadeInUp', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('600ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+      ]),
+    ]),
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('1000ms ease-in', style({ opacity: 1 })),
+      ]),
+    ]),
+  ]
 })
-export class LandingComponent {
-
-}
+export class LandingComponent {}
