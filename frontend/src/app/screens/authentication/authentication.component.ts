@@ -8,10 +8,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LayoutComponent } from "../../components/template/layout/layout.component";
 
 @Component({
   selector: 'app-authentication',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, LayoutComponent],
   templateUrl: './authentication.component.html',
 })
 export class AuthenticationComponent {
