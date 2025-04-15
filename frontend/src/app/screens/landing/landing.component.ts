@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './landing.component.html',
   animations: [
     trigger('fadeInUp', [
@@ -22,4 +23,4 @@ import { trigger, style, animate, transition } from '@angular/animations';
     ]),
   ]
 })
-export class LandingComponent {}
+export class LandingComponent { }
