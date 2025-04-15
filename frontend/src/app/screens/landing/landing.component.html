@@ -1,42 +1,33 @@
 <div class="w-full min-h-screen flex flex-col font-sans">
-    <div
-      class="flex-1 flex flex-col text-white"
-      [ngStyle]="{
-        background: 'url(assets/background.jpg)',
+  <div class="flex-1 flex flex-col text-white" [ngStyle]="{
+        background: 'url(assets/bg.jpg)',
         'background-size': 'cover',
         'background-position': 'center',
         'background-repeat': 'no-repeat'
-      }"
-    >
-      <main
-        class="h-screen flex flex-col sm:flex-row-reverse items-center sm:items-start justify-center gap-12 px-6 py-16 bg-purple-900 bg-opacity-50 text-center sm:text-left"
-      >
-        <section class="max-w-2xl" @fadeInUp>
-          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 drop-shadow-xl">
-            Organize suas tarefas com
-            <strong class="bg-gradient-to-r from-purple-800 via-purple-500 to-purple-400 bg-clip-text  font-extrabold text-transparent  tracking-wide">Trackllo</strong>
-          </h1>
-          <p class="text-lg md:text-xl text-purple-200 mb-8 leading-relaxed" @fadeIn>
-            Crie quadros Kanban, acompanhe o progresso e mantenha seu time sempre alinhado.
-            Tudo isso em uma plataforma intuitiva e poderosa.
-          </p>
-          <button
-            class="bg-purple-700 hover:bg-purple-800 active:scale-95 transition-all duration-300 px-8 py-3 rounded-full text-white font-medium flex items-center gap-3 shadow-xl"
-            @fadeInUp
-          >
-            <i class="fas fa-plus-circle text-lg"></i>
-            <span>Comece agora</span>
-          </button>
-        </section>
-  
-        <figure class="max-w-xl w-full rounded-xl overflow-hidden shadow-2xl" @fadeIn>
-          <img
-            src="assets/kanban2.jpg"
-            alt="Visualização de um quadro Kanban"
-            class="w-full h-auto object-cover"
-          />
-        </figure>
-      </main>
-    </div>
+      }">
+    <main
+      class="h-screen flex flex-col sm:flex-row items-center sm:items-start justify-center gap-12 px-6 py-16  text-center sm:text-left">
+      <section class="max-w-2xl" @fadeInUp>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 drop-shadow-xl">
+          Organize suas tarefas com
+          <strong
+            class="bg-gradient-to-r from-blue-800 via-blue-500 to-blue-400 bg-clip-text  font-extrabold text-transparent  tracking-wide">Trackllo</strong>
+        </h1>
+        <p class="text-lg md:text-xl text-blue-500 mb-8 leading-relaxed" @fadeIn>
+          Crie quadros Kanban, acompanhe o progresso e mantenha seu time sempre alinhado.
+          Tudo isso em uma plataforma intuitiva e poderosa.
+        </p>
+        <button
+          class="bg-blue-700 hover:bg-blue-800 active:scale-95 transition-all duration-300 px-8 py-3 rounded-full text-white font-medium flex items-center gap-3 shadow-xl"
+          @fadeInUp>
+          <i class="fas fa-plus-circle text-lg"></i>
+          <span>Comece agora</span>
+        </button>
+      </section>
+
+      <figure class="max-w-xl w-full rounded-xl overflow-hidden shadow-2xl" @fadeIn>
+        <img src="assets/kanban.jpg" alt="Visualização de um quadro Kanban" class="w-full h-auto object-cover" />
+      </figure>
+    </main>
   </div>
-  
+</div>
