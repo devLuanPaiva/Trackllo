@@ -1,4 +1,4 @@
-<section class="w-full flex justify-around gap-5 flex-wrap items-start">
+<section class="max-w-full box-border flex justify-around gap-5 flex-wrap items-start">
   @for (column of ['Todo', 'In Progress', 'Done']; track $index) {
   <app-tasks [columnTitle]="column"
     [columnId]="column === 'Todo' ? idTodo : column === 'In Progress' ? idInProgress : idDone"
