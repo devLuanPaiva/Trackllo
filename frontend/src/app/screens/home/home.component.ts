@@ -5,11 +5,12 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { UserBoardsComponent } from '../../components/board/user-boards/user-boards.component';
 import { HeaderComponent } from "../../components/template/header/header.component";
 import { LoadingComponent } from "../../components/shared/loading/loading.component";
+import { LayoutComponent } from "../../components/template/layout/layout.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, UserBoardsComponent, HeaderComponent, LoadingComponent],
+  imports: [CommonModule, UserBoardsComponent, HeaderComponent, LoadingComponent, LayoutComponent],
   templateUrl: './home.component.html',
 })
 export class HomeComponent {

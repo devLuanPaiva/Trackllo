@@ -7,10 +7,11 @@ import { ColumnsComponent } from '../../components/board/columns/columns.compone
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "../../components/template/header/header.component";
 import { LoadingComponent } from "../../components/shared/loading/loading.component";
+import { LayoutComponent } from "../../components/template/layout/layout.component";
 
 @Component({
   selector: 'app-board',
-  imports: [ColumnsComponent, CommonModule, HeaderComponent, LoadingComponent],
+  imports: [ColumnsComponent, CommonModule, HeaderComponent, LoadingComponent, LayoutComponent],
   templateUrl: './board.component.html',
 })
 export class BoardComponent implements OnInit {
