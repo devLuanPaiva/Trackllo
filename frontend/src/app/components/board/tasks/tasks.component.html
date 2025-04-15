@@ -1,96 +1,84 @@
-<article
-    class="flex flex-col items-center bg-gray-100 p-4 rounded-lg shadow-lg w-80">
-    <h2 class="text-lg font-bold mb-3">{{ columnTitle }}</h2>
-    <ul cdkDropList [id]="id" [cdkDropListData]="columnTasks"
-        [cdkDropListConnectedTo]="connectedTo"
-        (cdkDropListDropped)="onMoveColumnTask($event)"
-        class="w-full space-y-2">
-        @for (item of columnTasks; track $index) {
-        <li cdkDrag [@fadeInOut]
-            class="p-2 rounded-lg shadow-md cursor-move list-none" [ngClass]="{
+<article class="flex flex-col items-center bg-gray-100 p-4 rounded-lg shadow-lg w-80">
+  <h2 class="text-lg font-bold mb-3">{{ columnTitle }}</h2>
+  <ul cdkDropList [id]="id" [cdkDropListData]="columnTasks" [cdkDropListConnectedTo]="connectedTo"
+    (cdkDropListDropped)="onMoveColumnTask($event)" class="w-full space-y-2">
+    @for (item of columnTasks; track $index) {
+    <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md cursor-move list-none" [ngClass]="{
         'bg-blue-200': colorTask === 'blue',
         'bg-yellow-200': colorTask === 'yellow',
         'bg-green-200': colorTask === 'green'
       }">
 
-            <div class="flex flex-col items-start space-y-2">
-                <h3 class="font-medium text-lg">{{ item.title }}</h3>
-                <p class="text-sm text-gray-600">{{ item.description }}</p>
-                @if(item.image){
-                <img [src]="item.image" alt="Task"
-                    class="w-full h-32 object-cover rounded-lg" />
-                }
-            </div>
-        </li>
+      <div class="flex flex-col items-start space-y-2">
+        <h3 class="font-medium text-lg">{{ item.title }}</h3>
+        <p class="text-sm text-gray-600">{{ item.description }}</p>
+        @if(item.image){
+        <img [src]="item.image" alt="Task" class="w-full h-32 object-cover rounded-lg" />
         }
-    </ul>
-    <button (click)="toggleForm()"
-        class="group mt-5  transition-colors duration-300 ease-out w-full py-3 flex items-center justify-center rounded-lg shadow-md gap-3 text-white font-medium hover:shadow-lg focus:outline-none focus:ring-2
+      </div>
+    </li>
+    }
+  </ul>
+  <button (click)="toggleForm()" class="group mt-5  transition-colors duration-300 ease-out w-full py-3 flex items-center justify-center rounded-lg shadow-md gap-3 text-white font-medium hover:shadow-lg focus:outline-none focus:ring-2
   " [ngClass]="{
     'bg-blue-500 hover:bg-blue-600 focus:ring-blue-300': colorTask === 'blue',
     'bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-300': colorTask === 'yellow',
     'bg-green-500 hover:bg-green-600 focus:ring-green-300': colorTask === 'green'
   }">
 
-        <fa-icon [icon]="icons.plus"
-            class="bg-white w-6 h-6 rounded-full transition-colors duration-300 ease-in-out"
-            [ngClass]="{
+    <fa-icon [icon]="icons.plus" class="bg-white w-6 h-6 rounded-full transition-colors duration-300 ease-in-out"
+      [ngClass]="{
         ' text-blue-500 group-hover:bg-blue-100': colorTask === 'blue',
         ' text-yellow-500 group-hover:bg-yellow-100 ': colorTask === 'yellow',
         ' text-green-500 group-hover:bg-green-100 ': colorTask === 'green'
       }" />
-        <span>Create Task</span>
-    </button>
+    <span>Criar Tarefa</span>
+  </button>
 
-    @if (showForm) {
-    <form [formGroup]="taskForm" (ngSubmit)="createTask()"
-        class="mt-3 flex flex-col gap-3 w-full">
-        <input formControlName="title" placeholder="Title"
-            class="border p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50"
-            [ngClass]="{
+  @if (showForm) {
+  <form [formGroup]="taskForm" (ngSubmit)="createTask()" class="mt-3 flex flex-col gap-3 w-full">
+    <input formControlName="title" placeholder="Título"
+      class="border p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50" [ngClass]="{
         'focus:ring-blue-400': colorTask === 'blue',
         'focus:ring-yellow-400': colorTask === 'yellow',
         'focus:ring-green-400': colorTask === 'green'
       }" required />
 
-        <textarea formControlName="description" placeholder="Description"
-            class="border p-2 rounded-lg shadow-sm resize-none h-24 focus:outline-none focus:ring-2 focus:ring-opacity-50"
-            [ngClass]="{
+    <textarea formControlName="description" placeholder="Descrição"
+      class="border p-2 rounded-lg shadow-sm resize-none h-24 focus:outline-none focus:ring-2 focus:ring-opacity-50"
+      [ngClass]="{
         'focus:ring-blue-400': colorTask === 'blue',
         'focus:ring-yellow-400': colorTask === 'yellow',
         'focus:ring-green-400': colorTask === 'green'
       }" required></textarea>
 
-        <input formControlName="image" placeholder="Image URL"
-            class="border p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50"
-            [ngClass]="{
+    <input formControlName="image" placeholder="Imagem URL"
+      class="border p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50" [ngClass]="{
         'focus:ring-blue-400': colorTask === 'blue',
         'focus:ring-yellow-400': colorTask === 'yellow',
         'focus:ring-green-400': colorTask === 'green'
       }" />
 
-        <div class="flex items-center gap-2">
-            <button type="submit"
-                class=" w-[85%] py-2 rounded-lg shadow-md text-white font-medium transition-colors duration-300"
-                [ngClass]="{
+    <div class="flex items-center gap-2">
+      <button type="submit"
+        class=" w-[85%] py-2 rounded-lg shadow-md text-white font-medium transition-colors duration-300" [ngClass]="{
           'bg-blue-500 hover:bg-blue-600 focus:ring-blue-300': colorTask === 'blue',
           'bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-300': colorTask === 'yellow',
           'bg-green-500 hover:bg-green-600 focus:ring-green-300': colorTask === 'green'
         }">
-                Add Task
-            </button>
-            <button type="button" class="w-[10%]" (click)="showForm = false">
-                <abbr title="close button">
-                    <fa-icon [icon]="icons.xmark"
-                        class="bg-white w-6 h-6 rounded-full transition-colors duration-300 ease-in-out"
-                        [ngClass]="{
+        Adicionar Tarefa
+      </button>
+      <button type="button" class="w-[10%]" (click)="showForm = false">
+        <abbr title="fechar formulário">
+          <fa-icon [icon]="icons.xmark" class="bg-white w-6 h-6 rounded-full transition-colors duration-300 ease-in-out"
+            [ngClass]="{
           ' text-blue-500 group-hover:bg-blue-100': colorTask === 'blue',
           ' text-yellow-500 group-hover:bg-yellow-100 ': colorTask === 'yellow',
           ' text-green-500 group-hover:bg-green-100 ': colorTask === 'green'
                 }" />
-                </abbr>
-            </button>
-        </div>
-    </form>
-    }
+        </abbr>
+      </button>
+    </div>
+  </form>
+  }
 </article>
