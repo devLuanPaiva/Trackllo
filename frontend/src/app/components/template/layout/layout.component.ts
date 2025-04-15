@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule],
   templateUrl: './layout.component.html',
 })
 export class LayoutComponent {
