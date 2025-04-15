@@ -8,9 +8,10 @@ import {
   transition,
   animate,
 } from '@angular/animations';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-logo',
-  imports: [FontAwesomeModule, MatTooltipModule],
+  imports: [FontAwesomeModule, MatTooltipModule, RouterLink],
   templateUrl: './logo.component.html',
   animations: [trigger('fadeInScale', [
     transition(':enter', [
