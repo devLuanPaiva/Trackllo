@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { IUser } from '../models';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,9 @@ import { environment } from '../../environments/environment';
 export class AuthenticationService {
   private readonly api_url = environment.API_URL;
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient,
+    private readonly router: Router
+  ) { }
 
   login(email: string, password: string): Observable<IUser> {
     return this.http
@@ -69,6 +72,7 @@ export class AuthenticationService {
     if (typeof window !== 'undefined') {
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('user');
+      this.router.navigate(['/autenticacao']);
     }
     return of(undefined);
   }
