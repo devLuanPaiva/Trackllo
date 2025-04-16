@@ -28,7 +28,7 @@ export class AuthenticationService {
         catchError((error) => {
           console.error('Login error:', error);
           return throwError(
-            () => new Error(error.error?.message || 'Login failed')
+            () => new Error(error.error?.message ?? 'Login failed')
           );
         })
       );
@@ -44,7 +44,7 @@ export class AuthenticationService {
         catchError((error) => {
           console.error('Registration error:', error);
           return throwError(
-            () => new Error(error.error?.message || 'Registration failed')
+            () => new Error(error.error?.message ?? 'Registration failed')
           );
         })
       );
