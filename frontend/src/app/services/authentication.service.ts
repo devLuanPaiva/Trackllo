@@ -30,10 +30,12 @@ export class AuthenticationService {
         map((response) => response.data.user),
         catchError((error) => {
           console.error('Login error:', error);
-          return throwError(
-            () => new Error(error.error?.message ?? 'Login failed')
-          );
+          const message = error?.error?.message ?? 'Erro ao fazer login';
+          console.log(message)
+
+          return throwError(() => new Error(message));
         })
+        
       );
   }
 
@@ -46,10 +48,11 @@ export class AuthenticationService {
         }),
         catchError((error) => {
           console.error('Registration error:', error);
-          return throwError(
-            () => new Error(error.error?.message ?? 'Registration failed')
-          );
+          const message = error?.error?.message ?? 'Erro ao registrar usuário';
+          console.log(message)
+          return throwError(() => new Error(message));
         })
+        
       );
   }
 
