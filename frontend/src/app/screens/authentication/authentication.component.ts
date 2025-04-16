@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LayoutComponent } from "../../components/template/layout/layout.component";
+import { LayoutComponent } from '../../components/template/layout/layout.component';
 
 @Component({
   selector: 'app-authentication',
@@ -18,7 +18,7 @@ import { LayoutComponent } from "../../components/template/layout/layout.compone
 export class AuthenticationComponent {
   authForm!: FormGroup;
   isRegister = true;
-
+  errorMessage: string | null = null;
   constructor(
     private readonly auth: AuthenticationService,
     private readonly formBuilder: FormBuilder,
@@ -42,20 +42,28 @@ export class AuthenticationComponent {
     if (this.authForm.invalid) return;
 
     const { name, email, password } = this.authForm.value;
+    this.errorMessage = null;
 
     if (this.isRegister) {
       this.auth.register(name, email, password).subscribe({
-        next: () => {
-          this.router.navigate(['/home']);
+        next: () => this.router.navigate(['/home']),
+        error: (err) => {
+          this.errorMessage =
+            err.message ?? 'Erro ao registrar. Tente novamente mais tarde.';
         },
-        error: (err) => console.error('Registration error:', err),
       });
     } else {
       this.auth.login(email, password).subscribe({
-        next: (user) => {
-          this.router.navigate(['/home']);
+        next: () => this.router.navigate(['/home']),
+        error: (err) => {
+          console.log(err, err.message)
+          if (err.message) {
+            this.errorMessage = err.message;
+          } else {
+            this.errorMessage =
+              'Servidor indisponível. Tente novamente mais tarde.';
+          }
         },
-        error: (err) => console.error('Login error:', err),
       });
     }
   }
