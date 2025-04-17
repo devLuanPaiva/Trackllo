@@ -36,7 +36,7 @@ export default class BoardService {
         })
 
         if (!userExists) {
-            throw new Error('User not found')
+            throw new Error('Usuário não encontrado')
         }
 
         return prisma.board.create({
@@ -70,7 +70,7 @@ export default class BoardService {
         })
 
         if (!board) {
-            throw new Error('Board not found or not owned by user')
+            throw new Error('Quadro não encontrado para este usuário')
         }
 
         return prisma.board.delete({
