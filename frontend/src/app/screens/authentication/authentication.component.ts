@@ -19,6 +19,8 @@ export class AuthenticationComponent {
   authForm!: FormGroup;
   isRegister = false;
   errorMessage: string | null = null;
+  successMessage: string | null = null
+
   constructor(
     private readonly auth: AuthenticationService,
     private readonly formBuilder: FormBuilder,
@@ -32,6 +34,7 @@ export class AuthenticationComponent {
   }
 
   toggleMode() {
+    this.errorMessage = null
     this.isRegister = !this.isRegister;
 
     const nameControl = this.authForm.get('name');
@@ -46,14 +49,17 @@ export class AuthenticationComponent {
 
 
   onSubmit() {
+    this.errorMessage = null
     if (this.authForm.invalid) return;
 
     const { name, email, password } = this.authForm.value;
-    this.errorMessage = null;
 
     if (this.isRegister) {
       this.auth.register(name, email, password).subscribe({
-        next: () => { void this.router.navigate(['/home']) },
+        next: () => {
+          this.successMessage = 'Usuário criado com sucesso!'
+          this.router.navigate(['/home'])
+        },
         error: (err) => {
           this.errorMessage =
             err.message ?? 'Erro ao registrar. Tente novamente mais tarde.';
