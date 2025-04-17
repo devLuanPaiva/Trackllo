@@ -21,10 +21,10 @@ export default class UserService {
             select: { id: true, name: true, email: true, password: true }
         })
 
-        if (!user?.password) throw new Error('Invalid credentials')
+        if (!user?.password) throw new Error('Credenciais inválidas!')
 
         const isMatch = await bcrypt.compare(password, user.password)
-        if (!isMatch) throw new Error('Invalid credentials')
+        if (!isMatch) throw new Error('Credenciais inválidas!')
 
         const token = jwt.sign({ id: user.id }, SECRET, { expiresIn: '1h' })
 
@@ -48,7 +48,7 @@ export default class UserService {
 
     static async createUser(data: { name: string; email: string; password: string }) {
         const existingUser = await prisma.user.findUnique({ where: { email: data.email } })
-        if (existingUser) throw new Error('Email already in use')
+        if (existingUser) throw new Error('Este e-mail já está em uso')
 
         const hashedPassword = await bcrypt.hash(data.password, 10)
 
@@ -84,7 +84,7 @@ export default class UserService {
         })
 
         if (!user) {
-            throw new Error('User not found')
+            throw new Error('Usuário não encontrado')
         }
 
         return prisma.user.delete({
