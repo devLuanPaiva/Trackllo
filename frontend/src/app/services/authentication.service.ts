@@ -29,13 +29,10 @@ export class AuthenticationService {
         }),
         map((response) => response.data.user),
         catchError((error) => {
-          console.error('Login error:', error);
-          const message = error?.error?.message ?? 'Erro ao fazer login';
-          console.log(message)
-
+          const message = error?.error?.error?.message ?? 'Erro ao fazer login';
           return throwError(() => new Error(message));
         })
-        
+
       );
   }
 
@@ -47,12 +44,10 @@ export class AuthenticationService {
           this.login(email, password).subscribe();
         }),
         catchError((error) => {
-          console.error('Registration error:', error);
-          const message = error?.error?.message ?? 'Erro ao registrar usuário';
-          console.log(message)
+          const message = error?.error?.error?.message ?? 'Erro ao registrar usuário';
           return throwError(() => new Error(message));
         })
-        
+
       );
   }
 
