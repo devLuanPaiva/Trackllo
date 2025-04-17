@@ -46,7 +46,7 @@ export class AuthenticationComponent {
 
     if (this.isRegister) {
       this.auth.register(name, email, password).subscribe({
-        next: () => this.router.navigate(['/home']),
+        next: () => { void this.router.navigate(['/home']) },
         error: (err) => {
           this.errorMessage =
             err.message ?? 'Erro ao registrar. Tente novamente mais tarde.';
@@ -54,9 +54,8 @@ export class AuthenticationComponent {
       });
     } else {
       this.auth.login(email, password).subscribe({
-        next: () => this.router.navigate(['/home']),
+        next: () => { void this.router.navigate(['/home']) },
         error: (err) => {
-          console.log(err, err.message)
           if (err.message) {
             this.errorMessage = err.message;
           } else {
