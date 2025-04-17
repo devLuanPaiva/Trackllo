@@ -44,10 +44,14 @@ export class AuthenticationService {
           this.login(email, password).subscribe();
         }),
         catchError((error) => {
-          const message = error?.error?.error?.message ?? 'Erro ao registrar usuário';
+          const errorArray = error?.error?.error;
+          const message =
+            Array.isArray(errorArray) && errorArray.length > 0
+              ? errorArray[0].message ?? error?.error?.error?.message ?? 'Erro ao registrar usuário'
+              : error?.error?.error?.message ?? 'Erro ao registrar usuário';
+
           return throwError(() => new Error(message));
         })
-
       );
   }
 
