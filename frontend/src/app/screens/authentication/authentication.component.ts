@@ -17,7 +17,7 @@ import { LayoutComponent } from '../../components/template/layout/layout.compone
 })
 export class AuthenticationComponent {
   authForm!: FormGroup;
-  isRegister = true;
+  isRegister = false;
   errorMessage: string | null = null;
   constructor(
     private readonly auth: AuthenticationService,
@@ -33,10 +33,17 @@ export class AuthenticationComponent {
 
   toggleMode() {
     this.isRegister = !this.isRegister;
-    if (!this.isRegister) {
-      this.authForm.get('name')?.reset();
+
+    const nameControl = this.authForm.get('name');
+    if (this.isRegister) {
+      nameControl?.setValidators([Validators.required]);
+    } else {
+      nameControl?.clearValidators();
+      nameControl?.reset();
     }
+    nameControl?.updateValueAndValidity();
   }
+
 
   onSubmit() {
     if (this.authForm.invalid) return;
