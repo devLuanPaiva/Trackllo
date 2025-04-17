@@ -1,9 +1,7 @@
 <app-layout>
-  <div
-    class="w-full min-h-screen flex flex-col sm:flex-row items-center py-10 gap-10 ">
+  <div class="w-full min-h-screen flex flex-col sm:flex-row items-center py-10 gap-10 ">
     <figure class=" w-full sm:w-[45%] relative">
-      <img src="/assets/image.png" class="w-auto h-auto"
-        alt="Ilustração de homem tentando realizar login">
+      <img src="/assets/image.png" class="w-auto h-auto" alt="Ilustração de homem tentando realizar login">
     </figure>
     <article class="bg-[#F6F6FF] p-8 rounded-lg shadow-lg  w-full sm:w-[45%]">
       <h2 class="text-2xl font-bold text-center mb-6">{{ isRegister ?
@@ -12,14 +10,20 @@
         <div *ngIf="isRegister">
           <label class="block text-gray-700" for="name">Nome</label>
           <input type="text" formControlName="name"
-            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800">
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800" required>
+          <small class="text-red-500"
+            *ngIf="authForm.get('name')?.touched && authForm.get('name')?.invalid && isRegister">
+            <span *ngIf="authForm.get('name')?.errors?.['required']">
+              Nome é obrigatório.
+            </span>
+          </small>
+
         </div>
         <div>
           <label class="block text-gray-700" for="email">Email</label>
           <input type="email" formControlName="email"
             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800">
-          <small class="text-red-500"
-            *ngIf="authForm.get('email')?.touched && authForm.get('email')?.invalid">
+          <small class="text-red-500" *ngIf="authForm.get('email')?.touched && authForm.get('email')?.invalid">
             <span *ngIf="authForm.get('email')?.errors?.['required']">Email é
               obrigatório.</span>
             <span *ngIf="authForm.get('email')?.errors?.['email']">Email
@@ -31,8 +35,7 @@
           <label class="block text-gray-700" for="password">Senha</label>
           <input type="password" formControlName="password"
             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800">
-          <small class="text-red-500"
-            *ngIf="authForm.get('password')?.touched && authForm.get('password')?.invalid">
+          <small class="text-red-500" *ngIf="authForm.get('password')?.touched && authForm.get('password')?.invalid">
             <span *ngIf="authForm.get('password')?.errors?.['required']">Senha é
               obrigatória.</span>
             <span *ngIf="authForm.get('password')?.errors?.['minlength']">A
@@ -40,8 +43,7 @@
           </small>
         </div>
 
-        <button type="submit"
-          [disabled]="authForm.invalid"
+        <button type="submit" [disabled]="authForm.invalid"
           class="w-full bg-blue-500 hover:bg-blue-600 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:bg-blue-700 active:scale-95 transition-all duration-300 text-white py-2 rounded-lg cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">
           {{ isRegister ? 'Registrar' : 'Acessar' }}
         </button>
@@ -53,8 +55,7 @@
           "Não possui conta? Registre-se" }}
         </button>
       </p>
-      <div *ngIf="errorMessage"
-        class="bg-red-100 text-red-700 px-4 py-2 rounded mb-4">
+      <div *ngIf="errorMessage" class="bg-red-100 text-red-700 px-4 py-2 rounded mt-6 inline-block  float-right">
         {{ errorMessage }}
       </div>
 
