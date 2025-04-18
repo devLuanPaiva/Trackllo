@@ -1,18 +1,9 @@
 <div class="flex flex-col w-full  ">
-  @if (letters.length > 0) {
-    <h1
-      class="bg-gradient-to-r from-blue-600 via-blue-400 to-blue-200 bg-clip-text text-5xl font-extrabold text-transparent mx-auto drop-shadow-[2px_2px_0px_black]"
-      [@letterAnimation]>
-      @for (letter of letters; track letter) {
-        <span
-          [ngStyle]="getRandomStyle()"
-          class="inline-block mx-[1px]">
-          {{ letter }}
-        </span>
-      }
-    </h1>
-  }
-  
+  <h1
+    class="bg-gradient-to-r from-blue-600 via-blue-400 to-blue-200 bg-clip-text text-5xl font-extrabold text-transparent mx-auto drop-shadow-[1px_1px_0px_black]">
+    Olá, {{user.name}}!
+  </h1>
+
   @if (boards.length > 0) {
   <p class="self-center text-zinc-600 ">Aqui estão seus projetos.</p>
   <div
@@ -55,5 +46,17 @@
     }
   </section>
   }
-
+  @if (errorMessage) {
+  <app-alert
+    [message]="errorMessage"
+    [type]="'error'"
+    [duration]="5000">
+  </app-alert>
+  }
+  @if (successMessage) {
+  <app-alert
+    [message]="successMessage"
+    [type]="'success'"
+    [duration]="5000"></app-alert>
+  }
 </div>

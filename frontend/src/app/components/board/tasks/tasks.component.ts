@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TasksService } from '../../../services/tasks.service';
 import { fadeInOut } from '../../../animations';
+import { AlertComponent } from '../../shared/alert/alert.component';
 
 @Component({
   selector: 'app-tasks',
@@ -23,6 +24,7 @@ import { fadeInOut } from '../../../animations';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
+    AlertComponent
   ],
   templateUrl: './tasks.component.html',
   animations: [fadeInOut],
@@ -35,7 +37,8 @@ export class TasksComponent {
   @Input() connectedTo: string[] = [];
   @Input() colorTask: string = 'blue';
   @Output() taskDropped = new EventEmitter<CdkDragDrop<ITask[]>>();
-
+  errorMessage: string | null = null;
+  successMessage: string | null = null;
   icons = {
     plus: faPlus,
     xmark: faXmark,
@@ -44,7 +47,7 @@ export class TasksComponent {
   taskForm: FormGroup;
   constructor(
     private readonly fb: FormBuilder,
-    private readonly taskService: TasksService
+    private readonly taskService: TasksService,
   ) {
     this.taskForm = this.fb.group({
       title: [
@@ -87,13 +90,12 @@ export class TasksComponent {
 
       this.taskService.createTask(payload).subscribe({
         next: (newTask) => {
+          this.successMessage = 'Tarefa criada com sucesso!'
           this.columnTasks.push(newTask);
           this.taskForm.reset();
           this.showForm = false;
         },
-        error: (err) => {
-          console.error('Erro ao criar task:', err);
-        },
+        error: (err) => (this.errorMessage = err),
       });
     }
   }

@@ -6,4 +6,11 @@
     [colorTask]="column === 'Todo' ? 'blue' : column ==='In Progress' ?'yellow': 'green'" [id]="column.replace(' ', '')"
     [connectedTo]="getConnectedColumns(column)" (taskDropped)="onMoveColumnTask($event)" />
   }
+  @if (errorMessage) {
+    <app-alert
+      [message]="errorMessage"
+      [type]="'error'"
+      [duration]="5000">
+    </app-alert>
+    }
 </section>
