@@ -7,7 +7,7 @@ export default class ColumnService {
         })
 
         if (!board) {
-            throw new Error('Board not found or not owned by user')
+            throw new Error('Quadro não encontrado ou não pertence ao usuário.')
         }
 
         return prisma.column.findMany({
@@ -46,7 +46,7 @@ export default class ColumnService {
         })
 
         if (!board) {
-            throw new Error('Board not found or not owned by user')
+            throw new Error('Quadro não encontrado ou não pertence ao usuário.')
         }
 
         return prisma.column.create({
@@ -74,7 +74,7 @@ export default class ColumnService {
         })
 
         if (!column || column.board.userId !== userId) {
-            throw new Error('Column not found or not owned by user')
+            throw new Error('Coluna não encontrada ou não pertence ao usuário.')
         }
 
         return prisma.column.update({
@@ -96,7 +96,7 @@ export default class ColumnService {
         })
 
         if (!column || column.board.userId !== userId) {
-            throw new Error('Column not found or not owned by user')
+            throw new Error('Coluna não encontrada ou não pertence ao usuário.')
         }
 
         return prisma.column.delete({
