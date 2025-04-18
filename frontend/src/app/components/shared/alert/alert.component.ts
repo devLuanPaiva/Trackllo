@@ -1,34 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
 import { CommonModule } from '@angular/common';
+import { fadeSlide } from '../../../animations';
 
 @Component({
   selector: 'app-alert',
   imports: [CommonModule],
   templateUrl: './alert.component.html',
-  animations: [
-    trigger('fadeSlide', [
-      state('void', style({ opacity: 0, transform: 'translateY(-20px)' })),
-      transition(':enter', [
-        animate(
-          '300ms ease-out',
-          style({ opacity: 1, transform: 'translateY(0)' })
-        ),
-      ]),
-      transition(':leave', [
-        animate(
-          '300ms ease-in',
-          style({ opacity: 0, transform: 'translateY(-20px)' })
-        ),
-      ]),
-    ]),
-  ],
+  animations: [fadeSlide],
 })
 export class AlertComponent implements OnInit {
   @Input() message = 'Alerta!';

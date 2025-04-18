@@ -3,39 +3,14 @@ import { RouterModule } from '@angular/router';
 import { BoardFormComponent } from '../board-form/board-form.component';
 import { IBoard, IUser } from '../../../models';
 import { BoardService } from '../../../services/board.service';
-import {
-  animate,
-  query,
-  stagger,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { CommonModule } from '@angular/common';
+import { latterAnimation } from '../../../animations';
 
 @Component({
   selector: 'app-user-boards',
   imports: [BoardFormComponent, RouterModule, CommonModule],
   templateUrl: './user-boards.component.html',
-  animations: [
-    trigger('letterAnimation', [
-      transition(':enter', [
-        query('span', [
-          style({ opacity: 0, transform: 'translateY(-60px)' }),
-          stagger('100ms', [
-            animate(
-              '600ms cubic-bezier(0.23, 1, 0.32, 1)',
-              style({
-                opacity: 1,
-                transform: 'translateY(0)',
-              })
-            ),
-          ]),
-        ]),
-      ]),
-    ]),
-  ],
-  
+  animations: [latterAnimation],
 })
 export class UserBoardsComponent implements OnInit {
   @Input() user!: IUser;
@@ -83,11 +58,10 @@ export class UserBoardsComponent implements OnInit {
     });
   }
   getRandomStyle(): Record<string, string> {
-    const randomX = Math.floor(Math.random() * 40) - 20; 
+    const randomX = Math.floor(Math.random() * 40) - 20;
     return {
       display: 'inline-block',
       transform: `translateX(${randomX}px)`,
     };
   }
-  
 }
