@@ -25,7 +25,7 @@ export class BoardService {
         catchError((error) => {
           console.error('Error fetching boards:', error);
           return throwError(
-            () => new Error(error.error?.message || 'Erro ao buscar boards')
+            () => new Error(error.error?.message ?? 'Erro ao buscar boards')
           );
         })
       );
@@ -40,7 +40,7 @@ export class BoardService {
         catchError((error) => {
           console.error('Error fetching board:', error);
           return throwError(
-            () => new Error(error.error?.message || 'Erro ao buscar board')
+            () => new Error(error.error?.message ?? 'Erro ao buscar board')
           );
         })
       );
@@ -57,7 +57,7 @@ export class BoardService {
         catchError((error) => {
           console.error('Error creating board:', error);
           return throwError(
-            () => new Error(error.error?.message || 'Erro ao criar board')
+            () => new Error(error.error?.message ?? 'Erro ao criar board')
           );
         })
       );
@@ -72,7 +72,7 @@ export class BoardService {
         catchError((error) => {
           console.error('Error deleting board:', error);
           return throwError(
-            () => new Error(error.error?.message || 'Erro ao deletar board')
+            () => new Error(error.error?.message ?? 'Erro ao deletar board')
           );
         })
       );

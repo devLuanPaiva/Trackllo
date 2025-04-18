@@ -28,7 +28,7 @@ export class TasksService {
         catchError((error) => {
           console.error('Error fetching tasks:', error);
           return throwError(
-            () => new Error(error.error?.message || 'Erro ao buscar tasks')
+            () => new Error(error.error?.message ?? 'Erro ao buscar tasks')
           );
         })
       );
@@ -41,9 +41,9 @@ export class TasksService {
       .pipe(
         map((response) => response.data),
         catchError((error) => {
-          console.error('Error fetching boards:', error);
+          
           return throwError(
-            () => new Error(error.error?.message || 'Erro ao buscar task')
+            () => new Error(error.error?.message ?? 'Erro ao buscar task')
           );
         })
       );
@@ -58,9 +58,9 @@ export class TasksService {
       .pipe(
         map((response) => response.data),
         catchError((error) => {
-          console.error('Error fetching boards:', error);
+          
           return throwError(
-            () => new Error(error.error?.message || 'Erro ao buscar colunas')
+            () => new Error(error.error?.message ?? 'Erro ao buscar colunas')
           );
         })
       );
@@ -73,9 +73,9 @@ export class TasksService {
       .pipe(
         map((response) => response.data),
         catchError((error) => {
-          console.error('Error fetching boards:', error);
+          
           return throwError(
-            () => new Error(error.error?.message || 'Erro ao buscar colunas')
+            () => new Error(error.error?.message ?? 'Erro ao buscar colunas')
           );
         })
       );
@@ -88,9 +88,9 @@ export class TasksService {
       .pipe(
         map((response) => response.data),
         catchError((error) => {
-          console.error('Error fetching boards:', error);
+          
           return throwError(
-            () => new Error(error.error?.message || 'Erro ao buscar colunas')
+            () => new Error(error.error?.message ?? 'Erro ao buscar colunas')
           );
         })
       );
@@ -105,9 +105,9 @@ export class TasksService {
       .pipe(
         map((response) => response.data),
         catchError((error) => {
-          console.error('Error fetching boards:', error);
+          
           return throwError(
-            () => new Error(error.error?.message || 'Erro ao buscar colunas')
+            () => new Error(error.error?.message ?? 'Erro ao buscar colunas')
           );
         })
       );

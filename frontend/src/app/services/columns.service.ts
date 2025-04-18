@@ -24,7 +24,7 @@ export class ColumnsService {
         catchError((error) => {
           console.error('Error fetching boards:', error);
           return throwError(
-            () => new Error(error.error?.message || 'Erro ao buscar colunas')
+            () => new Error(error.error?.message ?? 'Erro ao buscar colunas')
           );
         })
       );
@@ -39,7 +39,7 @@ export class ColumnsService {
         catchError((error) => {
           console.error('Error fetching boards:', error);
           return throwError(
-            () => new Error(error.error?.message || 'Erro ao buscar coluna')
+            () => new Error(error.error?.message ?? 'Erro ao buscar coluna')
           );
         })
       );
