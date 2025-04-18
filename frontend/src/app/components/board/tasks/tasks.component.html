@@ -51,7 +51,17 @@
         'focus:ring-yellow-400': colorTask === 'yellow',
         'focus:ring-green-400': colorTask === 'green'
       }" required />
-
+    @if (taskForm.get('title')?.invalid && (taskForm.get('title')?.touched ||
+    taskForm.get('title')?.dirty)) {
+    <p class="text-red-500 text-sm">
+      @if (taskForm.get('title')?.errors?.['required']) {Título é obrigatório.
+      <br>}
+      @if (taskForm.get('title')?.errors?.['minlength']) {O título deve ter pelo menos 3 caracteres.
+      <br>}
+      @if (taskForm.get('title')?.errors?.['maxlength']) {O título deve ter no máximo 100 caracteres.
+      <br>}
+    </p>
+    }
     <textarea formControlName="description" placeholder="Descrição"
       class="border p-2 rounded-lg shadow-sm resize-none h-24 focus:outline-none focus:ring-2 focus:ring-opacity-50"
       [ngClass]="{
@@ -59,6 +69,16 @@
         'focus:ring-yellow-400': colorTask === 'yellow',
         'focus:ring-green-400': colorTask === 'green'
       }" required></textarea>
+    @if (taskForm.get('description')?.invalid &&
+    (taskForm.get('description')?.touched ||
+    taskForm.get('description')?.dirty)) {
+    <p class="text-red-500 text-sm">
+      @if (taskForm.get('description')?.errors?.['required']) {Descrição é
+      obrigatória. <br>}
+      @if (taskForm.get('description')?.errors?.['minlength']) {A descrição deve ter pelo menos 10 caracteres. <br>}
+      @if (taskForm.get('description')?.errors?.['maxlength']) {A descrição deve ter no máximo 500 caracteres. <br>}
+    </p>
+    }
 
     <input formControlName="image" placeholder="Imagem URL"
       class="border p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50"
@@ -67,10 +87,16 @@
         'focus:ring-yellow-400': colorTask === 'yellow',
         'focus:ring-green-400': colorTask === 'green'
       }" />
-
+    @if (taskForm.get('image')?.invalid && (taskForm.get('image')?.touched ||
+    taskForm.get('image')?.dirty)) {
+    <p class="text-red-500 text-sm">
+      @if (taskForm.get('image')?.errors?.['pattern']) {URL da imagem é inválida.}
+    </p>
+    }
     <div class="flex items-center gap-2">
       <button type="submit"
-        class=" w-[85%] py-2 rounded-lg shadow-md text-white font-medium transition-colors duration-300"
+      [disabled]="taskForm.invalid"
+        class=" w-[85%] py-2 rounded-lg shadow-md text-white font-medium transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         [ngClass]="{
           'bg-blue-500 hover:bg-blue-600 focus:ring-blue-300': colorTask === 'blue',
           'bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-300': colorTask === 'yellow',
