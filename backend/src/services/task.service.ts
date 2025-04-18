@@ -34,7 +34,7 @@ export default class TaskService {
     });
 
     if (!userExists) {
-      throw new Error("User not found");
+      throw new Error("Usuário não encontrado");
     }
 
     if (data.columnId) {
@@ -43,7 +43,7 @@ export default class TaskService {
       });
 
       if (!columnExists) {
-        throw new Error("Column not found");
+        throw new Error("Coluna não encontrada.");
       }
     }
 
@@ -71,7 +71,7 @@ export default class TaskService {
     });
 
     if (!task) {
-      throw new Error("Task not found or not owned by user");
+      throw new Error("Tarefa não encontrada ou não pertence ao usuário.");
     }
 
     if (data.columnId) {
@@ -80,7 +80,7 @@ export default class TaskService {
       });
 
       if (!columnExists) {
-        throw new Error("Column not found");
+        throw new Error("Coluna não encontrada.");
       }
     }
 
@@ -100,7 +100,7 @@ export default class TaskService {
     });
 
     if (!task) {
-      throw new Error("Task not found or not owned by user");
+      throw new Error("Tarefa não encontrada ou não pertence ao usuário.");
     }
 
     return prisma.task.delete({
@@ -122,7 +122,7 @@ export default class TaskService {
     });
 
     if (!task) {
-      throw new Error("Task not found or not owned by user");
+      throw new Error("Tarefa não encontrada ou não pertence ao usuário.");
     }
 
     if (newColumnId) {
@@ -131,7 +131,7 @@ export default class TaskService {
       });
 
       if (!columnExists) {
-        throw new Error("Column not found");
+        throw new Error("Coluna não encontrada.");
       }
     }
 
