@@ -28,7 +28,7 @@ taskRoutes.get("/:id", validator.taskId, async (c) => {
   try {
     const task = await TaskService.getTaskById(id, userId as string);
     if (!task) {
-      return errorResponse(c, "Task not found", 404);
+      return errorResponse(c, "Tarefa não encontrada", 404);
     }
     return successResponse(c, task);
   } catch (error: any) {
