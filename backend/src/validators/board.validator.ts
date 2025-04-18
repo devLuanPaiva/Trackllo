@@ -1,4 +1,5 @@
 import { validator } from "hono/validator";
+import { errorResponse } from "../utils/apiResponse";
 import { z } from "zod";
 
 export default {
@@ -11,8 +12,7 @@ export default {
 
     const result = schema.safeParse(value);
     if (!result.success) {
-      const messages = result.error.errors.map((e) => e.message);
-      return c.json({ error: messages }, 400);
+      return errorResponse(c, "ID inválido", 400, result.error.errors);
     }
     return result.data;
   }),
@@ -29,8 +29,7 @@ export default {
 
     const result = schema.safeParse(value);
     if (!result.success) {
-      const messages = result.error.errors.map((e) => e.message);
-      return c.json({ error: messages }, 400);
+      return errorResponse(c, "Erro de validação", 400, result.error.errors);
     }
     return result.data;
   }),

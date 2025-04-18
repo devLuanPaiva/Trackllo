@@ -1,12 +1,6 @@
 import { validator } from "hono/validator";
+import { errorResponse } from "../utils/apiResponse";
 import { z } from "zod";
-
-const formatZodErrors = (errors: z.ZodIssue[]) => {
-  return errors.map((err) => ({
-    campo: err.path.join("."),
-    mensagem: err.message,
-  }));
-};
 
 export default {
   taskId: validator("param", (value, c) => {
@@ -18,13 +12,7 @@ export default {
 
     const result = schema.safeParse(value);
     if (!result.success) {
-      return c.json(
-        {
-          erro: "ID da tarefa inválido.",
-          detalhes: formatZodErrors(result.error.errors),
-        },
-        400
-      );
+      return errorResponse(c, "ID inválido", 400, result.error.errors);
     }
 
     return result.data;
@@ -55,13 +43,7 @@ export default {
 
     const result = schema.safeParse(value);
     if (!result.success) {
-      return c.json(
-        {
-          erro: "Erro de validação ao criar tarefa.",
-          detalhes: formatZodErrors(result.error.errors),
-        },
-        400
-      );
+      return errorResponse(c, "Erro de validação", 400, result.error.errors);
     }
 
     return result.data;
@@ -90,13 +72,7 @@ export default {
 
     const result = schema.safeParse(value);
     if (!result.success) {
-      return c.json(
-        {
-          erro: "Erro de validação ao atualizar tarefa.",
-          detalhes: formatZodErrors(result.error.errors),
-        },
-        400
-      );
+      return errorResponse(c, "Erro de validação", 400, result.error.errors);
     }
 
     return result.data;
@@ -111,13 +87,7 @@ export default {
 
     const result = schema.safeParse(value);
     if (!result.success) {
-      return c.json(
-        {
-          erro: "Erro ao mover tarefa.",
-          detalhes: formatZodErrors(result.error.errors),
-        },
-        400
-      );
+      return errorResponse(c, "Erro de validação", 400, result.error.errors);
     }
 
     return result.data;
