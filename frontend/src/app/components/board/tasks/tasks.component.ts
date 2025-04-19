@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ITask } from '../../../models';
 import { CdkDrag, CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
-import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faXmark, faTrash } from '@fortawesome/free-solid-svg-icons';
 import {
   FormBuilder,
   FormGroup,
@@ -24,7 +24,7 @@ import { AlertComponent } from '../../shared/alert/alert.component';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    AlertComponent
+    AlertComponent,
   ],
   templateUrl: './tasks.component.html',
   animations: [fadeInOut],
@@ -42,12 +42,13 @@ export class TasksComponent {
   icons = {
     plus: faPlus,
     xmark: faXmark,
+    trash: faTrash,
   };
   showForm: boolean = false;
   taskForm: FormGroup;
   constructor(
     private readonly fb: FormBuilder,
-    private readonly taskService: TasksService,
+    private readonly taskService: TasksService
   ) {
     this.taskForm = this.fb.group({
       title: [
@@ -90,7 +91,7 @@ export class TasksComponent {
 
       this.taskService.createTask(payload).subscribe({
         next: (newTask) => {
-          this.successMessage = 'Tarefa criada com sucesso!'
+          this.successMessage = 'Tarefa criada com sucesso!';
           this.columnTasks.push(newTask);
           this.taskForm.reset();
           this.showForm = false;
@@ -102,5 +103,16 @@ export class TasksComponent {
 
   onMoveColumnTask(event: CdkDragDrop<ITask[]>) {
     this.taskDropped.emit(event);
+  }
+  onDeleteTask(taskId: string) {
+    this.taskService.deleteTask(taskId).subscribe({
+      next: () => {
+        this.successMessage = 'Tarefa deletada com sucesso!';
+        this.columnTasks = this.columnTasks.filter(
+          (task) => task.id !== taskId
+        );
+      },
+      error: (err) => (this.errorMessage = err),
+    });
   }
 }

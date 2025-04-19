@@ -3,15 +3,22 @@
   <h2 class="text-lg font-bold mb-3">{{ columnTitle }}</h2>
   <ul cdkDropList [id]="id" [cdkDropListData]="columnTasks"
     [cdkDropListConnectedTo]="connectedTo"
-    (cdkDropListDropped)="onMoveColumnTask($event)" class="w-full space-y-2">
+    (cdkDropListDropped)="onMoveColumnTask($event)" class="w-full space-y-6">
     @for (item of columnTasks; track $index) {
     <li cdkDrag [@fadeInOut]
-      class="p-2 rounded-lg shadow-md cursor-move list-none" [ngClass]="{
+      class="p-2 rounded-lg shadow-md cursor-move list-none relative"
+      [ngClass]="{
         'bg-blue-200': colorTask === 'blue',
         'bg-yellow-200': colorTask === 'yellow',
         'bg-green-200': colorTask === 'green'
       }">
 
+      <button
+        (click)="onDeleteTask(item.id)"
+        class="absolute -top-3 -right-3 "
+        aria-label="Excluir tarefa">
+        <fa-icon [icon]="icons.trash" class=" bg-red-500 hover:bg-red-600 text-white rounded-full px-2 py-1.5 shadow-lg transition-transform transform hover:scale-110 active:scale-95"></fa-icon>
+      </button>
       <div class="flex flex-col items-start space-y-2">
         <h3 class="font-medium text-lg">{{ item.title }}</h3>
         <p class="text-sm text-gray-600">{{ item.description }}</p>
@@ -56,9 +63,11 @@
     <p class="text-red-500 text-sm">
       @if (taskForm.get('title')?.errors?.['required']) {Título é obrigatório.
       <br>}
-      @if (taskForm.get('title')?.errors?.['minlength']) {O título deve ter pelo menos 3 caracteres.
+      @if (taskForm.get('title')?.errors?.['minlength']) {O título deve ter pelo
+      menos 3 caracteres.
       <br>}
-      @if (taskForm.get('title')?.errors?.['maxlength']) {O título deve ter no máximo 100 caracteres.
+      @if (taskForm.get('title')?.errors?.['maxlength']) {O título deve ter no
+      máximo 100 caracteres.
       <br>}
     </p>
     }
@@ -75,8 +84,10 @@
     <p class="text-red-500 text-sm">
       @if (taskForm.get('description')?.errors?.['required']) {Descrição é
       obrigatória. <br>}
-      @if (taskForm.get('description')?.errors?.['minlength']) {A descrição deve ter pelo menos 10 caracteres. <br>}
-      @if (taskForm.get('description')?.errors?.['maxlength']) {A descrição deve ter no máximo 500 caracteres. <br>}
+      @if (taskForm.get('description')?.errors?.['minlength']) {A descrição deve
+      ter pelo menos 10 caracteres. <br>}
+      @if (taskForm.get('description')?.errors?.['maxlength']) {A descrição deve
+      ter no máximo 500 caracteres. <br>}
     </p>
     }
 
@@ -90,12 +101,13 @@
     @if (taskForm.get('image')?.invalid && (taskForm.get('image')?.touched ||
     taskForm.get('image')?.dirty)) {
     <p class="text-red-500 text-sm">
-      @if (taskForm.get('image')?.errors?.['pattern']) {URL da imagem é inválida.}
+      @if (taskForm.get('image')?.errors?.['pattern']) {URL da imagem é
+      inválida.}
     </p>
     }
     <div class="flex items-center gap-2">
       <button type="submit"
-      [disabled]="taskForm.invalid"
+        [disabled]="taskForm.invalid"
         class=" w-[85%] py-2 rounded-lg shadow-md text-white font-medium transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         [ngClass]="{
           'bg-blue-500 hover:bg-blue-600 focus:ring-blue-300': colorTask === 'blue',
