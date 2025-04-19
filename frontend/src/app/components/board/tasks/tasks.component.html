@@ -17,7 +17,13 @@
         (click)="onDeleteTask(item.id)"
         class="absolute -top-3 -right-3 "
         aria-label="Excluir tarefa">
-        <fa-icon [icon]="icons.trash" class=" bg-red-500 hover:bg-red-600 text-white rounded-full px-2 py-1.5 shadow-lg transition-transform transform hover:scale-110 active:scale-95"></fa-icon>
+        <fa-icon [icon]="icons.trash"
+          class=" rounded-full px-2 text-red-500 py-1.5 shadow-lg transition-transform transform hover:scale-110 active:scale-95"
+          [ngClass]="{
+        'bg-blue-200': colorTask === 'blue',
+        'bg-yellow-200': colorTask === 'yellow',
+        'bg-green-200': colorTask === 'green'
+      }"></fa-icon>
       </button>
       <div class="flex flex-col items-start space-y-2">
         <h3 class="font-medium text-lg">{{ item.title }}</h3>
