@@ -16,7 +16,7 @@
         <h3 class="text-xl font-semibold text-center">
           {{ board.title }}
           <button
-            (click)="onDeleteBoard( board.id)"
+            (click)="onDeleteBoard($event, board.id)"
             class="absolute -top-3 -right-3 "
             aria-label="Excluir tarefa">
             <fa-icon [icon]="icons.trash"

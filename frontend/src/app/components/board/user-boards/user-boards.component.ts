@@ -30,7 +30,7 @@ export class UserBoardsComponent implements OnInit {
 
   icons = {
     trash: faTrash,
-  }
+  };
   ngOnInit(): void {
     this.loadBoards();
   }
@@ -58,13 +58,17 @@ export class UserBoardsComponent implements OnInit {
     });
   }
 
-  onDeleteBoard( id: string): void {
+  onDeleteBoard(event: MouseEvent, id: string): void {
+    event.stopPropagation();
+    event.preventDefault();
     this.boardService.deleteBoard(id).subscribe({
-      next: () => {
+      next: (): void => {
         this.successMessage = 'Projeto deletado com sucesso!';
         this.loadBoards();
       },
-      error: (err) => (this.errorMessage = err),
+      error: (err: string): void => {
+        this.errorMessage = err;
+      },
     });
   }
   getRandomStyle(): Record<string, string> {
