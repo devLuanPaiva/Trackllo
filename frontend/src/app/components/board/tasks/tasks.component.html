@@ -4,6 +4,9 @@
   <ul cdkDropList [id]="id" [cdkDropListData]="columnTasks"
     [cdkDropListConnectedTo]="connectedTo"
     (cdkDropListDropped)="onMoveColumnTask($event)" class="w-full space-y-6">
+    @if (columnTasks.length === 0) {
+      <li class="text-gray-400 text-center italic">Arraste tarefas para cá</li>
+    }
     @for (item of columnTasks; track $index) {
     <li cdkDrag [@fadeInOut]
       class="p-2 rounded-lg shadow-md cursor-move list-none relative"
