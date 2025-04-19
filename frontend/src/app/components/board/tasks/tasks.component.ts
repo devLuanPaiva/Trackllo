@@ -1,32 +1,18 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ITask } from '../../../models';
+import { CommonModule } from '@angular/common';
+import { fadeInOut } from '../../../animations';
+import { MatDialog } from '@angular/material/dialog';
+import { TasksService } from '../../../services/tasks.service';
+import { AlertComponent } from '../../shared/alert/alert.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { createTaskForm, openConfirmationDialog } from '../../../utils';
 import { CdkDrag, CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
 import { faPlus, faXmark, faTrash } from '@fortawesome/free-solid-svg-icons';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TasksService } from '../../../services/tasks.service';
-import { fadeInOut } from '../../../animations';
-import { AlertComponent } from '../../shared/alert/alert.component';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../../shared/dialog/dialog.component';
+import {FormBuilder,FormGroup,FormsModule,ReactiveFormsModule} from '@angular/forms';
 @Component({
   selector: 'app-tasks',
-  imports: [
-    CommonModule,
-    CdkDropList,
-    CdkDrag,
-    FontAwesomeModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AlertComponent,
-  ],
+  imports: [CommonModule, CdkDropList, CdkDrag, FontAwesomeModule, FormsModule, ReactiveFormsModule, AlertComponent],
   templateUrl: './tasks.component.html',
   animations: [fadeInOut],
 })
@@ -52,25 +38,7 @@ export class TasksComponent {
     private readonly taskService: TasksService,
     private readonly dialog: MatDialog
   ) {
-    this.taskForm = this.fb.group({
-      title: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(100),
-        ],
-      ],
-      description: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(200),
-        ],
-      ],
-      image: ['', [Validators.pattern(/https?:\/\/.+/)]],
-    });
+    this.taskForm = createTaskForm(this.fb);
   }
   toggleForm() {
     this.showForm = !this.showForm;
@@ -78,10 +46,7 @@ export class TasksComponent {
   createTask() {
     if (this.taskForm.valid) {
       const formValue = this.taskForm.value;
-      const payload: Pick<
-        ITask,
-        'title' | 'description' | 'image' | 'columnId'
-      > = {
+      const payload: Pick<ITask,'title' | 'description' | 'image' | 'columnId'> = {
         columnId: this.columnId,
         title: formValue.title,
         description: formValue.description,
@@ -107,13 +72,10 @@ export class TasksComponent {
     this.taskDropped.emit(event);
   }
   onDeleteTask(taskId: string) {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      data: {
-        message: 'Deseja realmente excluir esta tarefa?',
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
+    openConfirmationDialog(
+      this.dialog,
+      'Deseja realmente excluir esta tarefa?'
+    ).subscribe((result) => {
       if (result) {
         this.taskService.deleteTask(taskId).subscribe({
           next: () => {

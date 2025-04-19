@@ -9,7 +9,7 @@ import { AlertComponent } from '../../shared/alert/alert.component';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../../shared/dialog/dialog.component';
+import { openConfirmationDialog } from '../../../utils';
 @Component({
   selector: 'app-user-boards',
   imports: [
@@ -66,12 +66,7 @@ export class UserBoardsComponent implements OnInit {
   onDeleteBoard(event: MouseEvent, id: string): void {
     event.stopPropagation();
     event.preventDefault();
-    const dialogRef = this.dialog.open(DialogComponent, {
-      data: {
-        message: 'Deseja realmente excluir este projeto?',
-      },
-    });
-    dialogRef.afterClosed().subscribe((result) => {
+    openConfirmationDialog(this.dialog, 'Deseja realmente excluir este projeto?').subscribe((result) => {
       if (result) {
         this.boardService.deleteBoard(id).subscribe({
           next: (): void => {
