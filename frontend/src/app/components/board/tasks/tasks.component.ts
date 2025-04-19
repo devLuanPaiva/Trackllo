@@ -14,7 +14,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TasksService } from '../../../services/tasks.service';
 import { fadeInOut } from '../../../animations';
 import { AlertComponent } from '../../shared/alert/alert.component';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../shared/dialog/dialog.component';
 @Component({
   selector: 'app-tasks',
   imports: [
@@ -48,7 +49,8 @@ export class TasksComponent {
   taskForm: FormGroup;
   constructor(
     private readonly fb: FormBuilder,
-    private readonly taskService: TasksService
+    private readonly taskService: TasksService,
+    private readonly dialog: MatDialog
   ) {
     this.taskForm = this.fb.group({
       title: [
@@ -105,14 +107,24 @@ export class TasksComponent {
     this.taskDropped.emit(event);
   }
   onDeleteTask(taskId: string) {
-    this.taskService.deleteTask(taskId).subscribe({
-      next: () => {
-        this.successMessage = 'Tarefa deletada com sucesso!';
-        this.columnTasks = this.columnTasks.filter(
-          (task) => task.id !== taskId
-        );
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        message: 'Deseja realmente excluir esta tarefa?',
       },
-      error: (err) => (this.errorMessage = err),
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.taskService.deleteTask(taskId).subscribe({
+          next: () => {
+            this.successMessage = 'Tarefa deletada com sucesso!';
+            this.columnTasks = this.columnTasks.filter(
+              (task) => task.id !== taskId
+            );
+          },
+          error: (err) => (this.errorMessage = err),
+        });
+      }
     });
   }
 }

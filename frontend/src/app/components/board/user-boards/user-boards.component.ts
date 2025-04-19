@@ -8,6 +8,8 @@ import { latterAnimation } from '../../../animations';
 import { AlertComponent } from '../../shared/alert/alert.component';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../shared/dialog/dialog.component';
 @Component({
   selector: 'app-user-boards',
   imports: [
@@ -26,7 +28,10 @@ export class UserBoardsComponent implements OnInit {
   showForm: boolean = false;
   errorMessage: string | null = null;
   successMessage: string | null = null;
-  constructor(private readonly boardService: BoardService) {}
+  constructor(
+    private readonly boardService: BoardService,
+    private readonly dialog: MatDialog
+  ) {}
 
   icons = {
     trash: faTrash,
@@ -61,14 +66,23 @@ export class UserBoardsComponent implements OnInit {
   onDeleteBoard(event: MouseEvent, id: string): void {
     event.stopPropagation();
     event.preventDefault();
-    this.boardService.deleteBoard(id).subscribe({
-      next: (): void => {
-        this.successMessage = 'Projeto deletado com sucesso!';
-        this.loadBoards();
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        message: 'Deseja realmente excluir este projeto?',
       },
-      error: (err: string): void => {
-        this.errorMessage = err;
-      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.boardService.deleteBoard(id).subscribe({
+          next: (): void => {
+            this.successMessage = 'Projeto deletado com sucesso!';
+            this.loadBoards();
+          },
+          error: (err: string): void => {
+            this.errorMessage = err;
+          },
+        });
+      }
     });
   }
   getRandomStyle(): Record<string, string> {
