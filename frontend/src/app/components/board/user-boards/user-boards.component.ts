@@ -6,10 +6,17 @@ import { BoardService } from '../../../services/board.service';
 import { CommonModule } from '@angular/common';
 import { latterAnimation } from '../../../animations';
 import { AlertComponent } from '../../shared/alert/alert.component';
-
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @Component({
   selector: 'app-user-boards',
-  imports: [BoardFormComponent, RouterModule, CommonModule, AlertComponent],
+  imports: [
+    BoardFormComponent,
+    RouterModule,
+    CommonModule,
+    AlertComponent,
+    FontAwesomeModule,
+  ],
   templateUrl: './user-boards.component.html',
   animations: [latterAnimation],
 })
@@ -20,6 +27,10 @@ export class UserBoardsComponent implements OnInit {
   errorMessage: string | null = null;
   successMessage: string | null = null;
   constructor(private readonly boardService: BoardService) {}
+
+  icons = {
+    trash: faTrash,
+  }
   ngOnInit(): void {
     this.loadBoards();
   }
@@ -37,7 +48,6 @@ export class UserBoardsComponent implements OnInit {
     });
   }
 
-
   onCreateBoard(title: string): void {
     this.boardService.createBoard(title).subscribe({
       next: () => {
@@ -48,7 +58,7 @@ export class UserBoardsComponent implements OnInit {
     });
   }
 
-  onDeleteBoard(id: string): void {
+  onDeleteBoard( id: string): void {
     this.boardService.deleteBoard(id).subscribe({
       next: () => {
         this.successMessage = 'Projeto deletado com sucesso!';
