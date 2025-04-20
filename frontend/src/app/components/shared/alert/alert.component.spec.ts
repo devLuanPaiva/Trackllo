@@ -21,9 +21,16 @@ describe('AlertComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('should display the default message', () =>{
+  it('should display the default message', () => {
     fixture.detectChanges();
     const messageEl = fixture.nativeElement.querySelector('span');
     expect(messageEl.textContent).toContain('Alerta!');
-  })
+  });
+  it('should display the custom message', () => {
+    const customMessage = 'Custom alert message';
+    component.message = customMessage;
+    fixture.detectChanges();
+    const messageEl = fixture.nativeElement.querySelector('span');
+    expect(messageEl.textContent).toContain(customMessage);
+  });
 });
