@@ -33,4 +33,10 @@ describe('AlertComponent', () => {
     const messageEl = fixture.nativeElement.querySelector('span');
     expect(messageEl.textContent).toContain(customMessage);
   });
+  it('should apply success style', () => {
+    component.type = 'success';
+    fixture.detectChanges();
+    const divEl = fixture.debugElement.query(By.css('div'));
+    expect(divEl.nativeElement.className).toContain('bg-green-200');
+  });
 });
