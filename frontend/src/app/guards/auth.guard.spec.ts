@@ -28,10 +28,16 @@ describe('AuthGuard', () => {
   });
 
   it('should allow access when user is authenticated', () => {
-    authServiceSpy.isAuthenticated.and.returnValue(true)
+    authServiceSpy.isAuthenticated.and.returnValue(true);
 
     const result = guard.canActivate();
     expect(result).toBeTrue();
     expect(routerSpy.navigate).not.toHaveBeenCalled();
-  })
+  });
+  it('should deny access and navigate to /autenticacao when user is not authenticated', () => {
+    authServiceSpy.isAuthenticated.and.returnValue(false);
+    const result = guard.canActivate();
+    expect(result).toBeFalse();
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/autenticacao']);
+  });
 });
