@@ -22,4 +22,16 @@ describe('ErrorHandlerService', () => {
       },
     });
   });
+  it('should return fallbackMessage if no message found', (done) => {
+    const error = {
+      error: {},
+    };
+
+    service.handle(error, 'Mensagem alternativa').subscribe({
+      error: (err) => {
+        expect(err.message).toBe('Mensagem alternativa');
+        done();
+      },
+    });
+  });
 });
