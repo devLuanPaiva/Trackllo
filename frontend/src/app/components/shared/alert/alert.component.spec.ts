@@ -39,4 +39,14 @@ describe('AlertComponent', () => {
     const divEl = fixture.debugElement.query(By.css('div'));
     expect(divEl.nativeElement.className).toContain('bg-green-200');
   });
+  it('should hidden the alert after the duration', fakeAsync(() => {
+    component.duration = 1000;
+    fixture.detectChanges();
+    expect(component.show).toBeTrue();
+
+    tick(1000);
+    fixture.detectChanges();
+
+    expect(component.show).toBeFalse();
+  }));
 });
