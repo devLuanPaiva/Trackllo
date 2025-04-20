@@ -12,7 +12,6 @@ export class ErrorHandlerService {
       error?.error?.error?.message ??
       error?.error?.message ??
       fallbackMessage;
-    console.log(message);
     return throwError(() => new Error(message));
   }
 }
