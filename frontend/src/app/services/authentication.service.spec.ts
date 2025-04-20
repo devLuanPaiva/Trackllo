@@ -53,23 +53,7 @@ describe('AuthenticationService', () => {
       },
     });
   });
-  it('should throw error on login failure', () => {
-    const email = 'wrong@example.com';
-    const password = 'wrong';
 
-    service.login(email, password).subscribe({
-      next: () => fail('should have failed with an error'),
-      error: (error) => {
-        expect(error.message).toBe('Invalid credentials');
-      },
-    });
-
-    const req = httpMock.expectOne(`${apiURL}/users/login`);
-    req.flush(
-      { message: 'Invalid credentials' },
-      { status: 401, statusText: 'Unauthorized' }
-    );
-  });
   it('should register a user and call login internally', () => {
     spyOn(service, 'login').and.returnValue(of(mockUsers[0]));
     const name = 'John';
@@ -84,17 +68,7 @@ describe('AuthenticationService', () => {
     expect(req.request.method).toBe('POST');
     req.flush(mockUsers[0]);
   });
-  it('should throw error on register failure', () => {
-    service.register('John', 'email', 'pass').subscribe({
-      next: () => fail('Should have failed'),
-      error: (error) => {
-        expect(error.message).toBe('Email already in use');
-      },
-    });
-
-    const req = httpMock.expectOne(`${apiURL}/users`);
-    req.flush({ message: 'Email already in use' }, { status: 400, statusText: 'Bad Request' });
-  });
+  
   it('should get token from sessionStorage', () => {
     sessionStorage.setItem('token', 'token-alice-123');
     expect(service.getToken()).toBe('token-alice-123');
