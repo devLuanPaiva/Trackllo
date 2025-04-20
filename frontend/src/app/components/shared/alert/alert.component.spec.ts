@@ -49,4 +49,11 @@ describe('AlertComponent', () => {
 
     expect(component.show).toBeFalse();
   }));
+  it('should close the alert when the close button is clicked', () => {
+    fixture.detectChanges();
+    const closeButton = fixture.debugElement.query(By.css('button'));
+    closeButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(component.show).toBeFalse();
+  });
 });
