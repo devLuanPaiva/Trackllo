@@ -120,4 +120,21 @@ describe('AuthenticationService', () => {
       { status: 401, statusText: 'Unauthorized' }
     );
   });
+  it('should throw specific message from error array on register failure', () => {
+    const backendError = [{ message: 'Email já cadastrado' }];
+
+    service.register('Name', 'exists@example.com', '123').subscribe({
+      next: () => fail('Expected error, but got success response'),
+      error: (error) => {
+        expect(error.message).toBe('Email já cadastrado');
+      },
+    });
+
+    const req = httpMock.expectOne(`${apiURL}/users`);
+    expect(req.request.method).toBe('POST');
+    req.flush(
+      { error: backendError },
+      { status: 400, statusText: 'Bad Request' }
+    );
+  });
 });
