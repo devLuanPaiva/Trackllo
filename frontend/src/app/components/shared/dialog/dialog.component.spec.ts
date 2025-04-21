@@ -35,4 +35,13 @@ describe('DialogComponent', () => {
     expect(component.confirmed.emit).toHaveBeenCalledWith(false);
     expect(dialogRef.close).toHaveBeenCalled();
   });
+  it('should output "true" and close the dialog when clicking "sim"', () => {
+    spyOn(component.confirmed, 'emit');
+    const yesButton = fixture.debugElement.queryAll(By.css('button'))[1]
+      .nativeElement;
+    yesButton.click();
+    fixture.detectChanges();
+    expect(component.confirmed.emit).toHaveBeenCalledWith(true);
+    expect(dialogRef.close).toHaveBeenCalled();
+  });
 });
