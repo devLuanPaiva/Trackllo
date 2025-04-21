@@ -53,23 +53,7 @@ describe('AuthenticationService', () => {
       },
     });
   });
-  it('should throw error on login failure', () => {
-    const email = 'wrong@example.com';
-    const password = 'wrong';
 
-    service.login(email, password).subscribe({
-      next: () => fail('should have failed with an error'),
-      error: (error) => {
-        expect(error.message).toBe('Invalid credentials');
-      },
-    });
-
-    const req = httpMock.expectOne(`${apiURL}/users/login`);
-    req.flush(
-      { message: 'Invalid credentials' },
-      { status: 401, statusText: 'Unauthorized' }
-    );
-  });
   it('should register a user and call login internally', () => {
     spyOn(service, 'login').and.returnValue(of(mockUsers[0]));
     const name = 'John';
@@ -84,17 +68,7 @@ describe('AuthenticationService', () => {
     expect(req.request.method).toBe('POST');
     req.flush(mockUsers[0]);
   });
-  it('should throw error on register failure', () => {
-    service.register('John', 'email', 'pass').subscribe({
-      next: () => fail('Should have failed'),
-      error: (error) => {
-        expect(error.message).toBe('Email already in use');
-      },
-    });
 
-    const req = httpMock.expectOne(`${apiURL}/users`);
-    req.flush({ message: 'Email already in use' }, { status: 400, statusText: 'Bad Request' });
-  });
   it('should get token from sessionStorage', () => {
     sessionStorage.setItem('token', 'token-alice-123');
     expect(service.getToken()).toBe('token-alice-123');
@@ -118,15 +92,49 @@ describe('AuthenticationService', () => {
     expect(service.isAuthenticated()).toBeTrue();
   });
   it('should auth headers with token', () => {
-    sessionStorage.setItem('token', 'token-alice-123')
-    const headers = service.getAuthHeaders()
-    expect(headers.get('Authorization')).toBe('Bearer token-alice-123')
+    sessionStorage.setItem('token', 'token-alice-123');
+    const headers = service.getAuthHeaders();
+    expect(headers.get('Authorization')).toBe('Bearer token-alice-123');
     expect(headers.get('Content-Type')).toBe('application/json');
-  })
+  });
   it('should return headers without Authorization if no token', () => {
     sessionStorage.removeItem('token');
     const headers = service.getAuthHeaders();
     expect(headers.get('Authorization')).toBeNull();
     expect(headers.get('Content-Type')).toBe('application/json');
+  });
+  it('should throw error with custom message on login failure', () => {
+    const errorMessage = 'Credenciais inválidas';
+
+    service.login('invalid@example.com', 'wrong-pass').subscribe({
+      next: () => fail('Expected error, but got success response'),
+      error: (error) => {
+        expect(error.message).toBe(errorMessage);
+      },
+    });
+
+    const req = httpMock.expectOne(`${apiURL}/users/login`);
+    expect(req.request.method).toBe('POST');
+    req.flush(
+      { error: { message: errorMessage } },
+      { status: 401, statusText: 'Unauthorized' }
+    );
+  });
+  it('should throw specific message from error array on register failure', () => {
+    const backendError = [{ message: 'Email já cadastrado' }];
+
+    service.register('Name', 'exists@example.com', '123').subscribe({
+      next: () => fail('Expected error, but got success response'),
+      error: (error) => {
+        expect(error.message).toBe('Email já cadastrado');
+      },
+    });
+
+    const req = httpMock.expectOne(`${apiURL}/users`);
+    expect(req.request.method).toBe('POST');
+    req.flush(
+      { error: backendError },
+      { status: 400, statusText: 'Bad Request' }
+    );
   });
 });
