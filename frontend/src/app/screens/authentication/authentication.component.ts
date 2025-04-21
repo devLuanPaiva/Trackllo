@@ -8,15 +8,18 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LayoutComponent } from '../../components/template/layout/layout.component';
 
 @Component({
   selector: 'app-authentication',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, LayoutComponent],
   templateUrl: './authentication.component.html',
 })
 export class AuthenticationComponent {
   authForm!: FormGroup;
-  isRegister = true;
+  isRegister = false;
+  errorMessage: string | null = null;
+  successMessage: string | null = null
 
   constructor(
     private readonly auth: AuthenticationService,
@@ -31,13 +34,22 @@ export class AuthenticationComponent {
   }
 
   toggleMode() {
+    this.errorMessage = null
     this.isRegister = !this.isRegister;
-    if (!this.isRegister) {
-      this.authForm.get('name')?.reset();
+
+    const nameControl = this.authForm.get('name');
+    if (this.isRegister) {
+      nameControl?.setValidators([Validators.required]);
+    } else {
+      nameControl?.clearValidators();
+      nameControl?.reset();
     }
+    nameControl?.updateValueAndValidity();
   }
 
+
   onSubmit() {
+    this.errorMessage = null
     if (this.authForm.invalid) return;
 
     const { name, email, password } = this.authForm.value;
@@ -45,16 +57,25 @@ export class AuthenticationComponent {
     if (this.isRegister) {
       this.auth.register(name, email, password).subscribe({
         next: () => {
-          this.router.navigate(['/home']);
+          this.successMessage = 'Usuário criado com sucesso!'
+          this.router.navigate(['/home'])
         },
-        error: (err) => console.error('Registration error:', err),
+        error: (err) => {
+          this.errorMessage =
+            err.message ?? 'Erro ao registrar. Tente novamente mais tarde.';
+        },
       });
     } else {
       this.auth.login(email, password).subscribe({
-        next: (user) => {
-          this.router.navigate(['/home']);
+        next: () => { void this.router.navigate(['/home']) },
+        error: (err) => {
+          if (err.message) {
+            this.errorMessage = err.message;
+          } else {
+            this.errorMessage =
+              'Servidor indisponível. Tente novamente mais tarde.';
+          }
         },
-        error: (err) => console.error('Login error:', err),
       });
     }
   }

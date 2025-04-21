@@ -11,7 +11,7 @@ userRoutes.get("/", async (c) => {
     return successResponse(c, users);
   } catch (error) {
     console.error(error);
-    return errorResponse(c, "Failed to get users", 500);
+    return errorResponse(c, "Erro ao buscar usuário", 500);
   }
 });
 
@@ -21,7 +21,7 @@ userRoutes.get("/:id", validator.userId, async (c) => {
   try {
     const user = await UserService.getUserById(id);
     if (!user) {
-      return errorResponse(c, "User not found", 404);
+      return errorResponse(c, "Usuário não encontrado", 404);
     }
     return successResponse(c, user);
   } catch (error: any) {
@@ -35,7 +35,7 @@ userRoutes.post("/", validator.createUser, async (c) => {
     const newUser = await UserService.createUser(data);
     return successResponse(c, newUser, 201);
   } catch (error: any) {
-    if (error.message === "Email already in use") {
+    if (error.message === "Este e-mail já está em uso") {
       return errorResponse(c, error.message, 409);
     }
     return errorResponse(c, error.message, 400);
@@ -52,7 +52,7 @@ userRoutes.post("/login", validator.loginUser, async (c) => {
       token,
     });
   } catch (error: any) {
-    if (error.message === "Invalid credentials") {
+    if (error.message === "Credenciais inválidas!") {
       return errorResponse(c, "Email ou senha inválidos", 401);
     }
     return errorResponse(c, error.message, 500);
@@ -78,7 +78,7 @@ userRoutes.delete("/:id", validator.userId, async (c) => {
     const deletedUser = await UserService.deleteUser(id);
     return successResponse(c, deletedUser);
   } catch (error: any) {
-    if (error.message === "User not found") {
+    if (error.message === "Usuário não encontrado") {
       return errorResponse(c, error.message, 404);
     }
     return errorResponse(c, error.message, 400);

@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { IUser } from '../models';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,9 @@ import { environment } from '../../environments/environment';
 export class AuthenticationService {
   private readonly api_url = environment.API_URL;
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient,
+    private readonly router: Router
+  ) { }
 
   login(email: string, password: string): Observable<IUser> {
     return this.http
@@ -26,11 +29,10 @@ export class AuthenticationService {
         }),
         map((response) => response.data.user),
         catchError((error) => {
-          console.error('Login error:', error);
-          return throwError(
-            () => new Error(error.error?.message || 'Login failed')
-          );
+          const message = error?.error?.error?.message ?? 'Erro ao fazer login';
+          return throwError(() => new Error(message));
         })
+
       );
   }
 
@@ -42,10 +44,13 @@ export class AuthenticationService {
           this.login(email, password).subscribe();
         }),
         catchError((error) => {
-          console.error('Registration error:', error);
-          return throwError(
-            () => new Error(error.error?.message || 'Registration failed')
-          );
+          const errorArray = error?.error?.error;
+          const message =
+            Array.isArray(errorArray) && errorArray.length > 0
+              ? errorArray[0].message ?? error?.error?.error?.message ?? 'Erro ao registrar usuário'
+              : error?.error?.error?.message ?? 'Erro ao registrar usuário';
+
+          return throwError(() => new Error(message));
         })
       );
   }
@@ -69,6 +74,7 @@ export class AuthenticationService {
     if (typeof window !== 'undefined') {
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('user');
+      this.router.navigate(['/autenticacao']);
     }
     return of(undefined);
   }

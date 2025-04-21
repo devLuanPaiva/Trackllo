@@ -1,39 +1,56 @@
-<div class="flex flex-col space-y-5">
+<div class="flex flex-col w-full  ">
   <h1
-    class="bg-gradient-to-r from-purple-800 via-purple-500 to-purple-400 bg-clip-text text-5xl font-extrabold text-transparent mx-auto">
-    Hello, {{ user.name }}!
+    class="bg-gradient-to-r from-blue-600 via-blue-400 to-blue-200 bg-clip-text text-5xl font-extrabold text-transparent mx-auto drop-shadow-[1px_1px_0px_black]">
+    Olá, {{user.name}}!
   </h1>
 
   @if (boards.length > 0) {
-  <div class="flex flex-col md:flex-row gap-5 items-start justify-between font-[Montserrat]">
-    <section class="flex flex-row w-full sm:w-[80%] flex-wrap gap-5 items-center justify-start">
+  <p class="self-center text-zinc-600 ">Aqui estão seus projetos.</p>
+  <div
+    class="mt-10 w-full flex  flex-col sm:flex-row gap-5 items-center sm:items-start justify-between font-[Montserrat]">
+    <section
+      class="flex flex-row  flex-wrap gap-5 items-center justify-center sm:justify-start">
       @for (board of boards; track board.id) {
-      <a [routerLink]="['/boardColumns', board.id]"
-        class="bg-gradient-to-tr from-violet-500 to-purple-600 text-white rounded-2xl p-6 w-[250px] h-[120px] flex items-center justify-center hover:scale-105 hover:shadow-xl transition-all duration-300">
-        <h3 class="text-xl font-semibold text-center">{{ board.title }}</h3>
-      </a>
+        <div class="relative w-[250px] h-[120px]">
+          <button
+            (click)="onDeleteBoard($event, board.id)"
+            class="absolute -top-3 -right-3 z-20"
+            aria-label="Excluir tarefa">
+            <fa-icon [icon]="icons.trash"
+              class="bg-blue-500 hover:bg-blue-600 text-white rounded-full px-2 py-1.5 shadow-lg transition-transform transform hover:scale-110 active:scale-95"></fa-icon>
+          </button>
+        
+          <a
+            [routerLink]="['/boardColumns', board.id]"
+            class=" bg-gradient-to-tr from-blue-500 to-blue-600 text-white rounded-2xl p-6 w-full h-full flex items-center justify-center hover:scale-105 hover:shadow-xl transition-all duration-300">
+            <h3 class="text-xl font-semibold text-center">
+              {{ board.title }}
+            </h3>
+          </a>
+        </div>
+        
       }
     </section>
 
-    <section class="space-y-5 w-full sm:w-[15%]">
+    <section class="space-y-5">
       @if (showForm) {
       <app-board-form (create)="onCreateBoard($event)"></app-board-form>
       }
       <button (click)="showForm = !showForm"
-        class="w-full bg-white text-violet-700 font-semibold border border-violet-500 rounded-xl py-2 px-4 transition hover:bg-violet-50">
-        {{ showForm ? 'Cancel' : 'New Board' }}
+        class="w-full bg-white text-blue-700 font-semibold border border-blue-500 rounded-xl py-2 px-4 transition hover:bg-blue-50">
+        {{ showForm ? 'Cancelar' : 'Novo projeto' }}
       </button>
     </section>
   </div>
   } @else {
   <section class="font-[Montserrat] text-center space-y-4">
     <h2 class="text-lg font-semibold text-zinc-700">
-      There are no goals registered for this user
+      Você não tem projetos cadastrados ainda.
     </h2>
 
     <button (click)="showForm = !showForm"
-      class="bg-indigo-600 text-white py-2 px-4 rounded-xl hover:bg-indigo-700 transition">
-      {{ showForm ? 'Cancel' : 'New Board' }}
+      class="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition">
+      {{ showForm ? 'Cancelar' : 'Novo projeto' }}
     </button>
 
     @if (showForm) {
@@ -43,5 +60,17 @@
     }
   </section>
   }
-
+  @if (errorMessage) {
+  <app-alert
+    [message]="errorMessage"
+    [type]="'error'"
+    [duration]="5000">
+  </app-alert>
+  }
+  @if (successMessage) {
+  <app-alert
+    [message]="successMessage"
+    [type]="'success'"
+    [duration]="5000"></app-alert>
+  }
 </div>

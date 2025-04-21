@@ -8,33 +8,18 @@ import {
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
-
 import { TasksComponent } from '../tasks/tasks.component';
 import { ColumnsService } from '../../../services/columns.service';
 import { TasksService } from '../../../services/tasks.service';
+import { fadeInOut } from '../../../animations';
+import { AlertComponent } from '../../shared/alert/alert.component';
 
 @Component({
   selector: 'app-columns',
-  imports: [CommonModule, FontAwesomeModule, TasksComponent],
+  imports: [CommonModule, FontAwesomeModule, TasksComponent, AlertComponent],
   templateUrl: './columns.component.html',
   animations: [
-    trigger('fadeInOut', [
-      state('void', style({ opacity: 0, transform: 'scale(0.95)' })),
-      transition('void => *', [animate('300ms ease-in')]),
-      transition('* => void', [
-        animate(
-          '200ms ease-out',
-          style({ opacity: 0, transform: 'scale(0.95)' })
-        ),
-      ]),
-    ]),
+   fadeInOut
   ],
 })
 export class ColumnsComponent implements OnInit {
@@ -50,6 +35,7 @@ export class ColumnsComponent implements OnInit {
   idTodo: string = '';
   idInProgress: string = '';
   idDone: string = '';
+  errorMessage: string | null = null;
   icons = {
     plus: faPlus,
   };
@@ -65,7 +51,6 @@ export class ColumnsComponent implements OnInit {
     this.columnService.getBoardColumns(this.board.id).subscribe({
       next: (column) => {
         if (column.length === 0) {
-          console.error('Not found!');
           return;
         }
         const todoColumn = column.find((column) => column.title === 'To do');
@@ -81,13 +66,9 @@ export class ColumnsComponent implements OnInit {
         this.idTodo = todoColumn?.id ?? '';
         this.idInProgress = inProgressColumn?.id ?? '';
         this.idDone = doneColumn?.id ?? '';
-        console.log(
-          'todo: ' + this.idTodo,
-          'in progress' + this.idInProgress,
-          'done: ' + this.idDone
-        );
+
       },
-      error: (err) => console.error('Erro ao buscar boards:', err),
+      error: (err) => (this.errorMessage = err),
     });
   }
   onMoveColumnTask(event: CdkDragDrop<ITask[]>) {
@@ -106,9 +87,7 @@ export class ColumnsComponent implements OnInit {
           next: () => {
             task.columnId = newColumnID;
           },
-          error: (err) => {
-            console.error(err);
-          },
+          error: (err) => (this.errorMessage = err),
         });
       }
       transferArrayItem(

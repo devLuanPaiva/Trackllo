@@ -28,7 +28,7 @@ taskRoutes.get("/:id", validator.taskId, async (c) => {
   try {
     const task = await TaskService.getTaskById(id, userId as string);
     if (!task) {
-      return errorResponse(c, "Task not found", 404);
+      return errorResponse(c, "Tarefa não encontrada", 404);
     }
     return successResponse(c, task);
   } catch (error: any) {
@@ -48,7 +48,7 @@ taskRoutes.post("/", validator.createTask, async (c) => {
 
     return successResponse(c, newTask, 201);
   } catch (error: any) {
-    if (error.message === "User not found") {
+    if (error.message === "Usuário não encontrado") {
       return errorResponse(c, error.message, 404);
     }
     return errorResponse(c, error.message, 400);
@@ -68,7 +68,7 @@ taskRoutes.put("/:id", validator.taskId, validator.updateTask, async (c) => {
     );
     return successResponse(c, updatedTask);
   } catch (error: any) {
-    if (error.message === "Task not found or not owned by user") {
+    if (error.message === "Tarefa não encontrada ou não pertence ao usuário.") {
       return errorResponse(c, error.message, 404);
     }
     return errorResponse(c, error.message, 400);
@@ -83,7 +83,7 @@ taskRoutes.delete("/:id", validator.taskId, async (c) => {
     const deletedTask = await TaskService.deleteTask(id, userId as string);
     return successResponse(c, deletedTask);
   } catch (error: any) {
-    if (error.message === "Task not found or not owned by user") {
+    if (error.message === "Tarefa não encontrada ou não pertence ao usuário.") {
       return errorResponse(c, error.message, 404);
     }
     return errorResponse(c, error.message, 400);
@@ -107,7 +107,7 @@ taskRoutes.patch(
       );
       return successResponse(c, movedTask);
     } catch (error: any) {
-      if (error.message === "Task not found or not owned by user") {
+      if (error.message === "Tarefa não encontrada ou não pertence ao usuário.") {
         return errorResponse(c, error.message, 404);
       }
       return errorResponse(c, error.message, 400);

@@ -27,7 +27,7 @@ boardRoutes.get("/:id", validator.boardId, async (c) => {
   try {
     const board = await BoardService.getBoardById(id, userId as string);
     if (!board) {
-      return errorResponse(c, "Board not found", 404);
+      return errorResponse(c, "Quadro não encontrado", 404);
     }
     return successResponse(c, board);
   } catch (error: any) {
@@ -46,7 +46,7 @@ boardRoutes.post("/", validator.createBoard, async (c) => {
     );
     return successResponse(c, newBoard, 201);
   } catch (error: any) {
-    if (error.message === "User not found") {
+    if (error.message === "Usuário não encontrado") {
       return errorResponse(c, error.message, 404);
     }
     return errorResponse(c, error.message, 400);
@@ -61,7 +61,7 @@ boardRoutes.delete("/:id", validator.boardId, async (c) => {
     const deletedBoard = await BoardService.deleteBoard(id, userId as string);
     return successResponse(c, deletedBoard);
   } catch (error: any) {
-    if (error.message === "Board not found or not owned by user") {
+    if (error.message === "Quadro não encontrado para este usuário") {
       return errorResponse(c, error.message, 404);
     }
     return errorResponse(c, error.message, 400);

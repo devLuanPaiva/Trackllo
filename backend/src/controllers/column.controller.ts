@@ -20,7 +20,7 @@ columnRoutes.get("/board/:boardId", validator.boardId, async (c) => {
     );
     return successResponse(c, columns);
   } catch (error: any) {
-    if (error.message === "Board not found or not owned by user") {
+    if (error.message === "Quadro não encontrado ou não pertence ao usuário.") {
       return errorResponse(c, error.message, 404);
     }
     return errorResponse(c, error.message, 500);
@@ -34,7 +34,7 @@ columnRoutes.get("/:id", validator.columnId, async (c) => {
   try {
     const column = await ColumnService.getColumnById(id, userId as string);
     if (!column) {
-      return errorResponse(c, "Column not found", 404);
+      return errorResponse(c, "Coluna não encontrada.", 404);
     }
     return successResponse(c, column);
   } catch (error: any) {
@@ -54,7 +54,7 @@ columnRoutes.post("/", validator.createColumn, async (c) => {
     );
     return successResponse(c, newColumn, 201);
   } catch (error: any) {
-    if (error.message === "Board not found or not owned by user") {
+    if (error.message === "Quadro não encontrado ou não pertence ao usuário.") {
       return errorResponse(c, error.message, 404);
     }
     return errorResponse(c, error.message, 400);
@@ -78,7 +78,7 @@ columnRoutes.put(
       );
       return successResponse(c, updatedColumn);
     } catch (error: any) {
-      if (error.message === "Column not found or not owned by user") {
+      if (error.message === "Coluna não encontrada ou não pertence ao usuário.") {
         return errorResponse(c, error.message, 404);
       }
       return errorResponse(c, error.message, 400);
@@ -97,7 +97,7 @@ columnRoutes.delete("/:id", validator.columnId, async (c) => {
     );
     return successResponse(c, deletedColumn);
   } catch (error: any) {
-    if (error.message === "Column not found or not owned by user") {
+    if (error.message === "Coluna não encontrada ou não pertence ao usuário.") {
       return errorResponse(c, error.message, 404);
     }
     return errorResponse(c, error.message, 400);
