@@ -70,4 +70,18 @@ describe('ColumnsComponent', () => {
     expect(component.columnInProgress.length).toBe(1);
     expect(component.columnInProgress[0].id).toBe(mockTasks[0].id);
   });
+  it('should return correct connected columns', () => {
+    expect(component.getConnectedColumns('Todo')).toEqual([
+      'InProgress',
+      'Done',
+    ]);
+    expect(component.getConnectedColumns('In Progress')).toEqual([
+      'Todo',
+      'Done',
+    ]);
+    expect(component.getConnectedColumns('Done')).toEqual([
+      'Todo',
+      'InProgress',
+    ]);
+  });
 });
