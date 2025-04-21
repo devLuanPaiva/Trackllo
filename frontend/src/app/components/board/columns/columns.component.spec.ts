@@ -48,4 +48,26 @@ describe('ColumnsComponent', () => {
     component.onMoveColumnTask(event);
     expect(component.columnTodo[1].id).toBe(mockTasks[0].id);
   });
+  it('should move task to different column and call service', () => {
+    component.columnTodo = [mockTasks[0]];
+    component.columnInProgress = [];
+    component.idInProgress = 'column-in-progress';
+
+    const event: any = {
+      previousContainer: { data: component.columnTodo, id: 'Todo' },
+      container: { data: component.columnInProgress, id: 'InProgress' },
+      previousIndex: 0,
+      currentIndex: 0,
+    };
+
+    mockTasksService.moveTask.and.returnValue(of(mockTasks[0]));
+    component.onMoveColumnTask(event);
+    expect(mockTasksService.moveTask).toHaveBeenCalledWith(
+      mockTasks[0].id,
+      'column-in-progress'
+    );
+    expect(component.columnTodo.length).toBe(0);
+    expect(component.columnInProgress.length).toBe(1);
+    expect(component.columnInProgress[0].id).toBe(mockTasks[0].id);
+  });
 });
