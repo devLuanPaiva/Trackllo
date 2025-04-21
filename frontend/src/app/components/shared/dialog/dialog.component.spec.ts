@@ -27,4 +27,12 @@ describe('DialogComponent', () => {
     const messageEl = fixture.debugElement.query(By.css('h3')).nativeElement;
     expect(messageEl.textContent).toContain('Custom message');
   });
+  it('should output "false" and close the dialog when clicking "não"', () => {
+    spyOn(component.confirmed, 'emit');
+    const noButton = fixture.debugElement.query(By.css('button')).nativeElement;
+    noButton.click();
+    fixture.detectChanges();
+    expect(component.confirmed.emit).toHaveBeenCalledWith(false);
+    expect(dialogRef.close).toHaveBeenCalled();
+  });
 });
