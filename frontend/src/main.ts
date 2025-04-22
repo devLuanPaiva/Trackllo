@@ -1,5 +1,4 @@
 /// <reference types="@angular/localize" />
-import 'angular-locale-pt-br';
 
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
