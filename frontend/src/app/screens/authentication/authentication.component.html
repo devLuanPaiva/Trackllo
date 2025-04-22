@@ -8,37 +8,37 @@
         'Registrar' : 'Acessar' }}</h2>
       <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="space-y-4">
         <div *ngIf="isRegister">
-          <label class="block text-gray-700" for="name">Nome</label>
+          <label class="block text-gray-700" for="name" i18n>Nome</label>
           <input type="text" formControlName="name"
             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800" required>
           <small class="text-red-500"
             *ngIf="authForm.get('name')?.touched && authForm.get('name')?.invalid && isRegister">
-            <span *ngIf="authForm.get('name')?.errors?.['required']">
+            <span *ngIf="authForm.get('name')?.errors?.['required']" i18n>
               Nome é obrigatório.
             </span>
           </small>
 
         </div>
         <div>
-          <label class="block text-gray-700" for="email">Email</label>
+          <label class="block text-gray-700" for="email" i18n>Email</label>
           <input type="email" formControlName="email"
             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800">
           <small class="text-red-500" *ngIf="authForm.get('email')?.touched && authForm.get('email')?.invalid">
-            <span *ngIf="authForm.get('email')?.errors?.['required']">Email é
+            <span *ngIf="authForm.get('email')?.errors?.['required']" i18n>Email é
               obrigatório.</span>
-            <span *ngIf="authForm.get('email')?.errors?.['email']">Email
+            <span *ngIf="authForm.get('email')?.errors?.['email']" i18n>Email
               inválido.</span>
           </small>
         </div>
 
         <div>
-          <label class="block text-gray-700" for="password">Senha</label>
+          <label class="block text-gray-700" for="password" i18n>Senha</label>
           <input type="password" formControlName="password"
             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800">
           <small class="text-red-500" *ngIf="authForm.get('password')?.touched && authForm.get('password')?.invalid">
-            <span *ngIf="authForm.get('password')?.errors?.['required']">Senha é
+            <span *ngIf="authForm.get('password')?.errors?.['required']" i18n>Senha é
               obrigatória.</span>
-            <span *ngIf="authForm.get('password')?.errors?.['minlength']">A
+            <span *ngIf="authForm.get('password')?.errors?.['minlength']" i18n>A
               senha deve ter ao menos 6 caracteres.</span>
           </small>
         </div>
