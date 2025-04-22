@@ -1,4 +1,11 @@
 /// <reference types="@angular/localize" />
+import 'angular-locale-pt-br';
+
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import localePtExtra from '@angular/common/locales/extra/pt';
+
+registerLocaleData(localePt, 'pt-BR', localePtExtra);
 
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
