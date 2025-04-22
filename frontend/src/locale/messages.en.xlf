@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="pt-BR" datatype="plaintext" original="ng2.template" target-language="en">
+    <body>
+      <trans-unit id="2332180001770133395" datatype="html">
+        <source>Nome</source>
+        <target>Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1836670072691523167" datatype="html">
+        <source> Nome é obrigatório. </source>
+        <target> Name is required. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4768749765465246664" datatype="html">
+        <source>Email</source>
+        <target>Email</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2787683719202508670" datatype="html">
+        <source>Email é obrigatório.</source>
+        <target>Email is required.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8365839397555502878" datatype="html">
+        <source>Email inválido.</source>
+        <target>Invalid email.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="150555469217751648" datatype="html">
+        <source>Senha</source>
+        <target>Password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">35,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8050259032116077733" datatype="html">
+        <source>Senha é obrigatória.</source>
+        <target>Password is required.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7687217593321787242" datatype="html">
+        <source>A senha deve ter ao menos 6 caracteres.</source>
+        <target>The password must have at least 6 characters.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8623936171733065386" datatype="html">
+        <source> Organize suas tarefas com <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong
+            class=&quot;bg-gradient-to-r from-blue-800 via-blue-600 to-blue-500 bg-clip-text  font-extrabold text-transparent  tracking-wide&quot;&gt;"/>Trackllo!<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+        <target> Organize your tasks with <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong
+            class=&quot;bg-gradient-to-r from-blue-800 via-blue-600 to-blue-500 bg-clip-text  font-extrabold text-transparent  tracking-wide&quot;&gt;"/>Trackllo!<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/landing/landing.component.html</context>
+          <context context-type="linenumber">13,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2274984081069246442" datatype="html">
+        <source> Crie quadros Kanban, acompanhe o progresso e mantenha seu time sempre alinhado. Tudo isso em uma plataforma intuitiva e poderosa. </source>
+        <target> Create Kanban boards, track progress, and keep your team always aligned. All this on an intuitive and powerful platform. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/landing/landing.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="30538234558668215" datatype="html">
+        <source> Comece agora </source>
+        <target> Start now </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/landing/landing.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

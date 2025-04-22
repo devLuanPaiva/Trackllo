@@ -7,7 +7,7 @@
       "i18n": {
         "sourceLocale": "pt-BR",
         "locales": {
-          "en-US": "src/locale/messages.en .xlf",
+          "en-US": "src/locale/messages.en.xlf",
           "es-PR": "src/locale/messages.es.xlf"
         }
       },
