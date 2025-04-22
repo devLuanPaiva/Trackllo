@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="pt-BR" datatype="plaintext" original="ng2.template">
+  <file source-language="pt" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="2332180001770133395" datatype="html">
         <source>Nome</source>
@@ -77,7 +77,7 @@
         <source> Comece agora </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/screens/landing/landing.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">25,26</context>
         </context-group>
       </trans-unit>
     </body>
