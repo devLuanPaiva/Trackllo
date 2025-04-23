@@ -88,6 +88,30 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "en-US": {
+              "localize": [
+                "en-US"
+              ],
+              "outputPath": "dist/trackllo/en-US",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ]
+            },
+            "es-PR": {
+              "localize": [
+                "es-PR"
+              ],
+              "outputPath": "dist/trackllo/es-PR",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
