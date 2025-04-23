@@ -1,0 +1,8 @@
+<mat-form-field appearance="outline" class="w-40 text-white">
+  <mat-label>Idioma</mat-label>
+  <mat-select (selectionChange)="switchLanguage($event.value)">
+    <mat-option value="pt">Português</mat-option>
+    <mat-option value="en-US">Inglês</mat-option>
+    <mat-option value="es-PR">Espanhol</mat-option>
+  </mat-select>
+</mat-form-field>
