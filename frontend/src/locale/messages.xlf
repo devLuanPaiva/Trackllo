@@ -2,6 +2,181 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="pt" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="7087384868204126562" datatype="html">
+        <source>Título do projeto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/board-form/board-form.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2150090454076253515" datatype="html">
+        <source> Criar projeto </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/board-form/board-form.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2280331014371342431" datatype="html">
+        <source>Arraste tarefas para cá</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6940106882380956579" datatype="html">
+        <source>Excluir tarefa</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">15,16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/user-boards/user-boards.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8385086074859157886" datatype="html">
+        <source>Tarefa</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1818605637899463344" datatype="html">
+        <source><x id="START_TAG_FA_ICON" ctype="x-fa_icon" equiv-text="&lt;fa-icon [icon]=&quot;icons.plus&quot; class=&quot;bg-white w-6 h-6 rounded-full transition-colors duration-300 ease-in-out&quot;
+      [ngClass]=&quot;{
+        &apos; text-blue-500 group-hover:bg-blue-100&apos;: colorTask === &apos;blue&apos;,
+        &apos; text-yellow-500 group-hover:bg-yellow-100 &apos;: colorTask === &apos;yellow&apos;,
+        &apos; text-green-500 group-hover:bg-green-100 &apos;: colorTask === &apos;green&apos;
+      }&quot; /&gt;"/><x id="CLOSE_TAG_FA_ICON" ctype="x-fa_icon" equiv-text="&lt;fa-icon [icon]=&quot;icons.plus&quot; class=&quot;bg-white w-6 h-6 rounded-full transition-colors duration-300 ease-in-out&quot;
+      [ngClass]=&quot;{
+        &apos; text-blue-500 group-hover:bg-blue-100&apos;: colorTask === &apos;blue&apos;,
+        &apos; text-yellow-500 group-hover:bg-yellow-100 &apos;: colorTask === &apos;yellow&apos;,
+        &apos; text-green-500 group-hover:bg-green-100 &apos;: colorTask === &apos;green&apos;
+      }&quot; /&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Criar Tarefa<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">42,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8331458230102334089" datatype="html">
+        <source>Título</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6565026594507061112" datatype="html">
+        <source>Título é obrigatório.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">63,64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7600875329802127002" datatype="html">
+        <source> O título deve ter pelo menos 3 caracteres. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">67,68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="561362554662791785" datatype="html">
+        <source> O título deve ter no máximo 100 caracteres. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">72,73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5269978570089659028" datatype="html">
+        <source>Descrição</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6768307183544138043" datatype="html">
+        <source> Descrição é obrigatória. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">90,91</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6507075889186568741" datatype="html">
+        <source> A descrição deve ter pelo menos 10 caracteres. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">94,95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4202170221926540149" datatype="html">
+        <source> A descrição deve ter no máximo 500 caracteres. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">98,99</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="637423534403363192" datatype="html">
+        <source>Imagem URL</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6737618759956200441" datatype="html">
+        <source> URL da imagem é inválida. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">114,115</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7122708284932666485" datatype="html">
+        <source> Adicionar Tarefa </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/tasks/tasks.component.html</context>
+          <context context-type="linenumber">126,127</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7783496281689621226" datatype="html">
+        <source> Olá, <x id="INTERPOLATION" equiv-text="{{user.name}}"/>! </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/user-boards/user-boards.component.html</context>
+          <context context-type="linenumber">5,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2935612674017717383" datatype="html">
+        <source>Aqui estão seus projetos.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/user-boards/user-boards.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="748736016541854340" datatype="html">
+        <source> Você não tem projetos cadastrados ainda. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/user-boards/user-boards.component.html</context>
+          <context context-type="linenumber">45,46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7708270344948043036" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ showForm ? &apos;Cancelar&apos; : &apos;Novo projeto&apos; }}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/user-boards/user-boards.component.html</context>
+          <context context-type="linenumber">50,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8269227428906520414" datatype="html">
+        <source> Não </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/shared/dialog/dialog.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5030787526357917836" datatype="html">
+        <source> Sim </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/shared/dialog/dialog.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="2332180001770133395" datatype="html">
         <source>Nome</source>
         <context-group purpose="location">
@@ -77,7 +252,7 @@
         <source> Comece agora </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/screens/landing/landing.component.html</context>
-          <context context-type="linenumber">25,26</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
     </body>
