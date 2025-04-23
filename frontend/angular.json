@@ -124,6 +124,12 @@
             },
             "development": {
               "buildTarget": "Trackllo:build:development"
+            },
+            "en-US": {
+              "buildTarget": "Trackllo:build:en-US"
+            },
+            "es-PR": {
+              "buildTarget": "Trackllo:build:es-PR"
             }
           },
           "defaultConfiguration": "development"
