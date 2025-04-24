@@ -35,7 +35,11 @@
       }
       <button (click)="showForm = !showForm"
         class="w-full bg-white text-blue-700 font-semibold border border-blue-500 rounded-xl py-2 px-4 transition hover:bg-blue-50">
-        {{ showForm ? 'Cancelar' : 'Novo projeto' }}
+        @if (showForm) {
+        <span i18n>Cancelar</span>
+        }@else {
+        <span i18n>Novo projeto</span>
+        }
       </button>
     </section>
   </div>
@@ -46,8 +50,12 @@
     </h2>
 
     <button (click)="showForm = !showForm"
-      class="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition" i18n>
-      {{ showForm ? 'Cancelar' : 'Novo projeto' }}
+      class="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition">
+      @if (showForm) {
+      <span i18n>Cancelar</span>
+      }@else {
+      <span i18n>Novo projeto</span>
+      }
     </button>
 
     @if (showForm) {
