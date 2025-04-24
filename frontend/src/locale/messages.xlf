@@ -149,18 +149,33 @@
           <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="6402951927316857780" datatype="html">
+        <source>Cancelar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/user-boards/user-boards.component.html</context>
+          <context context-type="linenumber">39,40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/user-boards/user-boards.component.html</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5490419516731258410" datatype="html">
+        <source>Novo projeto</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/user-boards/user-boards.component.html</context>
+          <context context-type="linenumber">41,42</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/board/user-boards/user-boards.component.html</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="748736016541854340" datatype="html">
         <source> Você não tem projetos cadastrados ainda. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/board/user-boards/user-boards.component.html</context>
-          <context context-type="linenumber">45,46</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7708270344948043036" datatype="html">
-        <source> <x id="INTERPOLATION" equiv-text="{{ showForm ? &apos;Cancelar&apos; : &apos;Novo projeto&apos; }}"/> </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/board/user-boards/user-boards.component.html</context>
-          <context context-type="linenumber">50,52</context>
+          <context context-type="linenumber">49,50</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8269227428906520414" datatype="html">
@@ -177,60 +192,96 @@
           <context context-type="linenumber">11,12</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4670165424868688046" datatype="html">
+        <source>Registrar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">53,54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1748265488226315945" datatype="html">
+        <source>Acessar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="2332180001770133395" datatype="html">
         <source>Nome</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
-          <context context-type="linenumber">11,12</context>
+          <context context-type="linenumber">16,17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1836670072691523167" datatype="html">
         <source> Nome é obrigatório. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4768749765465246664" datatype="html">
         <source>Email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
-          <context context-type="linenumber">23,24</context>
+          <context context-type="linenumber">28,29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2787683719202508670" datatype="html">
         <source>Email é obrigatório.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8365839397555502878" datatype="html">
         <source>Email inválido.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="150555469217751648" datatype="html">
         <source>Senha</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
-          <context context-type="linenumber">35,36</context>
+          <context context-type="linenumber">40,41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8050259032116077733" datatype="html">
         <source>Senha é obrigatória.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">44,45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7687217593321787242" datatype="html">
         <source>A senha deve ter ao menos 6 caracteres.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4206679466851861695" datatype="html">
+        <source>Já possui conta? Entrar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">63,64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5703023263053264809" datatype="html">
+        <source>Não possui conta? Registre-se</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/screens/authentication/authentication.component.html</context>
+          <context context-type="linenumber">65,66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8623936171733065386" datatype="html">
