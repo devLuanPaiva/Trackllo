@@ -22,7 +22,16 @@ export class LanguageComponent {
   selectedLang = this.translate.currentLang || 'pt';
 
   switchLanguage(lang: string) {
-    this.translate.use(lang);
-    this.selectedLang = lang;
+    this.translate.use(lang).subscribe({
+      next: () => {
+        this.selectedLang = lang;
+
+      },
+      error: (err) => {
+        console.error('Failed to change language', err);
+        this.translate.use('pt');
+        this.selectedLang = 'pt';
+      }
+    });
   }
 }
