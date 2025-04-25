@@ -4,13 +4,6 @@
   "newProjectRoot": "projects",
   "projects": {
     "Trackllo": {
-      "i18n": {
-        "sourceLocale": "pt",
-        "locales": {
-          "en-US": "src/locale/messages.en.xlf",
-          "es-PR": "src/locale/messages.es.xlf"
-        }
-      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,10 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "localize": [
-              "es-PR",
-              "en-US"
-            ],
+            "localize": false,
             "outputPath": "dist/trackllo",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -90,9 +80,7 @@
               ]
             },
             "en-US": {
-              "localize": [
-                "en-US"
-              ],
+              "localize": false,
               "outputPath": "dist/trackllo/en-US",
               "fileReplacements": [
                 {
@@ -102,9 +90,7 @@
               ]
             },
             "es-PR": {
-              "localize": [
-                "es-PR"
-              ],
+              "localize": false,
               "outputPath": "dist/trackllo/es-PR",
               "fileReplacements": [
                 {
