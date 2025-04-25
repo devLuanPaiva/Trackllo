@@ -1,0 +1,97 @@
+{
+  "7087384868204126562": "Título del proyecto",
+  "2150090454076253515": " Crear proyecto ",
+  "2280331014371342431": "Arrastra tareas aquí",
+  "6940106882380956579": "Eliminar tarea",
+  "8385086074859157886": "Tarea",
+  "1818605637899463344": [
+    {
+      "Standalone": {
+        "id": "START_TAG_FA_ICON",
+        "ctype": "x-fa_icon",
+        "equiv-text": "<fa-icon [icon]=\"icons.plus\" class=\"bg-white w-6 h-6 rounded-full transition-colors duration-300 ease-in-out\"\n      [ngClass]=\"{\n        ' text-blue-500 group-hover:bg-blue-100': colorTask === 'blue',\n        ' text-yellow-500 group-hover:bg-yellow-100 ': colorTask === 'yellow',\n        ' text-green-500 group-hover:bg-green-100 ': colorTask === 'green'\n      }\" />"
+      }
+    },
+    {
+      "Standalone": {
+        "id": "CLOSE_TAG_FA_ICON",
+        "ctype": "x-fa_icon",
+        "equiv-text": "<fa-icon [icon]=\"icons.plus\" class=\"bg-white w-6 h-6 rounded-full transition-colors duration-300 ease-in-out\"\n      [ngClass]=\"{\n        ' text-blue-500 group-hover:bg-blue-100': colorTask === 'blue',\n        ' text-yellow-500 group-hover:bg-yellow-100 ': colorTask === 'yellow',\n        ' text-green-500 group-hover:bg-green-100 ': colorTask === 'green'\n      }\" />"
+      }
+    },
+    {
+      "Standalone": {
+        "id": "START_TAG_SPAN",
+        "ctype": "x-span",
+        "equiv-text": "<span>"
+      }
+    },
+    "Crear tarea",
+    {
+      "Standalone": {
+        "id": "CLOSE_TAG_SPAN",
+        "ctype": "x-span",
+        "equiv-text": "</span>"
+      }
+    }
+  ],
+  "8331458230102334089": "Título",
+  "6565026594507061112": "El título es obligatorio.",
+  "7600875329802127002": " El título debe tener al menos 3 caracteres. ",
+  "561362554662791785": " El título debe tener máximo 100 caracteres. ",
+  "5269978570089659028": "Descripción",
+  "6768307183544138043": " La descripción es obligatoria. ",
+  "6507075889186568741": " La descripción debe tener al menos 10 caracteres. ",
+  "4202170221926540149": " La descripción debe tener máximo 500 caracteres. ",
+  "637423534403363192": "URL de la imagen",
+  "6737618759956200441": " La URL de la imagen no es válida. ",
+  "7122708284932666485": " Añadir tarea ",
+  "7783496281689621226": [
+    " Hola, ",
+    {
+      "Standalone": {
+        "id": "INTERPOLATION",
+        "equiv-text": "{{user.name}}"
+      }
+    },
+    "! "
+  ],
+  "2935612674017717383": "Aquí están tus proyectos.",
+  "6402951927316857780": "Cancelar",
+  "5490419516731258410": "Nuevo proyecto",
+  "748736016541854340": " Aún no tienes proyectos registrados. ",
+  "8269227428906520414": " No ",
+  "5030787526357917836": " Sí ",
+  "4670165424868688046": "Registrar",
+  "1748265488226315945": "Acceder",
+  "2332180001770133395": "Nombre",
+  "1836670072691523167": " El nombre es obligatorio. ",
+  "4768749765465246664": "Correo electrónico",
+  "2787683719202508670": "El correo electrónico es obligatorio.",
+  "8365839397555502878": "Correo electrónico inválido.",
+  "150555469217751648": "Contraseña",
+  "8050259032116077733": "La contraseña es obligatoria.",
+  "7687217593321787242": "La contraseña debe tener al menos 6 caracteres.",
+  "4206679466851861695": "¿Ya tienes cuenta? Iniciar sesión",
+  "5703023263053264809": "¿No tienes cuenta? Regístrate",
+  "8623936171733065386": [
+    " Organiza tus tareas con ",
+    {
+      "Standalone": {
+        "id": "START_TAG_STRONG",
+        "ctype": "x-strong",
+        "equiv-text": "<strong\n            class=\"bg-gradient-to-r from-blue-800 via-blue-600 to-blue-500 bg-clip-text  font-extrabold text-transparent  tracking-wide\">"
+      }
+    },
+    "\n          Trackllo!",
+    {
+      "Standalone": {
+        "id": "CLOSE_TAG_STRONG",
+        "ctype": "x-strong",
+        "equiv-text": "</strong>"
+      }
+    }
+  ],
+  "2274984081069246442": " Crea tableros Kanban, sigue el progreso y mantén a tu equipo siempre alineado. Todo\n          esto en una plataforma intuitiva y poderosa. ",
+  "30538234558668215": " Comienza ahora "
+}
