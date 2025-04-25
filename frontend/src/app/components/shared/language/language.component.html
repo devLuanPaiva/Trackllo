@@ -1,8 +1,9 @@
-<mat-form-field appearance="outline" class="w-40  absolute top-6 right-5">
-  <mat-label>Idioma</mat-label>
-  <mat-select (selectionChange)="switchLanguage($event.value)">
+<mat-form-field appearance="outline" class="w-44 absolute top-6 right-5">
+  <mat-label>{{ 'LANGUAGE' | translate }}</mat-label>
+  <mat-select [(ngModel)]="selectedLang"
+    (selectionChange)="switchLanguage($event.value)">
     <mat-option value="pt">Português</mat-option>
-    <mat-option value="en-US">Inglês</mat-option>
-    <mat-option value="es-PR">Espanhol</mat-option>
+    <mat-option value="en">English</mat-option>
+    <mat-option value="es">Español</mat-option>
   </mat-select>
 </mat-form-field>
