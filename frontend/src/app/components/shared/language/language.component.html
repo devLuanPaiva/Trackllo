@@ -1,32 +1,31 @@
-<div class="absolute top-6 right-5">
-  <div class="relative" (click)="toggleDropdown()" tabindex="0"
-    (blur)="closeDropdown()">
-    <button
+<div>
+  <button class="relative" (click)="toggleDropdown()" tabindex="0">
+    <figure
       class="bg-blue-800 rounded-full p-1 w-10 h-10 shadow-sm hover:shadow-md transition-all">
       <fa-icon [icon]="icons.faLanguage"
         class=" text-white text-2xl transition-transform duration-300 hover:scale-110"></fa-icon>
+    </figure>
+
+  </button>
+  @if (dropdownOpen) {
+  <div
+    class="absolute right-0 mt-2 w-36 bg-white border border-blue-200 rounded-md shadow-lg z-50">
+    <button
+      class="w-full text-left px-4 py-2 text-sm hover:bg-blue-100"
+      (click)="switchLanguage('pt')">
+      Português
     </button>
-    @if (dropdownOpen) {
-    <div
-      class="absolute right-0 mt-2 w-36 bg-white border border-blue-200 rounded-md shadow-lg z-50">
-      <button
-        class="w-full text-left px-4 py-2 text-sm hover:bg-blue-100"
-        (click)="switchLanguage('pt')">
-        Português
-      </button>
-      <button
-        class="w-full text-left px-4 py-2 text-sm hover:bg-blue-100"
-        (click)="switchLanguage('en')">
-        English
-      </button>
-      <button
-        class="w-full text-left px-4 py-2 text-sm hover:bg-blue-100"
-        (click)="switchLanguage('es')">
-        Español
-      </button>
-    </div>
-
-    }
-
+    <button
+      class="w-full text-left px-4 py-2 text-sm hover:bg-blue-100"
+      (click)="switchLanguage('en')">
+      English
+    </button>
+    <button
+      class="w-full text-left px-4 py-2 text-sm hover:bg-blue-100"
+      (click)="switchLanguage('es')">
+      Español
+    </button>
   </div>
+
+  }
 </div>
