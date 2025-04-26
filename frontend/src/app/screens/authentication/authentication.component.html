@@ -8,14 +8,14 @@
     <article class="bg-[#F6F6FF] p-8 rounded-lg shadow-lg  w-full sm:w-[45%]">
       <h2 class="text-2xl font-bold text-center mb-6">
         @if (isRegister) {
-        <span>{{'4670165424868688046' | translate}}</span>
+        <span>{{'4670165424' | translate}}</span>
         }@else {
-        <span> {{'1748265488226315945'| translate}} </span>
+        <span> {{'1748265488'| translate}} </span>
         }
       </h2>
       <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="space-y-4">
         <div *ngIf="isRegister">
-          <label class="block text-gray-700" for="name">{{'2332180001770133395'
+          <label class="block text-gray-700" for="name">{{'2332180001'
             | translate}}</label>
           <input type="text" formControlName="name"
             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
@@ -23,39 +23,39 @@
           <small class="text-red-500"
             *ngIf="authForm.get('name')?.touched && authForm.get('name')?.invalid && isRegister">
             <span *ngIf="authForm.get('name')?.errors?.['required']">
-              {{'1836670072691523167' |translate}}
+              {{'1836670072' |translate}}
             </span>
           </small>
 
         </div>
         <div>
-          <label class="block text-gray-700" for="email">{{'4768749765465246664'
+          <label class="block text-gray-700" for="email">{{'4768749765'
             | translate}} </label>
           <input type="email" formControlName="email"
             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800">
           <small class="text-red-500"
             *ngIf="authForm.get('email')?.touched && authForm.get('email')?.invalid">
             <span
-              *ngIf="authForm.get('email')?.errors?.['required']">{{'2787683719202508670'
+              *ngIf="authForm.get('email')?.errors?.['required']">{{'2787683719'
               | translate}} </span>
             <span
-              *ngIf="authForm.get('email')?.errors?.['email']">{{'8365839397555502878'
+              *ngIf="authForm.get('email')?.errors?.['email']">{{'8365839397'
               | translate}}</span>
           </small>
         </div>
 
         <div>
           <label class="block text-gray-700"
-            for="password">{{'150555469217751648' | translate}} </label>
+            for="password">{{'1505554692' | translate}} </label>
           <input type="password" formControlName="password"
             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800">
           <small class="text-red-500"
             *ngIf="authForm.get('password')?.touched && authForm.get('password')?.invalid">
             <span
-              *ngIf="authForm.get('password')?.errors?.['required']">{{'8050259032116077733'
+              *ngIf="authForm.get('password')?.errors?.['required']">{{'8050259032'
               | translate}} </span>
             <span *ngIf="authForm.get('password')?.errors?.['minlength']">
-              {{'7687217593321787242' | translate}}
+              {{'7687217593' | translate}}
             </span>
           </small>
         </div>
@@ -63,9 +63,9 @@
         <button type="submit" [disabled]="authForm.invalid"
           class="w-full bg-blue-500 hover:bg-blue-600 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:bg-blue-700 active:scale-95 transition-all duration-300 text-white py-2 rounded-lg cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">
           @if (isRegister) {
-          <span>{{'4670165424868688046' | translate}}</span>
+          <span>{{'4670165424' | translate}}</span>
           }@else {
-          <span> {{'1748265488226315945'| translate}} </span>
+          <span> {{'1748265488'| translate}} </span>
           }
         </button>
 
@@ -73,9 +73,9 @@
       <p class="text-center mt-4">
         <button class="text-blue  hover:underline" (click)="toggleMode()">
           @if (isRegister) {
-          <span>{{'4206679466851861695' | translate}}</span>
+          <span>{{'4206679466' | translate}}</span>
           }@else {
-          <span> {{'5703023263053264809'| translate}} </span>
+          <span> {{'5703023263'| translate}} </span>
           }
         </button>
       </p>

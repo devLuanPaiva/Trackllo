@@ -3,7 +3,7 @@
   <ul cdkDropList [id]="id" [cdkDropListData]="columnTasks" [cdkDropListConnectedTo]="connectedTo"
     (cdkDropListDropped)="onMoveColumnTask($event)" class="w-full space-y-6">
     @if (columnTasks.length === 0) {
-    <li class="text-gray-400 text-center italic" >{{'2280331014371342431'| translate}}</li>
+    <li class="text-gray-400 text-center italic" >{{'2280331014'| translate}}</li>
     }
     @for (item of columnTasks; track $index) {
     <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md cursor-move list-none relative" [ngClass]="{
@@ -25,7 +25,7 @@
         <h3 class="font-medium text-lg">{{ item.title }}</h3>
         <p class="text-sm text-gray-600">{{ item.description }}</p>
         @if(item.image){
-        <img [src]="item.image" [alt]="'8385086074859157886' | translate"  class="w-full h-32 object-cover rounded-lg" />
+        <img [src]="item.image" [alt]="'8385086074' | translate"  class="w-full h-32 object-cover rounded-lg" />
         }
       </div>
     </li>
@@ -44,12 +44,12 @@
         ' text-yellow-500 group-hover:bg-yellow-100 ': colorTask === 'yellow',
         ' text-green-500 group-hover:bg-green-100 ': colorTask === 'green'
       }" />
-    <span>{{'1818605637899463344' | translate}}</span>
+    <span>{{'1818605637' | translate}}</span>
   </button>
 
   @if (showForm) {
   <form [formGroup]="taskForm" (ngSubmit)="createTask()" class="mt-3 flex flex-col gap-3 w-full">
-    <input formControlName="title"[placeholder]="'8331458230102334089' | translate" 
+    <input formControlName="title"[placeholder]="'8331458230' | translate" 
       class="border p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50" [ngClass]="{
         'focus:ring-blue-400': colorTask === 'blue',
         'focus:ring-yellow-400': colorTask === 'yellow',
@@ -59,21 +59,21 @@
     taskForm.get('title')?.dirty)) {
     <p class="text-red-500 text-sm">
       @if (taskForm.get('title')?.errors?.['required']) {
-      <span >{{'6565026594507061112' | translate}} </span>
+      <span >{{'6565026594' | translate}} </span>
       <br>}
       @if (taskForm.get('title')?.errors?.['minlength']) {
       <span >
-        {{'7600875329802127002' | translate}}
+        {{'7600875329' | translate}}
       </span>
       <br>}
       @if (taskForm.get('title')?.errors?.['maxlength']) {
       <span >
-        {{'561362554662791785' | translate}}
+        {{'5613625546' | translate}}
       </span>
       <br>}
     </p>
     }
-    <textarea formControlName="description" [placeholder]="'5269978570089659028' | translate"
+    <textarea formControlName="description" [placeholder]="'5269978570' | translate"
       class="border p-2 rounded-lg shadow-sm resize-none h-24 focus:outline-none focus:ring-2 focus:ring-opacity-50"
       [ngClass]="{
         'focus:ring-blue-400': colorTask === 'blue',
@@ -86,20 +86,20 @@
     <p class="text-red-500 text-sm">
       @if (taskForm.get('description')?.errors?.['required']) {
       <span >
-        {{'6768307183544138043' | translate}}
+        {{'6768307183' | translate}}
       </span><br>}
       @if (taskForm.get('description')?.errors?.['minlength']) {
       <span >
-        {{'6507075889186568741' | translate}}
+        {{'6507075889' | translate}}
       </span> <br>}
       @if (taskForm.get('description')?.errors?.['maxlength']) {
       <span >
-        {{'4202170221926540149' | translate}}
+        {{'4202170221' | translate}}
       </span> <br>}
     </p>
     }
 
-    <input formControlName="image" [placeholder]="'637423534403363192' | translate" 
+    <input formControlName="image" [placeholder]="'6374235344' | translate" 
       class="border p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50" [ngClass]="{
         'focus:ring-blue-400': colorTask === 'blue',
         'focus:ring-yellow-400': colorTask === 'yellow',
@@ -110,7 +110,7 @@
     <p class="text-red-500 text-sm">
       @if (taskForm.get('image')?.errors?.['pattern']) {
       <span >
-        {{'6737618759956200441' | translate}}
+        {{'6737618759' | translate}}
       </span>}
     </p>
     }
@@ -122,10 +122,10 @@
           'bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-300': colorTask === 'yellow',
           'bg-green-500 hover:bg-green-600 focus:ring-green-300': colorTask === 'green'
         }">
-        {{'7122708284932666485' | translate}}
+        {{'7122708284' | translate}}
       </button>
       <button type="button" class="w-[10%]" (click)="showForm = false">
-        <abbr  [title]="'824709493287487987' | translate">
+        <abbr  [title]="'8247094932' | translate">
           <fa-icon [icon]="icons.xmark" class="bg-white w-6 h-6 rounded-full transition-colors duration-300 ease-in-out"
             [ngClass]="{
           ' text-blue-500 group-hover:bg-blue-100': colorTask === 'blue',
