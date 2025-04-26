@@ -9,10 +9,11 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LayoutComponent } from '../../components/template/layout/layout.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-authentication',
-  imports: [CommonModule, ReactiveFormsModule, LayoutComponent],
+  imports: [CommonModule, ReactiveFormsModule, LayoutComponent, TranslateModule],
   templateUrl: './authentication.component.html',
 })
 export class AuthenticationComponent {

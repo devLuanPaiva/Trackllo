@@ -10,15 +10,10 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatDialog } from '@angular/material/dialog';
 import { openConfirmationDialog } from '../../../utils';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-user-boards',
-  imports: [
-    BoardFormComponent,
-    RouterModule,
-    CommonModule,
-    AlertComponent,
-    FontAwesomeModule,
-  ],
+  imports: [BoardFormComponent,RouterModule,CommonModule,AlertComponent,FontAwesomeModule,TranslateModule],
   templateUrl: './user-boards.component.html',
   animations: [latterAnimation],
 })

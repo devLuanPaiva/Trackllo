@@ -3,7 +3,7 @@
   <ul cdkDropList [id]="id" [cdkDropListData]="columnTasks" [cdkDropListConnectedTo]="connectedTo"
     (cdkDropListDropped)="onMoveColumnTask($event)" class="w-full space-y-6">
     @if (columnTasks.length === 0) {
-    <li class="text-gray-400 text-center italic" i18n>Arraste tarefas para cá</li>
+    <li class="text-gray-400 text-center italic" >{{'2280331014371342431'| translate}}</li>
     }
     @for (item of columnTasks; track $index) {
     <li cdkDrag [@fadeInOut] class="p-2 rounded-lg shadow-md cursor-move list-none relative" [ngClass]="{
@@ -12,8 +12,7 @@
         'bg-green-200': colorTask === 'green'
       }">
 
-      <button (click)="onDeleteTask(item.id)" class="absolute -top-3 -right-3 " aria-label="Excluir tarefa"
-        i18n-aria-label>
+      <button (click)="onDeleteTask(item.id)" class="absolute -top-3 -right-3 " >
         <fa-icon [icon]="icons.trash"
           class=" rounded-full px-2 text-red-500 py-1.5 shadow-lg transition-transform transform hover:scale-110 active:scale-95"
           [ngClass]="{
@@ -26,13 +25,13 @@
         <h3 class="font-medium text-lg">{{ item.title }}</h3>
         <p class="text-sm text-gray-600">{{ item.description }}</p>
         @if(item.image){
-        <img [src]="item.image" alt="Tarefa" i18n-alt class="w-full h-32 object-cover rounded-lg" />
+        <img [src]="item.image" [alt]="'8385086074859157886' | translate"  class="w-full h-32 object-cover rounded-lg" />
         }
       </div>
     </li>
     }
   </ul>
-  <button (click)="toggleForm()" i18n class="group mt-5  transition-colors duration-300 ease-out w-full py-3 flex items-center justify-center rounded-lg shadow-md gap-3 text-white font-medium hover:shadow-lg focus:outline-none focus:ring-2
+  <button (click)="toggleForm()" class="group mt-5  transition-colors duration-300 ease-out w-full py-3 flex items-center justify-center rounded-lg shadow-md gap-3 text-white font-medium hover:shadow-lg focus:outline-none focus:ring-2
   " [ngClass]="{
     'bg-blue-500 hover:bg-blue-600 focus:ring-blue-300': colorTask === 'blue',
     'bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-300': colorTask === 'yellow',
@@ -45,12 +44,12 @@
         ' text-yellow-500 group-hover:bg-yellow-100 ': colorTask === 'yellow',
         ' text-green-500 group-hover:bg-green-100 ': colorTask === 'green'
       }" />
-    <span>Criar Tarefa</span>
+    <span>{{'1818605637899463344' | translate}}</span>
   </button>
 
   @if (showForm) {
   <form [formGroup]="taskForm" (ngSubmit)="createTask()" class="mt-3 flex flex-col gap-3 w-full">
-    <input formControlName="title" placeholder="Título" i18n-placeholder
+    <input formControlName="title"[placeholder]="'8331458230102334089' | translate" 
       class="border p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50" [ngClass]="{
         'focus:ring-blue-400': colorTask === 'blue',
         'focus:ring-yellow-400': colorTask === 'yellow',
@@ -60,21 +59,21 @@
     taskForm.get('title')?.dirty)) {
     <p class="text-red-500 text-sm">
       @if (taskForm.get('title')?.errors?.['required']) {
-      <span i18n>Título é obrigatório.</span>
+      <span >{{'6565026594507061112' | translate}} </span>
       <br>}
       @if (taskForm.get('title')?.errors?.['minlength']) {
-      <span i18n>
-        O título deve ter pelo menos 3 caracteres.
+      <span >
+        {{'7600875329802127002' | translate}}
       </span>
       <br>}
       @if (taskForm.get('title')?.errors?.['maxlength']) {
-      <span i18n>
-        O título deve ter no máximo 100 caracteres.
+      <span >
+        {{'561362554662791785' | translate}}
       </span>
       <br>}
     </p>
     }
-    <textarea formControlName="description" placeholder="Descrição" i18n-placeholder
+    <textarea formControlName="description" [placeholder]="'5269978570089659028' | translate"
       class="border p-2 rounded-lg shadow-sm resize-none h-24 focus:outline-none focus:ring-2 focus:ring-opacity-50"
       [ngClass]="{
         'focus:ring-blue-400': colorTask === 'blue',
@@ -86,21 +85,21 @@
     taskForm.get('description')?.dirty)) {
     <p class="text-red-500 text-sm">
       @if (taskForm.get('description')?.errors?.['required']) {
-      <span i18n>
-        Descrição é obrigatória.
+      <span >
+        {{'6768307183544138043' | translate}}
       </span><br>}
       @if (taskForm.get('description')?.errors?.['minlength']) {
-      <span i18n>
-        A descrição deve ter pelo menos 10 caracteres.
+      <span >
+        {{'6507075889186568741' | translate}}
       </span> <br>}
       @if (taskForm.get('description')?.errors?.['maxlength']) {
-      <span i18n>
-        A descrição deve ter no máximo 500 caracteres.
+      <span >
+        {{'4202170221926540149' | translate}}
       </span> <br>}
     </p>
     }
 
-    <input formControlName="image" placeholder="Imagem URL" i18n-placeholder
+    <input formControlName="image" [placeholder]="'637423534403363192' | translate" 
       class="border p-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-50" [ngClass]="{
         'focus:ring-blue-400': colorTask === 'blue',
         'focus:ring-yellow-400': colorTask === 'yellow',
@@ -110,23 +109,23 @@
     taskForm.get('image')?.dirty)) {
     <p class="text-red-500 text-sm">
       @if (taskForm.get('image')?.errors?.['pattern']) {
-      <span i18n>
-        URL da imagem é inválida.
+      <span >
+        {{'6737618759956200441' | translate}}
       </span>}
     </p>
     }
     <div class="flex items-center gap-2">
-      <button type="submit" [disabled]="taskForm.invalid" i18n
+      <button type="submit" [disabled]="taskForm.invalid" 
         class=" w-[85%] py-2 rounded-lg shadow-md text-white font-medium transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         [ngClass]="{
           'bg-blue-500 hover:bg-blue-600 focus:ring-blue-300': colorTask === 'blue',
           'bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-300': colorTask === 'yellow',
           'bg-green-500 hover:bg-green-600 focus:ring-green-300': colorTask === 'green'
         }">
-        Adicionar Tarefa
+        {{'7122708284932666485' | translate}}
       </button>
       <button type="button" class="w-[10%]" (click)="showForm = false">
-        <abbr title="fechar formulário">
+        <abbr  [title]="'824709493287487987' | translate">
           <fa-icon [icon]="icons.xmark" class="bg-white w-6 h-6 rounded-full transition-colors duration-300 ease-in-out"
             [ngClass]="{
           ' text-blue-500 group-hover:bg-blue-100': colorTask === 'blue',
