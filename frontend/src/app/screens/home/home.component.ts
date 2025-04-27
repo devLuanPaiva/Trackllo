@@ -6,11 +6,12 @@ import { UserBoardsComponent } from '../../components/board/user-boards/user-boa
 import { HeaderComponent } from "../../components/template/header/header.component";
 import { LoadingComponent } from "../../components/shared/loading/loading.component";
 import { LayoutComponent } from "../../components/template/layout/layout.component";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, UserBoardsComponent, HeaderComponent, LoadingComponent, LayoutComponent],
+  imports: [CommonModule, UserBoardsComponent, HeaderComponent, LoadingComponent, LayoutComponent, TranslateModule],
   templateUrl: './home.component.html',
 })
 export class HomeComponent {

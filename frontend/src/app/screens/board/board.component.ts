@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../components/template/header/header.component';
 import { LoadingComponent } from '../../components/shared/loading/loading.component';
 import { LayoutComponent } from '../../components/template/layout/layout.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-board',
@@ -17,6 +18,7 @@ import { LayoutComponent } from '../../components/template/layout/layout.compone
     HeaderComponent,
     LoadingComponent,
     LayoutComponent,
+    TranslateModule
   ],
   templateUrl: './board.component.html',
 })
