@@ -10,6 +10,14 @@ export const prisma =
     log: ["error"],
   });
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = prisma;
+}
+
+export async function disconnectPrisma() {
+  if (process.env.NODE_ENV === "production") {
+    await prisma.$disconnect();
+  }
+}
 
 export default prisma;
