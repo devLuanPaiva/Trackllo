@@ -9,25 +9,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { createTaskForm, openConfirmationDialog } from '../../../utils';
 import { CdkDrag, CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
 import { faPlus, faXmark, faTrash } from '@fortawesome/free-solid-svg-icons';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-tasks',
-  imports: [
-    CommonModule,
-    CdkDropList,
-    CdkDrag,
-    FontAwesomeModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AlertComponent,
-    TranslateModule,
-  ],
+  imports: [CommonModule, CdkDropList, CdkDrag, FontAwesomeModule, FormsModule, ReactiveFormsModule, AlertComponent, TranslateModule],
   templateUrl: './tasks.component.html',
   animations: [fadeInOut],
 })

@@ -10,7 +10,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatDialog } from '@angular/material/dialog';
 import { openConfirmationDialog } from '../../../utils';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-user-boards',
   imports: [BoardFormComponent,RouterModule,CommonModule,AlertComponent,FontAwesomeModule,TranslateModule],
@@ -25,7 +25,8 @@ export class UserBoardsComponent implements OnInit {
   successMessage: string | null = null;
   constructor(
     private readonly boardService: BoardService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly translate: TranslateService
   ) {}
 
   icons = {
@@ -51,7 +52,7 @@ export class UserBoardsComponent implements OnInit {
   onCreateBoard(title: string): void {
     this.boardService.createBoard(title).subscribe({
       next: () => {
-        this.successMessage = 'Projeto criado com sucesso!';
+        this.successMessage = this.translate.instant('8372978979');
         this.loadBoards();
       },
       error: (err) => (this.errorMessage = err),
@@ -61,11 +62,11 @@ export class UserBoardsComponent implements OnInit {
   onDeleteBoard(event: MouseEvent, id: string): void {
     event.stopPropagation();
     event.preventDefault();
-    openConfirmationDialog(this.dialog, 'Deseja realmente excluir este projeto?').subscribe((result) => {
+    openConfirmationDialog(this.dialog, this.translate.instant('5367357768')).subscribe((result) => {
       if (result) {
         this.boardService.deleteBoard(id).subscribe({
           next: (): void => {
-            this.successMessage = 'Projeto deletado com sucesso!';
+            this.successMessage = this.translate.instant('2786786786');
             this.loadBoards();
           },
           error: (err: string): void => {
