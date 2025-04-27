@@ -9,11 +9,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from './services/authentication.service';
 import { filter } from 'rxjs';
+import { rotateGear } from './animations';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, CommonModule, LanguageComponent, FontAwesomeModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  animations: [rotateGear]
 })
 export class AppComponent  {
   icons = {

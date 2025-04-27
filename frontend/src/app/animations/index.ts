@@ -1,4 +1,12 @@
-import { animate, keyframes, query, stagger, state, style, transition, trigger} from '@angular/animations';
+import {
+  animate,
+  query,
+  stagger,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 export const fadeIn = trigger('fadeIn', [
   transition(':enter', [
@@ -17,17 +25,6 @@ export const fadeInUp = trigger('fadeInUp', [
   ]),
 ]);
 
-export const spin = trigger('spin', [
-  transition('* => *', [
-    animate(
-      '2s linear infinite',
-      keyframes([
-        style({ transform: 'rotate(0deg)' }),
-        style({ transform: 'rotate(360deg)' }),
-      ])
-    ),
-  ]),
-]);
 
 export const fadeSlide = trigger('fadeSlide', [
   state('void', style({ opacity: 0, transform: 'translateY(-20px)' })),
@@ -80,9 +77,15 @@ export const latterAnimation = trigger('letterAnimation', [
 export const fadeDialog = trigger('fadeDialog', [
   transition(':enter', [
     style({ opacity: 0, transform: 'scale(0.9)' }),
-    animate('200ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
+    animate('200ms ease-out', style({ opacity: 1, transform: 'scale(1)' })),
   ]),
   transition(':leave', [
-    animate('150ms ease-in', style({ opacity: 0, transform: 'scale(0.95)' }))
-  ])
-])
+    animate('150ms ease-in', style({ opacity: 0, transform: 'scale(0.95)' })),
+  ]),
+]);
+
+export const rotateGear = trigger('rotateGear', [
+  state('closed', style({ transform: 'rotate(0deg)' })),
+  state('open', style({ transform: 'rotate(180deg)' })),
+  transition('closed <=> open', [animate('500ms ease-in-out')]),
+]);

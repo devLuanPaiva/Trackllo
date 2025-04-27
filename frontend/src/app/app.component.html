@@ -18,9 +18,11 @@
         }
         <button class="relative" (click)="toggleDropdown()" tabindex="0">
             <figure
-                class="bg-white rounded-full p-1.5 w-10 h-10 shadow-sm hover:shadow-md transition-all">
+                class="bg-white rounded-full p-1.5 w-10 h-10 shadow-sm hover:shadow-md transition-all" [@rotateGear]="dropdownOpen ? 'open' : 'closed'">
                 <fa-icon [icon]="icons.faGear"
-                    class=" text-blue-800 text-2xl transition-transform duration-300 hover:scale-110"></fa-icon>
+                    class="text-blue-800 text-2xl transition-transform duration-300 hover:scale-110">
+                </fa-icon>
+
             </figure>
         </button>
     </aside>
