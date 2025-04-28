@@ -42,4 +42,17 @@ describe('AppComponent', () => {
     component.onLogout();
     expect(authServiceSpy.logout).toHaveBeenCalled();
   })
+  it('should close dropdown if clicked outside', () => {
+    const fakeEvent = {
+      target: document.createElement('div')
+    } as unknown as MouseEvent;
+
+    spyOn(component['elementRef'].nativeElement, 'contains').and.returnValue(false);
+
+    component.dropdownOpen = true;
+    component.onDocumentClick(fakeEvent);
+
+    expect(component.dropdownOpen).toBeFalse();
+  });
+
 })
