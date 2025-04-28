@@ -45,5 +45,14 @@ describe('LanguageComponent', () => {
     expect(component.selectedLang).toBe('es');
     expect(component.dropdownOpen).toBeFalse();
   });
+  it('should fallback to Portuguese if language switch fails', () => {
+    spyOn(console, 'error');
+    translateServiceSpy.use.and.returnValue(throwError(() => new Error('switch failed')));
 
+    component.switchLanguage('es');
+
+    expect(translateServiceSpy.use).toHaveBeenCalledWith('es');
+    expect(translateServiceSpy.use).toHaveBeenCalledWith('pt');
+    expect(component.selectedLang).toBe('pt');
+  });
 });
