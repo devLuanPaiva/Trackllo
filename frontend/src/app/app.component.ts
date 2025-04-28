@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {Component,computed,ElementRef,HostListener,inject,signal} from '@angular/core';
+import { Component, computed, ElementRef, HostListener, inject, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { LanguageComponent } from './components/shared/language/language.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -14,10 +14,9 @@ import { rotateGear } from './animations';
   selector: 'app-root',
   imports: [RouterOutlet, CommonModule, LanguageComponent, FontAwesomeModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
   animations: [rotateGear]
 })
-export class AppComponent  {
+export class AppComponent {
   icons = {
     faGear,
     faArrowRightFromBracket,

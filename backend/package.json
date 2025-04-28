@@ -3,7 +3,7 @@
   "scripts": {
     "start": "vercel dev",
     "deploy": "vercel",
-    "vercel-build": "npx prisma generate --no-engine && npx prisma migrate deploy"
+    "vercel-build": "npx prisma generate --no-engine && npx prisma db push"
   },
   "dependencies": {
     "@hono/node-server": "^1.14.1",

@@ -1,0 +1,15 @@
+{
+  "builds": [
+    {
+      "src": "dist/trackllo/browser/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/trackllo/browser/$1",
+      "check": true
+    }
+  ]
+}
