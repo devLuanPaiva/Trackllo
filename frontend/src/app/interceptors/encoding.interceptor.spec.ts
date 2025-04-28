@@ -32,5 +32,20 @@ describe('encodingInterceptor', () => {
       done();
     });
   });
+  it('should just pass the request if it isn"t .json', (done) => {
+    const mockReq = new HttpRequest('GET', 'api/other-data');
+
+    const mockNext = (req: HttpRequest<any>) => {
+      expect(req).toBe(mockReq);
+      const response = new HttpResponse({ body: { data: 123 }, status: 200 });
+      return of(response);
+    };
+    encodingInterceptor(mockReq, mockNext).subscribe((event) => {
+      expect(event instanceof HttpResponse).toBe(true);
+      const response = event as HttpResponse<any>;
+      expect(response.body).toEqual({ data: 123 });
+      done();
+    });
+  })
 
 });
