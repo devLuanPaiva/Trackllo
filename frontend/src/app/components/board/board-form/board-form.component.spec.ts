@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BoardFormComponent } from './board-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { TranslateModule, TranslateService, TranslateStore } from '@ngx-translate/core';
 
 describe('BoardForm component', () => {
   let component: BoardFormComponent;
@@ -9,7 +10,11 @@ describe('BoardForm component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, FormsModule, BoardFormComponent],
+      imports: [ReactiveFormsModule, FormsModule, BoardFormComponent, TranslateModule.forRoot()],
+      providers: [
+        TranslateService,
+        TranslateStore
+      ]
     }).compileComponents();
     fixture = TestBed.createComponent(BoardFormComponent);
     component = fixture.componentInstance;

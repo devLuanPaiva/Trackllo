@@ -5,6 +5,7 @@ import { TasksService } from '../../../services/tasks.service';
 import { of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { mockBoards, mockColumns, mockTasks } from '../../../mocks';
+import { TranslateModule, TranslateService, TranslateStore } from '@ngx-translate/core';
 
 describe('ColumnsComponent', () => {
   let component: ColumnsComponent;
@@ -19,8 +20,10 @@ describe('ColumnsComponent', () => {
     mockTasksService = jasmine.createSpyObj('TasksService', ['moveTask']);
 
     await TestBed.configureTestingModule({
-      imports: [ColumnsComponent, BrowserAnimationsModule],
+      imports: [ColumnsComponent, BrowserAnimationsModule, TranslateModule.forRoot()],
       providers: [
+        TranslateService,
+        TranslateStore,
         { provide: ColumnsService, useValue: mockColumnsService },
         { provide: TasksService, useValue: mockTasksService },
       ],
