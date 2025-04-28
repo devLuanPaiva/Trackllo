@@ -47,5 +47,19 @@ describe('encodingInterceptor', () => {
       done();
     });
   })
+  it('should ignore the BOM if it doesn"t exist and parse the json normally', (done) => {
+    const mockReq = new HttpRequest('GET', 'assets/data.json');
 
+    const mockNext = (req: HttpRequest<any>) => {
+      const normalBody = '{"name":"test"}';
+      const response = new HttpResponse({ body: normalBody, status: 200 });
+      return of(response);
+    }
+    encodingInterceptor(mockReq, mockNext).subscribe((event) => {
+      expect(event instanceof HttpResponse).toBe(true);
+      const response = event as HttpResponse<any>;
+      expect(response.body).toEqual({ name: 'test' });
+      done();
+    });
+  })
 });
