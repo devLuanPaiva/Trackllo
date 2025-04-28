@@ -38,4 +38,8 @@ describe('AppComponent', () => {
     component.toggleDropdown();
     expect(component.dropdownOpen).toBeFalse();
   })
+  it('should call logout when onLogout is called', () => {
+    component.onLogout();
+    expect(authServiceSpy.logout).toHaveBeenCalled();
+  })
 })
