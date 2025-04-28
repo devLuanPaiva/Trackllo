@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { fadeDialog } from '../../../animations';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-dialog',
-  imports: [],
+  imports: [TranslateModule, CommonModule],
   templateUrl: './dialog.component.html',
   animations: [fadeDialog],
 })

@@ -4,8 +4,6 @@
     "module": "CommonJS",
     "moduleResolution": "Node",
     "strict": true,
-    "verbatimModuleSyntax": false,
-    "allowImportingTsExtensions": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,

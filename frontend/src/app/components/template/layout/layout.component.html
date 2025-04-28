@@ -7,14 +7,6 @@
   }">
     <main class="relative min-h-full flex-1 flex flex-col items-center" [ngClass]="className">
       <ng-content></ng-content>
-      @if (showLayout()) {
-      <button (click)="onLogout()" class="fixed left-5 bottom-16 rotate-180 bg-blue-800 rounded-full p-1 w-10 h-10">
-        <fa-icon [icon]="icon.logout" class=" text-white text-2xl transition-transform duration-300 hover:scale-110">
-        </fa-icon>
-      </button>
-
-      }
     </main>
-
   </div>
 </div>

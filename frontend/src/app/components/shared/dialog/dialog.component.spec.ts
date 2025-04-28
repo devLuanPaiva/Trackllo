@@ -3,6 +3,7 @@ import { DialogComponent } from './dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
+import { TranslateModule, TranslateService, TranslateStore } from '@ngx-translate/core';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;
@@ -13,8 +14,10 @@ describe('DialogComponent', () => {
     dialogRef = jasmine.createSpyObj('MatDialogRef', ['close']);
 
     await TestBed.configureTestingModule({
-      imports: [DialogComponent, BrowserAnimationsModule],
+      imports: [DialogComponent, BrowserAnimationsModule, TranslateModule.forRoot()],
       providers: [
+        TranslateService,
+        TranslateStore,
         { provide: MatDialogRef, useValue: dialogRef },
         { provide: MAT_DIALOG_DATA, useValue: { message: 'Custom message' } },
       ],

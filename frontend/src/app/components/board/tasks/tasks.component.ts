@@ -9,10 +9,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { createTaskForm, openConfirmationDialog } from '../../../utils';
 import { CdkDrag, CdkDragDrop, CdkDropList } from '@angular/cdk/drag-drop';
 import { faPlus, faXmark, faTrash } from '@fortawesome/free-solid-svg-icons';
-import {FormBuilder,FormGroup,FormsModule,ReactiveFormsModule} from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-tasks',
-  imports: [CommonModule, CdkDropList, CdkDrag, FontAwesomeModule, FormsModule, ReactiveFormsModule, AlertComponent],
+  imports: [CommonModule, CdkDropList, CdkDrag, FontAwesomeModule, FormsModule, ReactiveFormsModule, AlertComponent, TranslateModule],
   templateUrl: './tasks.component.html',
   animations: [fadeInOut],
 })
@@ -36,7 +37,8 @@ export class TasksComponent {
   constructor(
     private readonly fb: FormBuilder,
     private readonly taskService: TasksService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly translate: TranslateService
   ) {
     this.taskForm = createTaskForm(this.fb);
   }
@@ -46,7 +48,10 @@ export class TasksComponent {
   createTask() {
     if (this.taskForm.valid) {
       const formValue = this.taskForm.value;
-      const payload: Pick<ITask,'title' | 'description' | 'image' | 'columnId'> = {
+      const payload: Pick<
+        ITask,
+        'title' | 'description' | 'image' | 'columnId'
+      > = {
         columnId: this.columnId,
         title: formValue.title,
         description: formValue.description,
@@ -58,7 +63,7 @@ export class TasksComponent {
 
       this.taskService.createTask(payload).subscribe({
         next: (newTask) => {
-          this.successMessage = 'Tarefa criada com sucesso!';
+          this.successMessage = this.translate.instant('8372978979');
           this.columnTasks.push(newTask);
           this.taskForm.reset();
           this.showForm = false;
@@ -74,12 +79,12 @@ export class TasksComponent {
   onDeleteTask(taskId: string) {
     openConfirmationDialog(
       this.dialog,
-      'Deseja realmente excluir esta tarefa?'
+      this.translate.instant('5367357768')
     ).subscribe((result) => {
       if (result) {
         this.taskService.deleteTask(taskId).subscribe({
           next: () => {
-            this.successMessage = 'Tarefa deletada com sucesso!';
+            this.successMessage = this.translate.instant('2786786786');
             this.columnTasks = this.columnTasks.filter(
               (task) => task.id !== taskId
             );

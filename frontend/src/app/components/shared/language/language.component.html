@@ -1,0 +1,35 @@
+<div class="relative">
+  <button class="relative" (click)="toggleDropdown()" tabindex="0">
+    <figure
+      class="bg-blue-800 rounded-full p-1 w-10 h-10 shadow-sm hover:shadow-md transition-all">
+      <fa-icon [icon]="icons.faLanguage"
+        class="text-white text-2xl transition-transform duration-300 hover:scale-110"></fa-icon>
+    </figure>
+  </button>
+
+  @if (dropdownOpen) {
+    <div
+      class="absolute right-0 bottom-12 w-36 bg-white border border-blue-200 rounded-md shadow-lg z-50">
+      <button
+        class="w-full flex items-center gap-2 px-4 py-2 text-sm hover:bg-blue-100"
+        (click)="switchLanguage('pt')">
+        <img src="assets/flags/br.png" alt="Português" class="w-5 h-5">
+        Português
+      </button>
+      
+      <button
+        class="w-full flex items-center gap-2 px-4 py-2 text-sm hover:bg-blue-100"
+        (click)="switchLanguage('en')">
+        <img src="assets/flags/us.png" alt="English" class="w-5 h-5">
+        English
+      </button>
+      
+      <button
+        class="w-full flex items-center gap-2 px-4 py-2 text-sm hover:bg-blue-100"
+        (click)="switchLanguage('es')">
+        <img src="assets/flags/es.png" alt="Español" class="w-5 h-5">
+        Español
+      </button>
+    </div>
+  }
+</div>
