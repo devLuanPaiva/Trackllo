@@ -6,7 +6,7 @@
     "prestart": "node scripts/env.js",
     "start": "ng serve",
     "prebuild": "node scripts/env.js",
-    "build": "ng build --configuration=production",
+    "build": "node scripts/env.js && ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:Trackllo": "node dist/trackllo/server/server.mjs"
