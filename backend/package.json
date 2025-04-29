@@ -3,12 +3,14 @@
   "scripts": {
     "start": "vercel dev",
     "deploy": "vercel",
-    "vercel-build": "npx prisma generate --no-engine && npx prisma db push"
+    "vercel-build": "npx prisma generate --no-engine && npx prisma migrate deploy"
   },
   "dependencies": {
     "@hono/node-server": "^1.14.1",
     "@prisma/extension-accelerate": "^1.3.0",
+    "@types/bcryptjs": "^2.4.6",
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
     "hono": "^4.7.5",
     "jsonwebtoken": "^9.0.2",
     "vercel": "^41.6.0",

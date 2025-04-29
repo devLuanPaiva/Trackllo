@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 import prisma from '../database/db'
 import type { UpdateUserInput, User } from '../models/user.model'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 const SECRET = process.env.JWT_SECRET ?? 'secrettoken'
