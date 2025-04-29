@@ -16,8 +16,6 @@ async function bootstrap() {
     allowedHeaders: 'Content-Type, Authorization, X-Requested-With',
   });
 
-  app.setGlobalPrefix('api');
-
   await app.listen(process.env.PORT ?? 3000);
 
   console.log(`Application is running on: ${await app.getUrl()}`);
