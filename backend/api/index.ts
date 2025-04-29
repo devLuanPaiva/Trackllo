@@ -10,7 +10,18 @@ import columnRoutes from "../src/controllers/column.controller";
 
 const app = new Hono().basePath("/api");
 
-app.use("*", cors());
+app.use("*", cors({
+  origin: (origin) => {
+    const allowedOrigins = [
+      "http://localhost:4200",
+      "https://trackllo.vercel.app"
+    ];
+    return origin && allowedOrigins.includes(origin) ? origin : "";
+  },
+  allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowHeaders: ["Content-Type", "Authorization"],
+}));
+
 app.use("*", async (c, next) => {
   console.log(`[${c.req.method}] ${c.req.url}`);
   await next();
