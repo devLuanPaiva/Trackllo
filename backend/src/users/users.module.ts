@@ -1,4 +1,3 @@
-import { AuthMiddleware } from "src/middlewares/auth.middleware";
 import { DatabaseModule } from "../database/database.module";
 import { Module } from "@nestjs/common";
 import { UsersService } from "./users.service";
@@ -6,7 +5,7 @@ import { UsersController } from "./users.controller";
 
 @Module({
     imports: [DatabaseModule],
-    exports: [AuthMiddleware, UsersService],
+    exports: [UsersService],
     controllers: [UsersController],
     providers: [UsersService]
 })
