@@ -14,12 +14,17 @@
         }
       </h2>
       <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="space-y-4">
-        <div *ngIf="isRegister">
-          <label class="block text-gray-700 text-base " for="name">{{'2332180001'
+        <div *ngIf="isRegister" class="relative">
+          <label class="block text-gray-700 text-base "
+            for="name">{{'2332180001'
             | translate}}</label>
-          <input type="text" formControlName="name"
-            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 text-lg sm:text-xl"
-            required>
+          <div class="relative">
+            <fa-icon [icon]="icons.user"
+              class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></fa-icon>
+            <input type="text" formControlName="name"
+              class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 text-lg sm:text-xl"
+              required />
+          </div>
           <small class="text-red-500"
             *ngIf="authForm.get('name')?.touched && authForm.get('name')?.invalid && isRegister">
             <span *ngIf="authForm.get('name')?.errors?.['required']">
@@ -28,11 +33,17 @@
           </small>
 
         </div>
-        <div>
-          <label class="block text-gray-700 text-base " for="email">{{'4768749765'
+        <div class="relative">
+          <label class="block text-gray-700 text-base "
+            for="email">{{'4768749765'
             | translate}} </label>
-          <input type="email" formControlName="email"
-            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 text-lg sm:text-xl">
+          <div class="relative">
+            <fa-icon [icon]="icons.envelope"
+              class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></fa-icon>
+            <input type="email" formControlName="email"
+              class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 text-lg sm:text-xl"
+              required />
+          </div>
           <small class="text-red-500"
             *ngIf="authForm.get('email')?.touched && authForm.get('email')?.invalid">
             <span
@@ -44,11 +55,22 @@
           </small>
         </div>
 
-        <div>
+        <div class="relative">
           <label class="block text-gray-700 text-base "
             for="password">{{'1505554692' | translate}} </label>
-          <input type="password" formControlName="password"
-            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 text-lg sm:text-xl">
+          <div class="relative">
+            <fa-icon [icon]="icons.key"
+              class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></fa-icon>
+            <input [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              class="w-full pl-10 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 text-lg sm:text-xl"
+              required />
+            <button type="button" (click)="togglePasswordVisibility()"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 focus:outline-none">
+              <fa-icon
+                [icon]="showPassword ? icons.eyeSlash : icons.eye"></fa-icon>
+            </button>
+          </div>
           <small class="text-red-500"
             *ngIf="authForm.get('password')?.touched && authForm.get('password')?.invalid">
             <span

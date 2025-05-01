@@ -7,21 +7,42 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import {
+  faEnvelope,
+  faEye,
+  faEyeSlash,
+  faKey,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { LayoutComponent } from '../../components/template/layout/layout.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-authentication',
-  imports: [CommonModule, ReactiveFormsModule, LayoutComponent, TranslateModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    LayoutComponent,
+    TranslateModule,
+    FontAwesomeModule,
+  ],
   templateUrl: './authentication.component.html',
 })
 export class AuthenticationComponent {
   authForm!: FormGroup;
   isRegister = false;
   errorMessage: string | null = null;
-  successMessage: string | null = null
-
+  successMessage: string | null = null;
+  showPassword = false;
+  icons = {
+    eye: faEye,
+    eyeSlash: faEyeSlash,
+    key: faKey,
+    envelope: faEnvelope,
+    user: faUser,
+  };
   constructor(
     private readonly auth: AuthenticationService,
     private readonly formBuilder: FormBuilder,
@@ -33,9 +54,11 @@ export class AuthenticationComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
-
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
   toggleMode() {
-    this.errorMessage = null
+    this.errorMessage = null;
     this.isRegister = !this.isRegister;
 
     const nameControl = this.authForm.get('name');
@@ -48,9 +71,8 @@ export class AuthenticationComponent {
     nameControl?.updateValueAndValidity();
   }
 
-
   onSubmit() {
-    this.errorMessage = null
+    this.errorMessage = null;
     if (this.authForm.invalid) return;
 
     const { name, email, password } = this.authForm.value;
@@ -58,8 +80,8 @@ export class AuthenticationComponent {
     if (this.isRegister) {
       this.auth.register(name, email, password).subscribe({
         next: () => {
-          this.successMessage = 'Usuário criado com sucesso!'
-          this.router.navigate(['/home'])
+          this.successMessage = 'Usuário criado com sucesso!';
+          this.router.navigate(['/home']);
         },
         error: (err) => {
           this.errorMessage =
@@ -68,7 +90,9 @@ export class AuthenticationComponent {
       });
     } else {
       this.auth.login(email, password).subscribe({
-        next: () => { void this.router.navigate(['/home']) },
+        next: () => {
+          void this.router.navigate(['/home']);
+        },
         error: (err) => {
           if (err.message) {
             this.errorMessage = err.message;
