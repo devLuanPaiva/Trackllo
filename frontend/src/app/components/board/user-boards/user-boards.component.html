@@ -1,11 +1,11 @@
 <div class="flex flex-col w-full  ">
   <h1
-    class="bg-gradient-to-r from-blue-600 via-blue-400 to-blue-200 bg-clip-text text-5xl font-extrabold text-transparent mx-auto drop-shadow-[1px_1px_0px_black]">
+    class="bg-gradient-to-r from-blue-600 via-blue-400 to-blue-200 bg-clip-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center text-transparent mx-auto drop-shadow-[1px_1px_0px_black] ">
     {{'7783496281'| translate}} {{user.name}}!
   </h1>
 
   @if (boards.length > 0) {
-  <p class="self-center text-zinc-600 ">
+  <p class="self-center text-zinc-600 text-base sm:text-lg md:text-xl lg:text-2xl ">
     {{'2935612674'| translate}}
   </p>
   <div
@@ -47,7 +47,7 @@
   </div>
   } @else {
   <section class="font-[Montserrat] text-center space-y-4">
-    <h2 class="text-lg font-semibold text-zinc-700">
+    <h2 class=" font-semibold text-zinc-700 text-base sm:text-lg md:text-xl lg:text-2xl">
       {{ '7487360165'| translate }}
     </h2>
 
@@ -61,7 +61,7 @@
     </button>
 
     @if (showForm) {
-    <div class="mt-4">
+    <div class="mt-4 max-w-640 mx-auto">
       <app-board-form (create)="onCreateBoard($event)"></app-board-form>
     </div>
     }
