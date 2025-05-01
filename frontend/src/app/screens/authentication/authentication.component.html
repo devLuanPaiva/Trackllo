@@ -6,7 +6,7 @@
         alt="Ilustração de homem tentando realizar login">
     </figure>
     <article class="bg-[#F6F6FF] p-8 rounded-lg shadow-lg  w-full sm:w-[45%]">
-      <h2 class="text-2xl font-bold text-center mb-6">
+      <h2 class="text-xl sm:text-2xl font-bold text-center mb-6">
         @if (isRegister) {
         <span>{{'4670165424' | translate}}</span>
         }@else {
@@ -15,10 +15,10 @@
       </h2>
       <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="space-y-4">
         <div *ngIf="isRegister">
-          <label class="block text-gray-700" for="name">{{'2332180001'
+          <label class="block text-gray-700 text-lg sm:text-xl" for="name">{{'2332180001'
             | translate}}</label>
           <input type="text" formControlName="name"
-            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 text-lg sm:text-xl"
             required>
           <small class="text-red-500"
             *ngIf="authForm.get('name')?.touched && authForm.get('name')?.invalid && isRegister">
@@ -29,10 +29,10 @@
 
         </div>
         <div>
-          <label class="block text-gray-700" for="email">{{'4768749765'
+          <label class="block text-gray-700 text-lg sm:text-xl" for="email">{{'4768749765'
             | translate}} </label>
           <input type="email" formControlName="email"
-            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800">
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 text-lg sm:text-xl">
           <small class="text-red-500"
             *ngIf="authForm.get('email')?.touched && authForm.get('email')?.invalid">
             <span
@@ -45,10 +45,10 @@
         </div>
 
         <div>
-          <label class="block text-gray-700"
+          <label class="block text-gray-700 text-lg sm:text-xl"
             for="password">{{'1505554692' | translate}} </label>
           <input type="password" formControlName="password"
-            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800">
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 text-lg sm:text-xl">
           <small class="text-red-500"
             *ngIf="authForm.get('password')?.touched && authForm.get('password')?.invalid">
             <span
@@ -61,7 +61,7 @@
         </div>
 
         <button type="submit" [disabled]="authForm.invalid"
-          class="w-full bg-blue-500 hover:bg-blue-600 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:bg-blue-700 active:scale-95 transition-all duration-300 text-white py-2 rounded-lg cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">
+          class="text-lg sm:text-xl w-full bg-blue-500 hover:bg-blue-600 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 active:bg-blue-700 active:scale-95 transition-all duration-300 text-white py-2 rounded-lg cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed">
           @if (isRegister) {
           <span>{{'4670165424' | translate}}</span>
           }@else {
@@ -80,16 +80,16 @@
         </button>
       </p>
       @if (errorMessage) {
-      <div
+      <small
         class="bg-red-100 text-red-700 px-4 py-2 rounded mt-6 inline-block  float-right">
         {{ errorMessage }}
-      </div>
+      </small>
       }
       @if (successMessage) {
-      <div
+      <small
         class="bg-green-100 text-green-700 px-4 py-2 rounded mt-6 inline-block  float-right">
         {{successMessage}}
-      </div>
+      </small>
       }
     </article>
   </div>
