@@ -1,6 +1,5 @@
-<figure class="flex flex-col items-center justify-center gap-4 p-6" @fadeIn>
-  <fa-icon [icon]="faSpinner" [ngClass]="{ 'spin-animation': spinning }"
-    class="text-4xl text-blue-600 animate-spin"></fa-icon>
+<figure class="h-screen flex flex-col items-center justify-center gap-4 p-6" @fadeIn>
+  <mat-spinner></mat-spinner>
 
   <figcaption class="text-lg text-gray-700 text-center">
     {{ message }}
