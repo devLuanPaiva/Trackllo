@@ -101,6 +101,9 @@
           }
         </button>
       </p>
+      @if (isLoading) {
+        <app-loading [message]="'7746872364' | translate"></app-loading>
+      }
       @if (errorMessage) {
       <small
         class="bg-red-100 text-red-700 px-4 py-2 rounded mt-6 inline-block  float-right">

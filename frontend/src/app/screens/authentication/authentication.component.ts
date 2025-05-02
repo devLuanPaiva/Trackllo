@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 import { LayoutComponent } from '../../components/template/layout/layout.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoadingComponent } from "../../components/shared/loading/loading.component";
 
 @Component({
   selector: 'app-authentication',
@@ -27,7 +28,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LayoutComponent,
     TranslateModule,
     FontAwesomeModule,
-  ],
+    LoadingComponent
+],
   templateUrl: './authentication.component.html',
 })
 export class AuthenticationComponent {
@@ -43,6 +45,7 @@ export class AuthenticationComponent {
     envelope: faEnvelope,
     user: faUser,
   };
+  isLoading: boolean = false;
   constructor(
     private readonly auth: AuthenticationService,
     private readonly formBuilder: FormBuilder,
@@ -76,7 +79,7 @@ export class AuthenticationComponent {
     if (this.authForm.invalid) return;
 
     const { name, email, password } = this.authForm.value;
-
+    this.isLoading = true;
     if (this.isRegister) {
       this.auth.register(name, email, password).subscribe({
         next: () => {
@@ -86,6 +89,9 @@ export class AuthenticationComponent {
         error: (err) => {
           this.errorMessage =
             err.message ?? 'Erro ao registrar. Tente novamente mais tarde.';
+        },
+        complete: () => {
+          this.isLoading = false;
         },
       });
     } else {
@@ -100,6 +106,9 @@ export class AuthenticationComponent {
             this.errorMessage =
               'Servidor indisponível. Tente novamente mais tarde.';
           }
+        },
+        complete: () => {
+          this.isLoading = false;
         },
       });
     }
