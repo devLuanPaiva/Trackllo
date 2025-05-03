@@ -7,21 +7,45 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import {
+  faEnvelope,
+  faEye,
+  faEyeSlash,
+  faKey,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { LayoutComponent } from '../../components/template/layout/layout.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoadingComponent } from "../../components/shared/loading/loading.component";
 
 @Component({
   selector: 'app-authentication',
-  imports: [CommonModule, ReactiveFormsModule, LayoutComponent, TranslateModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    LayoutComponent,
+    TranslateModule,
+    FontAwesomeModule,
+    LoadingComponent
+],
   templateUrl: './authentication.component.html',
 })
 export class AuthenticationComponent {
   authForm!: FormGroup;
   isRegister = false;
   errorMessage: string | null = null;
-  successMessage: string | null = null
-
+  successMessage: string | null = null;
+  showPassword = false;
+  icons = {
+    eye: faEye,
+    eyeSlash: faEyeSlash,
+    key: faKey,
+    envelope: faEnvelope,
+    user: faUser,
+  };
+  isLoading: boolean = false;
   constructor(
     private readonly auth: AuthenticationService,
     private readonly formBuilder: FormBuilder,
@@ -33,9 +57,11 @@ export class AuthenticationComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
-
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
   toggleMode() {
-    this.errorMessage = null
+    this.errorMessage = null;
     this.isRegister = !this.isRegister;
 
     const nameControl = this.authForm.get('name');
@@ -48,27 +74,31 @@ export class AuthenticationComponent {
     nameControl?.updateValueAndValidity();
   }
 
-
   onSubmit() {
-    this.errorMessage = null
+    this.errorMessage = null;
     if (this.authForm.invalid) return;
 
     const { name, email, password } = this.authForm.value;
-
+    this.isLoading = true;
     if (this.isRegister) {
       this.auth.register(name, email, password).subscribe({
         next: () => {
-          this.successMessage = 'Usuário criado com sucesso!'
-          this.router.navigate(['/home'])
+          this.successMessage = 'Usuário criado com sucesso!';
+          this.router.navigate(['/home']);
         },
         error: (err) => {
           this.errorMessage =
             err.message ?? 'Erro ao registrar. Tente novamente mais tarde.';
         },
+        complete: () => {
+          this.isLoading = false;
+        },
       });
     } else {
       this.auth.login(email, password).subscribe({
-        next: () => { void this.router.navigate(['/home']) },
+        next: () => {
+          void this.router.navigate(['/home']);
+        },
         error: (err) => {
           if (err.message) {
             this.errorMessage = err.message;
@@ -76,6 +106,9 @@ export class AuthenticationComponent {
             this.errorMessage =
               'Servidor indisponível. Tente novamente mais tarde.';
           }
+        },
+        complete: () => {
+          this.isLoading = false;
         },
       });
     }

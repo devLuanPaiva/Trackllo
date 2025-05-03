@@ -1,4 +1,5 @@
-<section class="max-w-full box-border flex justify-around gap-5 flex-wrap items-start">
+<section class="w-full mt-10 flex justify-between gap-5 flex-wrap items-start">
+  
   @for (column of ['Todo', 'In Progress', 'Done']; track $index) {
   <app-tasks [columnTitle]="column"
     [columnId]="column === 'Todo' ? idTodo : column === 'In Progress' ? idInProgress : idDone"
@@ -6,6 +7,7 @@
     [colorTask]="column === 'Todo' ? 'blue' : column ==='In Progress' ?'yellow': 'green'" [id]="column.replace(' ', '')"
     [connectedTo]="getConnectedColumns(column)" (taskDropped)="onMoveColumnTask($event)" />
   }
+  
   @if (errorMessage) {
     <app-alert
       [message]="errorMessage"

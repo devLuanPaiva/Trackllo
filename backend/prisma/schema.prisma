@@ -1,16 +1,12 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
@@ -32,10 +28,11 @@ model Task {
   image       String?
   userId      String
   columnId    String
+  column      Column  @relation(fields: [columnId], references: [id], onDelete: Cascade)
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  column Column @relation(fields: [columnId], references: [id], onDelete: Cascade)
-
+  @@index([columnId])
+  @@index([userId])
   @@map("task")
 }
 
@@ -43,10 +40,10 @@ model Column {
   id      String @id @default(uuid())
   title   String
   boardId String
+  board   Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  tasks   Task[]
 
-  board Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
-  tasks Task[]
-
+  @@index([boardId])
   @@map("column")
 }
 
@@ -57,5 +54,6 @@ model Board {
   user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   columns Column[]
 
+  @@index([userId])
   @@map("boards")
 }
