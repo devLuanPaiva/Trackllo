@@ -54,4 +54,16 @@ describe("UsersService", () => {
 			email: "john@example.com",
 		})
 	})
+	it("should throw if email is already in use", async () => {
+		;(mockPrismaService.user.findUnique as jest.Mock).mockResolvedValue(
+			mockUsers[0],
+		)
+		await expect(
+			service.createUser({
+				name: "John",
+				email: "john@example.com",
+				password: "123456",
+			}),
+		).rejects.toThrow("Este e-mail já está em uso")
+	})
 })
