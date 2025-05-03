@@ -25,4 +25,11 @@ describe("UsersService", () => {
 		const users = await service.getAllUsers()
 		expect(users).toEqual([mockUsers])
 	})
+	it("should return a user by ID", async () => {
+		;(mockPrismaService.user.findUnique as jest.Mock).mockResolvedValue(
+			mockUsers[0],
+		)
+		const user = await service.getUserById("123")
+		expect(user).toEqual(mockUsers[0])
+	})
 })
