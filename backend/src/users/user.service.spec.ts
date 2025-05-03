@@ -1,6 +1,7 @@
+import { mockUsers } from "../mocks"
+import * as bcrypt from "bcrypt"
 import { UsersService } from "./users.service"
 import { PrismaProvider } from "../database/prisma.provider"
-import { mockUsers } from "../mocks"
 
 const mockPrismaService: PrismaProvider = {
 	user: {
@@ -31,5 +32,26 @@ describe("UsersService", () => {
 		)
 		const user = await service.getUserById("123")
 		expect(user).toEqual(mockUsers[0])
+	})
+	it("should create a new user", async () => {
+		;(mockPrismaService.user.findUnique as jest.Mock).mockResolvedValue(null)
+		jest.spyOn(bcrypt, "hash").mockResolvedValue("hashedPassword" as never)
+		;(mockPrismaService.user.create as jest.Mock).mockResolvedValue({
+			id: "123",
+			name: "John",
+			email: "john@example.com",
+		})
+
+		const newUser = await service.createUser({
+			name: "John",
+			email: "john@example.com",
+			password: "123456",
+		})
+
+		expect(newUser).toEqual({
+			id: "123",
+			name: "John",
+			email: "john@example.com",
+		})
 	})
 })
