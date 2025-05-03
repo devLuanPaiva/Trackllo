@@ -2,6 +2,7 @@ import { mockUsers } from "../mocks"
 import * as bcrypt from "bcrypt"
 import { UsersService } from "./users.service"
 import { PrismaProvider } from "../database/prisma.provider"
+import * as jwt from "jsonwebtoken"
 
 const mockPrismaService: PrismaProvider = {
 	user: {
@@ -65,5 +66,21 @@ describe("UsersService", () => {
 				password: "123456",
 			}),
 		).rejects.toThrow("Este e-mail já está em uso")
+	})
+	it("should login and return user with token", async () => {
+		;(mockPrismaService.user.findUnique as jest.Mock).mockResolvedValue(
+			mockUsers[0],
+		)
+		jest.spyOn(bcrypt, "compare").mockResolvedValue(true as never)
+		jest
+			.spyOn(jwt, "sign")
+			.mockReturnValue("token-alice-123" as unknown as void)
+		;(mockPrismaService.user.update as jest.Mock).mockResolvedValue({})
+
+		const result = await service.loginUser("alice@example.com", "123456")
+		expect(result).toEqual({
+			user: mockUsers[0],
+			token: "token-alice-123",
+		})
 	})
 })
