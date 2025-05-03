@@ -3,16 +3,22 @@ import {
 	NestMiddleware,
 	UnauthorizedException,
 } from "@nestjs/common"
-import { NextFunction } from "express"
+import { Request, Response, NextFunction } from "express"
 import * as jwt from "jsonwebtoken"
+
+interface CustomRequest extends Request {
+	userId?: string
+}
+
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
-	use(req: Request, res: Response, next: NextFunction) {
+	use(req: CustomRequest, res: Response, next: NextFunction) {
 		const authHeader =
 			typeof req.headers["authorization"] === "string"
 				? req.headers["authorization"]
 				: undefined
 		const SECRET = process.env.JWT_SECRET ?? "secrettoken"
+
 		if (!authHeader?.startsWith("Bearer ")) {
 			throw new UnauthorizedException("Unauthorized")
 		}
@@ -21,7 +27,7 @@ export class AuthMiddleware implements NestMiddleware {
 
 		try {
 			const decoded = jwt.verify(token, SECRET) as { id: string }
-			req["userId"] = decoded.id
+			req.userId = decoded.id
 			next()
 		} catch (err) {
 			console.log(err)
