@@ -5,7 +5,7 @@
 ## 🤖 Visão Geral do Projeto
 
 - **Status**: Em desenvolvimento
-- **Versão Atual**: 3.0
+- **Versão Atual**: 4.0
 
 ## 🚀 Funcionalidades
 
@@ -24,7 +24,7 @@ Esse projeto foi uma jornada incrível de aprendizado!
 
 ### 🔧 Backend
 
-- 🌀 Desenvolvido com [**Hono**](https://hono.dev/) e **TypeScript**
+- 🌀 Desenvolvido com [**Nest**](https://nestjs.com/) e **TypeScript**
 - 🗂️ Integração com **Prisma** para manipulação de dados
 - 🌐 Primeira aplicação backend que desenvolvi do zero!
 
