@@ -83,4 +83,10 @@ describe("UsersService", () => {
 			token: "token-alice-123",
 		})
 	})
+	it("should throw if user not found", async () => {
+		;(mockPrismaService.user.findUnique as jest.Mock).mockResolvedValue(null)
+		await expect(
+			service.loginUser("notfound@example.com", "123456"),
+		).rejects.toThrow("Usuário não encontrado")
+	})
 })
