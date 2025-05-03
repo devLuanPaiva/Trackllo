@@ -1,6 +1,14 @@
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  ViewChild,
+  inject,
+  computed,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, computed, ElementRef, HostListener, inject, signal } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { LanguageComponent } from './components/shared/language/language.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -10,11 +18,13 @@ import {
 import { AuthenticationService } from './services/authentication.service';
 import { filter } from 'rxjs';
 import { rotateGear } from './animations';
+
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, CommonModule, LanguageComponent, FontAwesomeModule],
   templateUrl: './app.component.html',
-  animations: [rotateGear]
+  animations: [rotateGear],
 })
 export class AppComponent {
   icons = {
@@ -24,32 +34,38 @@ export class AppComponent {
   dropdownOpen = false;
 
   private readonly authService = inject(AuthenticationService);
-  private readonly elementRef = inject(ElementRef);
   private readonly router = inject(Router);
   currentURL = signal(this.router.url);
 
+  @ViewChild('dropdownWrapper') dropdownWrapper!: ElementRef;
+
   constructor() {
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.currentURL.set(event.urlAfterRedirects)
-      })
+        this.currentURL.set(event.urlAfterRedirects);
+      });
   }
+
   showLayout = computed(() => {
     const url = this.currentURL();
     return url !== '/' && url !== '/autenticacao';
   });
+
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-    const clickedInside = this.elementRef.nativeElement.contains(event.target);
+    const clickedInside = this.dropdownWrapper?.nativeElement.contains(
+      event.target
+    );
     if (!clickedInside) {
       this.dropdownOpen = false;
     }
   }
+
   onLogout() {
     this.authService.logout();
   }
