@@ -1,3 +1,4 @@
+import { UnauthorizedException } from "@nestjs/common"
 import { AuthMiddleware } from "./auth.middleware"
 import { NextFunction, Request, Response } from "express"
 import * as jwt from "jsonwebtoken"
@@ -33,5 +34,12 @@ describe("AuthMiddleware", () => {
 
 		expect(req.userId).toBe("123")
 		expect(mockNext).toHaveBeenCalled()
+	})
+	it("should throw UnauthorizedException if no authorization header", () => {
+		const req = mockRequest()
+
+		expect(() => middleware.use(req, mockResponse, mockNext)).toThrow(
+			UnauthorizedException,
+		)
 	})
 })
