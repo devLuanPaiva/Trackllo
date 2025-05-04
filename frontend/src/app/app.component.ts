@@ -20,11 +20,12 @@ import { AuthenticationService } from './services/authentication.service';
 import { filter } from 'rxjs';
 import { rotateGear } from './animations';
 import { GoogleAnalyticsService } from './services/google-analytics.service';
+import { CookiesConsentComponent } from './components/shared/cookies-consent/cookies-consent.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, LanguageComponent, FontAwesomeModule],
+  imports: [RouterOutlet, CommonModule, LanguageComponent, FontAwesomeModule, CookiesConsentComponent],
   templateUrl: './app.component.html',
   animations: [rotateGear],
 })
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit {
   };
   dropdownOpen = false;
 
-  private readonly gaService = inject(GoogleAnalyticsService)
+  private readonly gaService = inject(GoogleAnalyticsService);
   private readonly authService = inject(AuthenticationService);
   private readonly router = inject(Router);
   currentURL = signal(this.router.url);
@@ -50,8 +51,11 @@ export class AppComponent implements OnInit {
       });
   }
   ngOnInit(): void {
-    this.gaService.load();
+    if (localStorage.getItem('cookieConsent') === 'true') {
+      this.gaService.load();
+    }
   }
+
   showLayout = computed(() => {
     const url = this.currentURL();
     return url !== '/' && url !== '/autenticacao';
