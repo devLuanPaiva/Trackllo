@@ -24,7 +24,7 @@
       <div
         class="relative w-full min-[344px]:w-72  group bg-[#1e293b] flex flex-col items-center justify-center h-20 border border-blue-700 rounded-2xl  shadow-xl transition hover:border-blue-500 hover:scale-[1.02] duration-300">
         <button (click)="onDeleteBoard($event, board.id)"
-          class="absolute -top-3 -right-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2 z-10 shadow">
+          class="absolute -top-3 -right-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2 shadow">
           <fa-icon [icon]="icons.trash"></fa-icon>
         </button>
         <a [routerLink]="['/boardColumns', board.id]" class="text-center">
