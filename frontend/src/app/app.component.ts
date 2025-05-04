@@ -6,6 +6,7 @@ import {
   inject,
   computed,
   signal,
+  OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
@@ -18,6 +19,7 @@ import {
 import { AuthenticationService } from './services/authentication.service';
 import { filter } from 'rxjs';
 import { rotateGear } from './animations';
+import { GoogleAnalyticsService } from './services/google-analytics.service';
 
 @Component({
   selector: 'app-root',
@@ -26,13 +28,14 @@ import { rotateGear } from './animations';
   templateUrl: './app.component.html',
   animations: [rotateGear],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   icons = {
     faGear,
     faArrowRightFromBracket,
   };
   dropdownOpen = false;
 
+  private readonly gaService = inject(GoogleAnalyticsService)
   private readonly authService = inject(AuthenticationService);
   private readonly router = inject(Router);
   currentURL = signal(this.router.url);
@@ -46,7 +49,9 @@ export class AppComponent {
         this.currentURL.set(event.urlAfterRedirects);
       });
   }
-
+  ngOnInit(): void {
+    this.gaService.load();
+  }
   showLayout = computed(() => {
     const url = this.currentURL();
     return url !== '/' && url !== '/autenticacao';
