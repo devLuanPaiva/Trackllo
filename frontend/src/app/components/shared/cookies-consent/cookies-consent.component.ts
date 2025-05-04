@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { fadeSlideIn } from '../../../animations';
 import { isBrowser } from '../../../utils';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cookies-consent',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './cookies-consent.component.html',
   animations: [fadeSlideIn],
 })
