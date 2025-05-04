@@ -1,31 +1,20 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  ViewChild,
-  inject,
-  computed,
-  signal,
-  OnInit,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
-import { LanguageComponent } from './components/shared/language/language.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {
-  faArrowRightFromBracket,
-  faGear,
-} from '@fortawesome/free-solid-svg-icons';
-import { AuthenticationService } from './services/authentication.service';
 import { filter } from 'rxjs';
+import { isBrowser } from './utils';
 import { rotateGear } from './animations';
+import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
+import { AuthenticationService } from './services/authentication.service';
 import { GoogleAnalyticsService } from './services/google-analytics.service';
+import {faArrowRightFromBracket, faGear} from '@fortawesome/free-solid-svg-icons';
+import { LanguageComponent } from './components/shared/language/language.component';
 import { CookiesConsentComponent } from './components/shared/cookies-consent/cookies-consent.component';
+import {Component,ElementRef,HostListener,ViewChild,inject,computed,signal,OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, LanguageComponent, FontAwesomeModule, CookiesConsentComponent],
+  imports: [ RouterOutlet, CommonModule, LanguageComponent, FontAwesomeModule, CookiesConsentComponent],
   templateUrl: './app.component.html',
   animations: [rotateGear],
 })
@@ -51,8 +40,10 @@ export class AppComponent implements OnInit {
       });
   }
   ngOnInit(): void {
-    if (localStorage.getItem('cookieConsent') === 'true') {
-      this.gaService.load();
+    if (isBrowser()) {
+      if (localStorage.getItem('cookieConsent') === 'true') {
+        this.gaService.load();
+      }
     }
   }
 
