@@ -1,0 +1,14 @@
+@if (!accepted) {
+<div @fadeSlideIn
+    class="fixed bottom-0  bg-white border-t border-gray-300 shadow-md p-4  flex flex-col md:flex-row items-center justify-between gap-4 w-[80%]">
+    <p class="text-sm text-gray-800">
+        Este site utiliza cookies para melhorar sua experiência. Ao continuar
+        navegando, você concorda com o uso de cookies.
+    </p>
+    <button
+        (click)="acceptCookies()"
+        class="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition-all text-sm">
+        Aceitar
+    </button>
+</div>
+}
