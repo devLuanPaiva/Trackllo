@@ -19,6 +19,12 @@ export const routes: Routes = [
     title: 'Autenticação',
   },
   {
+    path: 'politicas',
+    loadChildren: () =>
+      import('./screens/policies/policies.module').then((m) => m.PoliciesModule),
+    title: 'Policies',
+  },
+  {
     path: 'home',
     loadChildren: () =>
       import('./screens/home/home.module').then((m) => m.HomeModule),
@@ -40,4 +46,4 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
