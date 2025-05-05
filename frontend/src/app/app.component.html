@@ -1,31 +1,27 @@
 <main class="min-h-full flex w-full flex-col relative ">
-    <router-outlet />
+  <router-outlet />
 
-    <aside class="fixed right-3 bottom-5 flex flex-col items-center">
-        @if (dropdownOpen) {
-        <div #dropdownWrapper
-            class="z-10 mb-5 flex flex-col space-y-3 bg-white py-4 px-1 rounded-full">
-            <app-language />
-            @if (showLayout()) {
-            <button (click)="onLogout()"
-                class="bg-blue-800 rounded-full p-1 w-10 h-10">
-                <fa-icon [icon]="icons.faArrowRightFromBracket"
-                    class="text-white text-2xl transition-transform duration-300 hover:scale-110">
-                </fa-icon>
-            </button>
-            }
-        </div>
-        }
-        <button class="relative"
-            (click)="toggleDropdown(); $event.stopPropagation()" tabindex="0">
-            <figure
-                class="bg-white rounded-full p-1.5 w-10 h-10 shadow-sm hover:shadow-md transition-all"
-                [@rotateGear]="dropdownOpen ? 'open' : 'closed'">
-                <fa-icon [icon]="icons.faGear"
-                    class="text-blue-800 text-2xl transition-transform duration-300 hover:scale-110">
-                </fa-icon>
-            </figure>
-        </button>
-    </aside>
-    <app-cookies-consent></app-cookies-consent>
+  >
+  <aside class="fixed right-3  flex flex-col items-center" [ngClass]="accepted ? 'bottom-10' : 'bottom-28'">
+    @if (dropdownOpen) {
+    <div #dropdownWrapper class="z-10 mb-5 flex flex-col space-y-3 bg-white py-4 px-1 rounded-full">
+      <app-language />
+      @if (showLayout()) {
+      <button (click)="onLogout()" class="bg-blue-800 rounded-full p-1 w-10 h-10">
+        <fa-icon [icon]="icons.faArrowRightFromBracket"
+          class="text-white text-2xl transition-transform duration-300 hover:scale-110">
+        </fa-icon>
+      </button>
+      }
+    </div>
+    }
+    <button class="relative" (click)="toggleDropdown(); $event.stopPropagation()" tabindex="0">
+      <figure class="bg-white rounded-full p-1.5 w-10 h-10 shadow-sm hover:shadow-md transition-all"
+        [@rotateGear]="dropdownOpen ? 'open' : 'closed'">
+        <fa-icon [icon]="icons.faGear" class="text-blue-800 text-2xl transition-transform duration-300 hover:scale-110">
+        </fa-icon>
+      </figure>
+    </button>
+  </aside>
+  <app-cookies-consent></app-cookies-consent>
 </main>
