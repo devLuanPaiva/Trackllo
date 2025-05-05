@@ -5,7 +5,7 @@
   <aside class="fixed right-3  flex flex-col items-center" [ngClass]="accepted ? 'bottom-10' : 'bottom-28'">
     @if (dropdownOpen) {
     <div #dropdownWrapper class="z-10 mb-5 flex flex-col space-y-3 bg-white py-4 px-1 rounded-full">
-      <app-language />
+      <app-language [selectedLang]="selectedLang" />
       @if (showLayout()) {
       <button (click)="onLogout()" class="bg-blue-800 rounded-full p-1 w-10 h-10">
         <fa-icon [icon]="icons.faArrowRightFromBracket"

@@ -11,6 +11,7 @@ import { faArrowRightFromBracket, faGear } from '@fortawesome/free-solid-svg-ico
 import { LanguageComponent } from './components/shared/language/language.component';
 import { CookiesConsentComponent } from './components/shared/cookies-consent/cookies-consent.component';
 import { Component, ElementRef, HostListener, ViewChild, inject, computed, signal, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,8 @@ export class AppComponent implements OnInit {
   };
   dropdownOpen = false;
   accepted = false;
-
+  selectedLang = 'pt';
+  private readonly translate = inject(TranslateService);
   private readonly gaService = inject(GoogleAnalyticsService);
   private readonly authService = inject(AuthenticationService);
   private readonly router = inject(Router);
@@ -47,6 +49,19 @@ export class AppComponent implements OnInit {
         this.gaService.load();
         this.accepted = true;
       }
+      const storedLang = localStorage.getItem('language');
+      const browserLang = this.translate.getBrowserLang();
+      const langToUse = storedLang ?? (browserLang?.match(/pt|en|es/) ? browserLang : 'pt');
+
+      this.translate.use(langToUse).subscribe({
+        next: () => {
+          this.selectedLang = langToUse;
+        },
+        error: () => {
+          this.translate.use('pt');
+          this.selectedLang = 'pt';
+        }
+      });
     }
   }
 
