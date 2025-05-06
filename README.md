@@ -4,8 +4,8 @@
 
 ## 🤖 Visão Geral do Projeto
 
-- **Status**: Em desenvolvimento
-- **Versão Atual**: 4.0
+- **Status**: Concluído
+- **Versão Atual**: 4.5
 
 ## 🚀 Funcionalidades
 
