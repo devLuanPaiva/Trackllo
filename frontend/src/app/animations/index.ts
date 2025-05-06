@@ -25,7 +25,6 @@ export const fadeInUp = trigger('fadeInUp', [
   ]),
 ]);
 
-
 export const fadeSlide = trigger('fadeSlide', [
   state('void', style({ opacity: 0, transform: 'translateY(-20px)' })),
   transition(':enter', [
@@ -38,6 +37,21 @@ export const fadeSlide = trigger('fadeSlide', [
     animate(
       '300ms ease-in',
       style({ opacity: 0, transform: 'translateY(-20px)' })
+    ),
+  ]),
+]);
+export const fadeSlideIn = trigger('fadeSlideIn', [
+  transition(':enter', [
+    style({ opacity: 0, transform: 'translateY(100%)' }),
+    animate(
+      '300ms ease-out',
+      style({ opacity: 1, transform: 'translateY(0)' })
+    ),
+  ]),
+  transition(':leave', [
+    animate(
+      '300ms ease-in',
+      style({ opacity: 0, transform: 'translateY(100%)' })
     ),
   ]),
 ]);

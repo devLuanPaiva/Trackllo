@@ -1,60 +1,52 @@
-<div class="min-h-screen bg-[#0f172a] text-white px-6 py-10 font-[Montserrat] rounded-xl">
-
+<div class=" w-full text-white px-6 py-10 font-[Montserrat] rounded-xl">
   <header class="text-center mb-14">
     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow">
       {{ '7783496281' | translate }} {{ user.name }}!
     </h1>
     @if (boards.length > 0) {
-    <p class="mt-4 text-blue-400 text-lg sm:text-xl lg:text-2xl">
+    <h2 class="mt-4 text-blue-400 text-lg sm:text-xl lg:text-2xl">
       {{ '2935612674' | translate }}
-    </p>
+    </h2>
+    }@else {
+    <h2 class="mt-4 text-blue-400 text-lg sm:text-xl lg:text-2xl">{{
+      '7487360165' | translate }}</h2>
+
     }
   </header>
 
-  <div class="grid lg:grid-cols-3 gap-10">
-    <section class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+  <div class="flex flex-col gap-4 max-w-full items-center">
+    <app-board-form (create)="onCreateBoard($event)"></app-board-form>
+    @if (isLoadingOperation) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+
+    }
+    <section class="flex mt-5 flex-col sm:flex-row justify-center flex-wrap gap-6 items-center ">
       @if (boards.length > 0) {
-        @for (board of boards; track board.id) {
-        <div class="relative group bg-[#1e293b] flex flex-col items-center justify-center h-20 border border-blue-700 rounded-2xl  shadow-xl transition hover:border-blue-500 hover:scale-[1.02] duration-300">
-          <button (click)="onDeleteBoard($event, board.id)"
-            class="absolute -top-3 -right-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2 z-10 shadow">
-            <fa-icon [icon]="icons.trash"></fa-icon>
-          </button>
-          <a [routerLink]="['/boardColumns', board.id]" class="text-center">
-            <h3 class="text-xl font-semibold text-white group-hover:text-blue-400 transition">
-              {{ board.title }}
-            </h3>
-          </a>
-        </div>
-        }
-      } @else {
-        <div class="col-span-full flex flex-col items-center text-center text-blue-200 space-y-4">
-          <h2 class="text-2xl font-semibold">{{ '7487360165' | translate }}</h2>
-          <img src="/assets/man-board.jpg" alt="Ilustração" class="w-3/4 h-auto rounded-xl shadow-xl border border-blue-800" />
-        </div>
+      @for (board of boards; track board.id) {
+      <div
+        class="relative w-full min-[344px]:w-72  group bg-[#1e293b] flex flex-col items-center justify-center h-20 border border-blue-700 rounded-2xl  shadow-xl transition hover:border-blue-500 hover:scale-[1.02] duration-300">
+        <button (click)="onDeleteBoard($event, board.id)"
+          class="absolute -top-3 -right-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2 shadow">
+          <fa-icon [icon]="icons.trash"></fa-icon>
+        </button>
+        <a [routerLink]="['/boardColumns', board.id]" class="text-center">
+          <h3 class="text-xl font-semibold text-white group-hover:text-blue-400 transition">
+            {{ board.title }}
+          </h3>
+        </a>
+      </div>
+      }
       }
     </section>
 
-    <section class="flex flex-col gap-6 bg-[#1e293b] rounded-2xl p-6 shadow-xl h-fit sticky top-10 border border-blue-800">
-      <button (click)="showForm = !showForm"
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl shadow-md transition">
-        {{ showForm ? ('6402951927' | translate) : ('5490419516' | translate) }}
-      </button>
-
-      @if (showForm) {
-        <div class="pt-2 border-t border-blue-700">
-          <app-board-form (create)="onCreateBoard($event)"></app-board-form>
-        </div>
-      }
-    </section>
   </div>
 
   <div class="mt-10 space-y-4">
     @if (errorMessage) {
-      <app-alert [message]="errorMessage" [type]="'error'" [duration]="5000"></app-alert>
+    <app-alert [message]="errorMessage" [type]="'error'" [duration]="5000"></app-alert>
     }
     @if (successMessage) {
-      <app-alert [message]="successMessage" [type]="'success'" [duration]="5000"></app-alert>
+    <app-alert [message]="successMessage" [type]="'success'" [duration]="5000"></app-alert>
     }
   </div>
 </div>

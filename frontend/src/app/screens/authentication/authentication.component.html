@@ -1,9 +1,7 @@
 <app-layout>
-  <div
-    class="w-full min-h-screen flex flex-col sm:flex-row items-center py-10 px-5 gap-10 ">
+  <div class="w-full min-h-screen flex flex-col sm:flex-row items-center py-10 px-5 gap-10 ">
     <figure class=" w-full sm:w-[45%] relative">
-      <img src="/assets/image.png" class="w-auto h-auto"
-        alt="Ilustração de homem tentando realizar login">
+      <img src="/assets/image.png" class="w-auto h-auto" alt="Ilustração de homem tentando realizar login">
     </figure>
     <article class="bg-[#F6F6FF] p-8 rounded-lg shadow-lg  w-full sm:w-[45%]">
       <h2 class="text-xl sm:text-2xl font-bold text-center mb-6">
@@ -15,12 +13,10 @@
       </h2>
       <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="space-y-4">
         <div *ngIf="isRegister" class="relative">
-          <label class="block text-gray-700 text-base "
-            for="name">{{'2332180001'
+          <label class="block text-gray-700 text-base " for="name">{{'2332180001'
             | translate}}</label>
           <div class="relative">
-            <fa-icon [icon]="icons.user"
-              class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></fa-icon>
+            <fa-icon [icon]="icons.user" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></fa-icon>
             <input type="text" formControlName="name"
               class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 text-lg sm:text-xl"
               required />
@@ -34,47 +30,36 @@
 
         </div>
         <div class="relative">
-          <label class="block text-gray-700 text-base "
-            for="email">{{'4768749765'
+          <label class="block text-gray-700 text-base " for="email">{{'4768749765'
             | translate}} </label>
           <div class="relative">
-            <fa-icon [icon]="icons.envelope"
-              class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></fa-icon>
+            <fa-icon [icon]="icons.envelope" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></fa-icon>
             <input type="email" formControlName="email"
               class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 text-lg sm:text-xl"
               required />
           </div>
-          <small class="text-red-500"
-            *ngIf="authForm.get('email')?.touched && authForm.get('email')?.invalid">
-            <span
-              *ngIf="authForm.get('email')?.errors?.['required']">{{'2787683719'
+          <small class="text-red-500" *ngIf="authForm.get('email')?.touched && authForm.get('email')?.invalid">
+            <span *ngIf="authForm.get('email')?.errors?.['required']">{{'2787683719'
               | translate}} </span>
-            <span
-              *ngIf="authForm.get('email')?.errors?.['email']">{{'8365839397'
+            <span *ngIf="authForm.get('email')?.errors?.['email']">{{'8365839397'
               | translate}}</span>
           </small>
         </div>
 
         <div class="relative">
-          <label class="block text-gray-700 text-base "
-            for="password">{{'1505554692' | translate}} </label>
+          <label class="block text-gray-700 text-base " for="password">{{'1505554692' | translate}} </label>
           <div class="relative">
-            <fa-icon [icon]="icons.key"
-              class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></fa-icon>
-            <input [type]="showPassword ? 'text' : 'password'"
-              formControlName="password"
+            <fa-icon [icon]="icons.key" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></fa-icon>
+            <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
               class="w-full pl-10 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 text-lg sm:text-xl"
               required />
             <button type="button" (click)="togglePasswordVisibility()"
               class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 focus:outline-none">
-              <fa-icon
-                [icon]="showPassword ? icons.eyeSlash : icons.eye"></fa-icon>
+              <fa-icon [icon]="showPassword ? icons.eyeSlash : icons.eye"></fa-icon>
             </button>
           </div>
-          <small class="text-red-500"
-            *ngIf="authForm.get('password')?.touched && authForm.get('password')?.invalid">
-            <span
-              *ngIf="authForm.get('password')?.errors?.['required']">{{'8050259032'
+          <small class="text-red-500" *ngIf="authForm.get('password')?.touched && authForm.get('password')?.invalid">
+            <span *ngIf="authForm.get('password')?.errors?.['required']">{{'8050259032'
               | translate}} </span>
             <span *ngIf="authForm.get('password')?.errors?.['minlength']">
               {{'7687217593' | translate}}
@@ -102,17 +87,16 @@
         </button>
       </p>
       @if (isLoading) {
-        <app-loading [message]="'7746872364' | translate"></app-loading>
+      <mat-progress-bar class="mt-6" mode="indeterminate"></mat-progress-bar>
+
       }
       @if (errorMessage) {
-      <small
-        class="bg-red-100 text-red-700 px-4 py-2 rounded mt-6 inline-block  float-right">
+      <small class="bg-red-100 text-red-700 px-4 py-2 rounded mt-6 inline-block  float-right">
         {{ errorMessage }}
       </small>
       }
       @if (successMessage) {
-      <small
-        class="bg-green-100 text-green-700 px-4 py-2 rounded mt-6 inline-block  float-right">
+      <small class="bg-green-100 text-green-700 px-4 py-2 rounded mt-6 inline-block  float-right">
         {{successMessage}}
       </small>
       }

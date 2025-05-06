@@ -1,4 +1,4 @@
-<section class="w-full mt-10 flex justify-between gap-5 flex-wrap items-start">
+<section class="w-full mt-10 flex flex-col sm:flex-row justify-center items-center  sm:justify-between gap-5 flex-wrap sm:items-start">
   
   @for (column of ['Todo', 'In Progress', 'Done']; track $index) {
   <app-tasks [columnTitle]="column"

@@ -1,0 +1,13 @@
+@if (!accepted) {
+<div @fadeSlideIn
+  class="fixed bottom-0  bg-white border-t border-gray-300 shadow-md p-4  flex  items-center justify-between gap-4 w-full">
+  <p class="text-sm text-gray-800">
+    {{"3131279879"| translate}}
+    <a class="text-blue-600 hover:text-blue-700" href="/politicas">{{"8432371274"| translate}}</a>
+  </p>
+  <button (click)="acceptCookies()"
+    class="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition-all text-sm">
+    {{"8478239790"| translate}}
+  </button>
+</div>
+}

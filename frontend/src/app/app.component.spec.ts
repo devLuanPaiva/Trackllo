@@ -7,6 +7,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
+import { ElementRef } from '@angular/core';
+import { TranslateModule, TranslateService, TranslateStore } from '@ngx-translate/core';
 
 
 describe('AppComponent', () => {
@@ -18,8 +20,10 @@ describe('AppComponent', () => {
     const authSpy = jasmine.createSpyObj('AuthenticationService', ['logout']);
     const fakeEvent = new NavigationEnd(0, '/old-url', '/new-url');
     await TestBed.configureTestingModule({
-      imports: [CommonModule, LanguageComponent, FontAwesomeModule, AppComponent],
+      imports: [CommonModule, LanguageComponent, FontAwesomeModule, AppComponent, TranslateModule.forRoot()],
       providers: [
+        TranslateService,
+        TranslateStore,
         { provide: AuthenticationService, useValue: authSpy },
         {
           provide: Router,
@@ -54,13 +58,19 @@ describe('AppComponent', () => {
       target: document.createElement('div')
     } as unknown as MouseEvent;
 
-    spyOn(component['elementRef'].nativeElement, 'contains').and.returnValue(false);
-
     component.dropdownOpen = true;
+
+    const mockDropdownWrapper = document.createElement('div');
+    fixture.nativeElement.appendChild(mockDropdownWrapper);
+    component.dropdownWrapper = new ElementRef(mockDropdownWrapper);
+
+    spyOn(component.dropdownWrapper.nativeElement, 'contains').and.returnValue(false);
+
     component.onDocumentClick(fakeEvent);
 
     expect(component.dropdownOpen).toBeFalse();
   });
+
   it('should update currentURL on navigation end', fakeAsync(() => {
     const navEnd = new NavigationEnd(1, '/teste', '/teste');
     (router.events as any) = of(navEnd);

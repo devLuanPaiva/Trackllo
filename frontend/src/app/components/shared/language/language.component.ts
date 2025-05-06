@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -14,7 +14,7 @@ import { faLanguage } from '@fortawesome/free-solid-svg-icons';
 export class LanguageComponent {
   private readonly translate = inject(TranslateService);
   private readonly elementRef = inject(ElementRef);
-  selectedLang = this.translate.currentLang || 'pt';
+  @Input() selectedLang = 'pt'
   dropdownOpen = false;
   icons = {
     faLanguage,
@@ -36,6 +36,7 @@ export class LanguageComponent {
     this.translate.use(lang).subscribe({
       next: () => {
         this.selectedLang = lang;
+        localStorage.setItem('language', lang);
         this.dropdownOpen = false;
       },
       error: (err) => {
