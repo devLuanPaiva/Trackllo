@@ -1,35 +1,17 @@
-import { Component } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
-import { CommonModule } from '@angular/common';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import {
-  faEnvelope,
-  faEye,
-  faEyeSlash,
-  faKey,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
-import { LayoutComponent } from '../../components/template/layout/layout.component';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LoadingComponent } from "../../components/shared/loading/loading.component";
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AuthenticationService } from '../../services/authentication.service';
+import { LayoutComponent } from '../../components/template/layout/layout.component';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { faEnvelope, faEye, faEyeSlash, faKey, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-authentication',
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    LayoutComponent,
-    TranslateModule,
-    FontAwesomeModule,
-    LoadingComponent
-],
+  imports: [CommonModule, ReactiveFormsModule, LayoutComponent, TranslateModule, FontAwesomeModule, MatProgressBarModule],
   templateUrl: './authentication.component.html',
 })
 export class AuthenticationComponent {
@@ -106,6 +88,7 @@ export class AuthenticationComponent {
             this.errorMessage =
               'Servidor indisponível. Tente novamente mais tarde.';
           }
+          this.isLoading = false;
         },
         complete: () => {
           this.isLoading = false;
