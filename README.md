@@ -17,6 +17,7 @@
 - 🔒 Autenticação com guards e proteção de rotas
 - 📡 Uso de resolvers e RxJS para otimizar a experiência do usuário
 - 🌍 Suporte a múltiplos idiomas (PT, EN, ES) para tradução de todo o sistema
+- 🍪 Utilização de cookies de desempenho e análise
 
 ## 🧠 Aprendizados
 
