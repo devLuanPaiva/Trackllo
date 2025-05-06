@@ -1,7 +1,6 @@
 <div class=" w-full text-white px-6 py-10 font-[Montserrat] rounded-xl">
   <header class="text-center mb-14">
-    <h1
-      class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow">
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow">
       {{ '7783496281' | translate }} {{ user.name }}!
     </h1>
     @if (boards.length > 0) {
@@ -17,8 +16,11 @@
 
   <div class="flex flex-col gap-4 max-w-full items-center">
     <app-board-form (create)="onCreateBoard($event)"></app-board-form>
-    <section
-      class="flex mt-5 flex-col sm:flex-row justify-center flex-wrap gap-6 items-center ">
+    @if (isLoadingOperation) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+
+    }
+    <section class="flex mt-5 flex-col sm:flex-row justify-center flex-wrap gap-6 items-center ">
       @if (boards.length > 0) {
       @for (board of boards; track board.id) {
       <div
@@ -28,8 +30,7 @@
           <fa-icon [icon]="icons.trash"></fa-icon>
         </button>
         <a [routerLink]="['/boardColumns', board.id]" class="text-center">
-          <h3
-            class="text-xl font-semibold text-white group-hover:text-blue-400 transition">
+          <h3 class="text-xl font-semibold text-white group-hover:text-blue-400 transition">
             {{ board.title }}
           </h3>
         </a>
@@ -42,12 +43,10 @@
 
   <div class="mt-10 space-y-4">
     @if (errorMessage) {
-    <app-alert [message]="errorMessage" [type]="'error'"
-      [duration]="5000"></app-alert>
+    <app-alert [message]="errorMessage" [type]="'error'" [duration]="5000"></app-alert>
     }
     @if (successMessage) {
-    <app-alert [message]="successMessage" [type]="'success'"
-      [duration]="5000"></app-alert>
+    <app-alert [message]="successMessage" [type]="'success'" [duration]="5000"></app-alert>
     }
   </div>
 </div>
