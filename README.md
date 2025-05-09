@@ -53,6 +53,11 @@ npm run test
 
 ✅ **60 testes implementados e aprovados com Jest.**
 
+
+## 🌌 Interfaces
+![Home](https://ik.imagekit.io/p0mm3nebo/trackllo/Facebook%20cover%20-%204.jpg?updatedAt=1746790954118)
+
+![Home](https://ik.imagekit.io/p0mm3nebo/trackllo/Facebook%20cover%20-%203.jpg?updatedAt=1746790954172)
 ## 👨‍💻 Autor
 
 Desenvolvido por [Luan Paiva](mailto:devLuanpaiva@gmail.com)  
